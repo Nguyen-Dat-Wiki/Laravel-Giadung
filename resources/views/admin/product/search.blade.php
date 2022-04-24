@@ -1,5 +1,6 @@
 @extends('admin.index')
 
+
 @section('content')
     <form action="" method="POST">
         <div class="input-group mb-3 col-md-5">
@@ -26,7 +27,7 @@
             <tr>
                 <td>{{ $product->id }}</td>
                 <td>{{ $product->name }}</td>
-                <td>{{ $product->menu->name }}</td>
+                <td>{{ $product->menu->name}}</td>
                 <td>{{ $product->price }}</td>
                 <td>{{ $product->price_sale }}</td>
                 <td>{!! \App\Helpers\Helper::active($product->active) !!}</td>
@@ -47,7 +48,6 @@
 
     <div class="card-footer clearfix">
         {!! $products->links() !!}
+
     </div>
-@endsection
-
-
+@endsection     
