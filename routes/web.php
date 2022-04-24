@@ -3,7 +3,10 @@
 use Illuminate\Support\Facades\Route;
 use  App\Http\Controllers\LoginController;
 use  App\Http\Controllers\MainController;
+use  App\Http\Controllers\Client;
 use  App\Http\Controllers\MenuController;
+use  App\Http\Controllers\ProductController;
+use  App\Http\Controllers\SliderController;
 
 use Illuminate\Http\Request;
 
@@ -33,7 +36,7 @@ Route::middleware(['auth'])->group(function () {
             Route::get('add', [MenuController::class, 'create']);
             Route::post('add', [MenuController::class, 'store']);
             Route::get('list', [MenuController::class, 'index']);
-            Route::get('edit/{menu}', [MenuController::class, 'show']);
+            Route::get('edit/{menu}', [MenuController::class, 'edit']);
             Route::post('edit/{menu}', [MenuController::class, 'update']);
             Route::DELETE('destroy', [MenuController::class, 'destroy']);
         });
@@ -59,11 +62,14 @@ Route::middleware(['auth'])->group(function () {
         });
 
         #Upload
-        Route::post('upload/services', [\App\Http\Controllers\Admin\UploadController::class, 'store']);
+        
+        Route::post('upload/services', [App\Http\Controllers\UploadController::class, 'store']);
 
         #Cart
-        Route::get('customers', [\App\Http\Controllers\Admin\CartController::class, 'index']);
-        Route::get('customers/view/{customer}', [\App\Http\Controllers\Admin\CartController::class, 'show']);
+        Route::get('customers', [\App\Http\Controllers\CartController::class, 'index']);
+        Route::get('customers/view/{customer}', [\App\Http\Controllers\CartController::class, 'show']);
     });
 
 });
+
+Route::get('/',[Client\MainController::class, 'index']);

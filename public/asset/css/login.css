@@ -111,3 +111,12 @@ body {
     background-color: #1CA347;
     border-color: #1CA347;
 }
+
+.inputpassword,
+.inputemail {
+    display: flex;
+}
+
+.fas {
+    font-size: 17px;
+}

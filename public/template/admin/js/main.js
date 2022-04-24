@@ -11,7 +11,7 @@ function removeRow(id, url) {
             datatype: 'JSON',
             data: { id },
             url: url,
-            success: function (result) {
+            success: function(result) {
                 if (result.error === false) {
                     alert(result.message);
                     location.reload();
@@ -25,7 +25,7 @@ function removeRow(id, url) {
 
 
 /*Upload File */
-$('#upload').change(function () {
+$('#upload').change(function() {
     const form = new FormData();
     form.append('file', $(this)[0].files[0]);
 
@@ -36,7 +36,7 @@ $('#upload').change(function () {
         dataType: 'JSON',
         data: form,
         url: '/admin/upload/services',
-        success: function (results) {
+        success: function(results) {
             if (results.error === false) {
                 $('#image_show').html('<a href="' + results.url + '" target="_blank">' +
                     '<img src="' + results.url + '" width="100px"></a>');

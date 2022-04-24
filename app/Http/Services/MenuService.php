@@ -47,7 +47,18 @@ class MenuService
         return true;
     }
 
-     /* public function update($request, $menu): bool
+    public function destroy($request)
+    {
+        $id = (int)$request->input('id');
+        $menu = Menu::where('id', $id)->first();
+        if ($menu) {
+            return Menu::where('id', $id)->orWhere('parent_id', $id)->delete();
+        }
+
+        return false;
+    }
+
+    public function update($request, $menu): bool
     {
         if ($request->input('parent_id') != $menu->id) {
             $menu->parent_id = (int)$request->input('parent_id');
@@ -61,19 +72,7 @@ class MenuService
 
         Session::flash('success', 'Cập nhật thành công Danh mục');
         return true;
-    } */
-
-    public function destroy($request)
-    {
-        $id = (int)$request->input('id');
-        $menu = Menu::where('id', $id)->first();
-        if ($menu) {
-            return Menu::where('id', $id)->orWhere('parent_id', $id)->delete();
-        }
-
-        return false;
     }
-
 
     /* public function getId($id)
     {
