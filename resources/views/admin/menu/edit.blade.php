@@ -1,4 +1,4 @@
-@extends('admin.main')
+@extends('admin.index')
 
 @section('head')
     <script src="/ckeditor/ckeditor.js"></script>
