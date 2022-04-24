@@ -6,6 +6,7 @@ use App\Http\Requests\ProductRequest;
 use App\Http\Services\Product\ProductAdminService;
 use App\Models\Product;
 use Illuminate\Http\Request;
+use DB;
 
 class ProductController extends Controller
 {
@@ -49,6 +50,7 @@ class ProductController extends Controller
             'menus' => $this->productService->getMenu()
         ]);
     }
+    
 
     public function update(Request $request, Product $product)
     {
@@ -71,5 +73,14 @@ class ProductController extends Controller
         }
 
         return response()->json([ 'error' => true ]);
+    }
+
+    public function search(Request $request)
+    {   
+        
+        return view('admin.product.search', [
+            'title' => 'Tìm kiếm Sản Phẩm',
+            'products' => $this->productService->getSearch($request)
+        ]);
     }
 }
