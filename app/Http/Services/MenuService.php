@@ -5,6 +5,7 @@ namespace App\Http\Services;
 
 
 use App\Models\Menu;
+use App\Models\Product;
 use Illuminate\Support\Facades\Session;
 
 class MenuService
@@ -22,9 +23,16 @@ class MenuService
             ->get();
     }
 
+    public function getAllParent()
+    {
+        return Menu::where('parent_id', 0)
+            ->orderbyDesc('id')
+            ->paginate(25);
+    }
+
     public function getAll()
     {
-        return Menu::orderbyDesc('id')->paginate(20);
+        return Menu::orderbyDesc('id')->paginate(30);
     }
 
     public function create($request)
@@ -74,24 +82,70 @@ class MenuService
         return true;
     }
 
-    /* public function getId($id)
+    public function getId($id)
     {
         return Menu::where('id', $id)->where('active', 1)->firstOrFail();
     }
 
     public function getProduct($menu, $request)
     {
+        $start= $request->input('start');
+        $end = $request->input('end');
+
         $query = $menu->products()
             ->select('id', 'name', 'price', 'price_sale', 'thumb')
             ->where('active', 1);
 
         if ($request->input('price')) {
-            $query->orderBy('price', $request->input('price'));
+            $query->orderBy('price_sale', $request->input('price'));
+        }
+        else if ($request->input('create_at')) {
+            $query->orderBy('price_sale', $request->input('create_at'));
+        }
+        else if ($request->input('name')) {
+            $query->orderBy('name', $request->input('name'));
+        }
+        else if ($request->input('start')) {
+            $query->where('price_sale', '>', $start)
+                ->where('price_sale', '<', $end);
         }
 
         return $query
             ->orderByDesc('id')
-            ->paginate(12)
+            ->paginate(10)
             ->withQueryString();
-    }  */
+    } 
+    public function getProductAll($request)
+    {   
+        $start= $request->input('start');
+        $end = $request->input('end');
+        $select = $request->input('select');
+        $select2 = $request->input('select2');
+        $query = Product::select('id', 'name', 'price', 'price_sale', 'thumb');
+
+        if ($request->input('price')) {
+            $query->orderBy('price_sale', $request->input('price'));
+        }
+        else if ($request->input('create_at')) {
+            $query->orderBy('price_sale', $request->input('create_at'));
+        }
+        else if ($request->input('name')) {
+            $query->orderBy('name', $request->input('name'));
+        }
+        else if ($request->input('start')) {
+            $query->where('price_sale', '>', $start)
+                ->where('price_sale', '<', $end);
+        }
+        else if($request->input('select')){
+            $query->where('active',$select );
+        }
+        else if($request->input('select2')){
+            $query->orderBy('name', $select2);
+        }
+
+        return $query
+            ->orderByDesc('id')
+            ->paginate(10)
+            ->withQueryString();
+    } 
 }

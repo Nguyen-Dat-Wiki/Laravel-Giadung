@@ -66,11 +66,12 @@ Route::middleware(['auth'])->group(function () {
         
         Route::post('upload/services', [App\Http\Controllers\UploadController::class, 'store']);
 
-        #Cart
-        Route::get('customers', [\App\Http\Controllers\CartController::class, 'index']);
-        Route::get('customers/view/{customer}', [\App\Http\Controllers\CartController::class, 'show']);
+
     });
 
 });
 
 Route::get('/',[Client\MainController::class, 'index']);
+Route::get('/danh-muc.html', [Client\MenuController::class, 'show']);
+Route::get('/danh-muc/{id}-{slug}.html', [Client\MenuController::class, 'index']);
+Route::get('/san-pham/{id}-{slug}.html', [Client\ProductController::class, 'index']);

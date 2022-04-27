@@ -1,0 +1,212 @@
+/* product */
+
+.cards {
+    --spacing: 15px;
+    --columns: 5;
+    display: flex;
+    padding: 0;
+    flex-wrap: wrap;
+    margin-left: calc(-1 * var(--spacing)/2);
+}
+
+@media screen and (min-width:776px) and (max-width: 1023px) {
+    .cards {
+        --columns: 4;
+    }
+}
+
+@media screen and (min-width: 361px) and (max-width:776px) {
+    .cards {
+        --spacing: 15px;
+        --columns: 3;
+    }
+}
+
+@media screen and (max-width:360px) {
+    .cards {
+        --columns: 2;
+    }
+}
+
+.card-content {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    padding: 7px;
+}
+
+.card-top {
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+}
+
+.card-user,
+.info-card,
+.card-bottom {
+    margin-top: auto;
+    flex-shrink: 0;
+}
+
+.card {
+    display: flex;
+    flex-direction: column;
+}
+
+
+/* ------------- product --------------- */
+
+.card {
+    border-radius: 5px;
+    overflow: hidden;
+    box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+    width: calc(calc(100% / var(--columns)) - var(--spacing));
+    margin-left: var(--spacing);
+    margin-bottom: var(--spacing);
+}
+
+.card .img-product {
+    padding: 10px;
+    width: 100%;
+    object-fit: cover;
+}
+
+.card:hover {
+    transition: 0.4s;
+    transform: scale(1.03);
+}
+
+
+/* ------- Title  --------- */
+
+.card-title {
+    font-weight: 500;
+    margin: 15px 0;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    word-break: break-word;
+    font-size: 15px;
+}
+
+
+/* ------- Giá tiền --------- */
+
+.sale {
+    position: absolute;
+    top: 5px;
+    right: 5px;
+    border: 1px solid;
+    border-radius: 50px;
+    color: #fff;
+    background-color: #ed3324;
+    padding: 5px 12px;
+}
+
+.card-user {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.card-user span {
+    font-size: 18px;
+    font-weight: 550;
+    line-height: 1;
+}
+
+.card-user .moneyold {
+    font-size: 15px;
+    color: #6c757c;
+    text-decoration: line-through;
+    align-items: center;
+}
+
+.card-user .moneysale {
+    font-size: 17px;
+    align-items: center;
+    color: rgb(255, 109, 109);
+}
+
+
+/* ------- Nut Order  ---------- */
+
+.card button {
+    color: white;
+    align-items: center;
+    text-align: center;
+    padding: 7px 30px;
+    margin: 5px;
+    border-radius: 10px;
+    border: 1px solid;
+    font-size: 17px;
+}
+
+.card button:hover {
+    transition: 0.5s;
+    color: rgb(223, 89, 0);
+}
+
+.title-main {
+    border-radius: 15px;
+    font-size: 25px;
+    padding: 6px 0;
+    text-transform: uppercase;
+    color: #004f9e;
+    font-weight: 600;
+}
+
+.title-main a:hover {
+    transition: 0.4s;
+    background-color: rgb(255, 35, 35);
+}
+
+.title-main a {
+    color: #fff;
+    background-color: #004f9e;
+    font-size: 15px;
+    line-height: 1;
+    padding: 9px;
+    border-radius: 15px;
+    text-decoration: none;
+}
+
+
+/* tieuchi */
+
+.pic-buy-normal img {
+    width: 50px;
+}
+
+.text-split {
+    display: -webkit-box;
+    -webkit-line-clamp: 1;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    word-break: break-word;
+}
+
+.slick-track {
+    background: rgb(17, 132, 253);
+    padding: 50px 0;
+}
+
+.info-buy-normal .name-buy {
+    font-weight: 550;
+    font-size: 19px;
+}
+
+.info-buy-normal {
+    color: #fff;
+}
+
+.content-main span {
+    font-size: 14px;
+}
+
+.form-contact {
+    width: 55%;
+}
