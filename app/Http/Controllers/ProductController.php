@@ -6,7 +6,6 @@ use App\Http\Requests\ProductRequest;
 use App\Http\Services\Product\ProductAdminService;
 use App\Models\Product;
 use Illuminate\Http\Request;
-use DB;
 
 class ProductController extends Controller
 {
