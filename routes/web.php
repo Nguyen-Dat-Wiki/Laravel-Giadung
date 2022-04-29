@@ -7,6 +7,8 @@ use  App\Http\Controllers\Client;
 use  App\Http\Controllers\MenuController;
 use  App\Http\Controllers\ProductController;
 use  App\Http\Controllers\SliderController;
+use  App\Http\Controllers\CartController;
+use  App\Http\Controllers\UploadController;
 
 use Illuminate\Http\Request;
 
@@ -22,7 +24,9 @@ use Illuminate\Http\Request;
 |
 */
 
-Route::get('/admin/login', [LoginController::class, 'index']);
+
+/* admin */
+Route::get('/admin/login', [LoginController::class, 'index'])->name('login');
 Route::post('/admin/login', [LoginController::class, 'login']);
 
 Route::middleware(['auth'])->group(function () {
@@ -64,20 +68,29 @@ Route::middleware(['auth'])->group(function () {
 
         #Upload
         
-        Route::post('upload/services', [App\Http\Controllers\UploadController::class, 'store']);
+        Route::post('upload/services', [UploadController::class, 'store']);
 
-
+        #Cart
+        Route::get('customers', [CartController::class, 'index']);
+        Route::get('customers/view/{customer}', [CartController::class, 'show']);
+        Route::DELETE('customers/destroy', [CartController::class, 'destroy']);
+        
     });
 
 });
 
+
+/* client */
+
+
 Route::get('/',[Client\MainController::class, 'index']);
+Route::get('/Login',[Client\Login\LoginController::class, 'index']);
 Route::get('danh-muc', [Client\MenuController::class, 'show']);
 Route::get('danh-muc/{id}-{slug}', [Client\MenuController::class, 'index']);
 Route::get('san-pham/{id}-{slug}', [Client\ProductController::class, 'index']);
 
 Route::post('/add-cart', [Client\CartController::class, 'index']);
 Route::get('gio-hang', [Client\CartController::class, 'show']);
+Route::post('gio-hang', [Client\CartController::class, 'addCart']);
 Route::post('/update-cart', [Client\CartController::class, 'update']);
 Route::get('gio-hang/delete/{id}', [Client\CartController::class, 'remove']);
-Route::post('gio-hang', [Client\CartController::class, 'addCart']);

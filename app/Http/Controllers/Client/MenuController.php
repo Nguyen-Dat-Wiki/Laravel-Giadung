@@ -18,7 +18,8 @@ class MenuController extends Controller
     public function index(Request $request, $id, $slug = '')
     {
         $menu = $this->menuService->getId($id);
-        $products = $this->menuService->getProduct($menu, $request);
+        $menus = $this->menuService->getChill_id($id);
+        $products = $this->menuService->getProduct($menus, $request);
 
         return view('client.category', [
             'title' => 'Sản phẩm',

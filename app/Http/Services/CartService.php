@@ -86,20 +86,16 @@ class CartService
                 return false;
 
             $customer = Customer::create([
-                'name' => $request->input('name'),
-                'phone' => $request->input('phone'),
-                'address' => $request->input('address'),
+                'name' => $request->input('fullname'),
+                'phone' => $request->input('phonenumber'),
+                'address' => $request->input('address').' ' .$request->input('Phường').' ' .$request->input('Quan').' ' .$request->input('TP'),
                 'email' => $request->input('email'),
-                'content' => $request->input('content')
+                'content' => $request->input('note')
             ]);
-
             $this->infoProductCart($carts, $customer->id);
 
             DB::commit();
             Session::flash('success', 'Đặt Hàng Thành Công');
-
-            #Queue
-            SendMail::dispatch($request->input('email'))->delay(now()->addSeconds(2));
 
             Session::forget('carts');
         } catch (\Exception $err) {
@@ -125,7 +121,7 @@ class CartService
                 'customer_id' => $customer_id,
                 'product_id' => $product->id,
                 'pty'   => $carts[$product->id],
-                'price' => $product->price_sale != 0 ? $product->price_sale : $product->price
+                'price' => $product->price_sale 
             ];
         }
 
@@ -142,5 +138,18 @@ class CartService
         return $customer->carts()->with(['product' => function ($query) {
             $query->select('id', 'name', 'thumb');
         }])->get();
+    }
+
+    public function delete($request)
+    {   
+        $id = (int)$request->input('id');
+        $menu = Customer::where('id', $id)->first();
+        if ($menu) {
+            Customer::where('id', $id)->delete();
+            Cart::where('customer_id', $id)->delete();
+            return true;
+        }
+
+        return false;
     }
 }
