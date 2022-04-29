@@ -117,11 +117,12 @@ class MenuService
     } 
     public function getProductAll($request)
     {   
-        $start= $request->input('start');
-        $end = $request->input('end');
-        $select = $request->input('select');
-        $select2 = $request->input('select2');
-        $query = Product::select('id', 'name', 'price', 'price_sale', 'thumb');
+
+       
+
+        $query = Product::select('id', 'name', 'price', 'price_sale', 'thumb')->where('active',1);
+
+        
 
         if ($request->input('price')) {
             $query->orderBy('price_sale', $request->input('price'));
@@ -132,16 +133,16 @@ class MenuService
         else if ($request->input('name')) {
             $query->orderBy('name', $request->input('name'));
         }
-        else if ($request->input('start')) {
-            $query->where('price_sale', '>', $start)
-                ->where('price_sale', '<', $end);
+        else if ($request->input('start') !=null) {
+            $query->where('price_sale', '>', $request->input('start'))
+                ->where('price_sale', '<', $request->input('end'));
         }
-        else if($request->input('select')){
-            $query->where('active',$select );
+        else if($request->input('tinhtrang')){
+            $query->where('active',  $request->input('tinhtrang'));
         }
-        else if($request->input('select2')){
-            $query->orderBy('name', $select2);
-        }
+        else if($request->input('LocSP')){
+            $query->orderBy('name',$request->input('LocSP'));
+        } 
 
         return $query
             ->orderByDesc('id')

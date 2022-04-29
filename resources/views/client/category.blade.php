@@ -6,8 +6,8 @@
     <div class="breadCrumbs">
         <div class="wrap-content">
             <ol class="breadcrumb">
-                <li class="breadcrumb-item"><a class="text-decoration-none" href="#"><span>Trang chủ</span></a></li>
-                <li class="breadcrumb-item "><a class="text-decoration-none" href="/danh-muc.html"><span>{{$title}}</span></a></li>
+                <li class="breadcrumb-item"><a class="text-decoration-none" href="/"><span>Trang chủ</span></a></li>
+                <li class="breadcrumb-item "><a class="text-decoration-none" href="/danh-muc"><span>{{$title}}</span></a></li>
                 <li class="breadcrumb-item "><a class="text-decoration-none" href="{{request()->url()}}"><span>{!! (isset($title2)) ? $title2 : "" !!}</span></a></li>
             </ol>
         </div>
@@ -20,7 +20,7 @@
     <div class="TitleBox headerBox">
         <form action="#" method="get" id="Kho">
             <div class="Kho">
-                <select class="select" name="select" id="TonKho">
+                <select class="tinhtrang" name="tinhtrang" id="TonKho">
                     <option selected="selected ">--Tình trạng--</option>
                     <option value="1">Còn hàng</option>
                     <option value="0">Sắp ra mắt</option>
@@ -48,7 +48,7 @@
         </ul>
         <form action="" method="GET" id="Loc">
             <div class=" ">
-                <select class="select " name="select" id="asc_name">
+                <select class="LocSP " name="LocSP" id="asc_name">
                     <option selected="selected ">--Lọc sản phẩm--</option>
                     <option value="desc">Đánh giá</option>
                     <option value="asc">Từ A -> Z</option>
@@ -64,11 +64,11 @@
                 <div class="card">
                     <div class="card-body">
                         <div class="card-img">
-                            <a href="/san-pham/{{ $product->id }}-{{ Str::slug($product->name, '-') }}.html"><img class="img-product" src="{{$product->thumb}}" alt="..."></a>
+                            <a href="/san-pham/{{ $product->id }}-{{ Str::slug($product->name, '-') }}"><img class="img-product" src="{{$product->thumb}}" alt="..."></a>
                             <span class="sale">-{{  (int)( ( ($product->price - $product->price_sale) * 100) / $product->price ) }}%</span>
                         </div>
                         <div class="card-top">
-                            <h3 class="card-title" style="text-align: center;"><a href="/san-pham/{{ $product->id }}-{{ Str::slug($product->name, '-') }}.html" style="color: black;">{{$product->name}}</a></h3>
+                            <h3 class="card-title" style="text-align: center;"><a href="/san-pham/{{ $product->id }}-{{ Str::slug($product->name, '-') }}" style="color: black;">{{$product->name}}</a></h3>
                         </div>
                         <p class="card-user">
                             <span class="moneyold">{{number_format($product->price)}}đ</span>&nbsp;&nbsp;

@@ -32,13 +32,13 @@ $(document).ready(function() {
     });
 });
 
-/* $(document).ready(function() {
+$(document).ready(function() {
     $('#TonKho').change(function() {
         if ($('#TonKho option:selected') != null) {
             $('#Kho').submit();
         }
     })
-}); */
+});
 
 $(document).ready(function() {
     $('#asc_name').change(function() {
@@ -47,3 +47,9 @@ $(document).ready(function() {
         }
     })
 });
+
+$(document).on('input', '.num_product', function(e) {
+    for (let index = 0; index < $('.num_product').length; index++) {
+        $('#autoclick').click();
+    }
+})

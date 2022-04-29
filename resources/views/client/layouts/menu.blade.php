@@ -20,11 +20,11 @@
                             <span>0788911668</span>
                         </div>
                     </a>
-                    <a class="cart-header d-flex align-items-center justify-content-between " href="GioHang.html ">
+                    <a class="cart-header d-flex align-items-center justify-content-between " href="/gio-hang">
                         <i class="fas fa-shopping-cart icon "></i>
                         <div class="combo-right ">
                             <p>Giỏ hàng:</p>
-                            <label>(<span class="count-cart ">0</span>) sản phẩm</label>
+                            <label>(<span class="count-cart ">{{ !is_null(\Session::get('carts')) ? count(\Session::get('carts')) : 0 }}</span>) sản phẩm</label>
                         </div>
                     </a>
                 </div>
@@ -67,35 +67,35 @@
                 <div class="collapse navbar-collapse" id="navbarResponsive">
                     <ul class="navbar-nav ml-auto ">
                         <li class="nav-item ">
-                            <a class="nav-link active" href="Index.html" title="Trang chủ ">Trang chủ
+                            <a class="nav-link " href="/" title="Trang chủ ">Trang chủ
                             </a>
                         </li>
                         <li class="nav-item ">
-                            <a class="nav-link " href="GioiThieu.html" title="Giới thiệu ">Giới thiệu
+                            <a class="nav-link"  href="/gioi-thieu" title="Giới thiệu ">Giới thiệu 
+                            </a>
+                        </li>   
+                        <li class="nav-item ">
+                            <a class="nav-link "  href="/danh-muc" title="Khuyến mãi ">Khuyến mãi
                             </a>
                         </li>
                         <li class="nav-item ">
-                            <a class="nav-link " href="SanPham.html" title="Khuyến mãi ">Khuyến mãi
+                            <a class="nav-link " href="/thanh-toan" title="Thanh toán ">Thanh toán
                             </a>
                         </li>
                         <li class="nav-item ">
-                            <a class="nav-link " href="ThanhToan.html" title="Thanh toán ">Thanh toán
+                            <a class="nav-link " href="/bao-hanh" title="Bảo hành ">Bảo hành
                             </a>
                         </li>
                         <li class="nav-item ">
-                            <a class="nav-link " href="BaoHanh.html" title="Bảo hành ">Bảo hành
+                            <a class="nav-link " href="/tin-tuc" title="Tin tức ">Tin tức
                             </a>
                         </li>
                         <li class="nav-item ">
-                            <a class="nav-link " href="TinTuc.html" title="Tin tức ">Tin tức
+                            <a class="nav-link " href="/lien-he" title="Liên hệ ">Liên hệ
                             </a>
                         </li>
                         <li class="nav-item ">
-                            <a class="nav-link " href="LienHe.html" title="Liên hệ ">Liên hệ
-                            </a>
-                        </li>
-                        <li class="nav-item ">
-                            <a class="nav-link " href="Login.html" title="Liên hệ ">Đăng nhập
+                            <a class="nav-link " href="/Login" title="Liên hệ ">Đăng nhập
                             </a>
                         </li>
                     </ul>

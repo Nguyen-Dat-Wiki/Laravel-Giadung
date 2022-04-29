@@ -17,7 +17,12 @@
             @yield('category_3')
             @yield('category_4')
             @yield('category_5')
-
+            
+            @yield('main-header')
+            @yield('main-middle')
+            @yield('main-bottom')
+            
+            
             @yield('tieuchi')
         </div>
     </div>

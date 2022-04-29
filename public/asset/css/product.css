@@ -190,8 +190,12 @@ thead tr th {
     text-align: center;
 }
 
+tbody tr td:nth-child(2) {
+    width: 40%;
+}
+
 tbody tr td:nth-child(3) input {
-    width: 120px;
+    width: 80px;
 }
 
 tbody tr td {
