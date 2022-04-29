@@ -72,6 +72,12 @@ Route::middleware(['auth'])->group(function () {
 });
 
 Route::get('/',[Client\MainController::class, 'index']);
-Route::get('/danh-muc.html', [Client\MenuController::class, 'show']);
-Route::get('/danh-muc/{id}-{slug}.html', [Client\MenuController::class, 'index']);
-Route::get('/san-pham/{id}-{slug}.html', [Client\ProductController::class, 'index']);
+Route::get('danh-muc', [Client\MenuController::class, 'show']);
+Route::get('danh-muc/{id}-{slug}', [Client\MenuController::class, 'index']);
+Route::get('san-pham/{id}-{slug}', [Client\ProductController::class, 'index']);
+
+Route::post('/add-cart', [Client\CartController::class, 'index']);
+Route::get('gio-hang', [Client\CartController::class, 'show']);
+Route::post('/update-cart', [Client\CartController::class, 'update']);
+Route::get('gio-hang/delete/{id}', [Client\CartController::class, 'remove']);
+Route::post('gio-hang', [Client\CartController::class, 'addCart']);
