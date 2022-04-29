@@ -1,5 +1,9 @@
 @extends('client.index')
 
+@section('head')
+    
+@endsection
+
 @section('content_new')
 <div class="breadCrumbs">
     <div class="wrap-content">
@@ -10,7 +14,7 @@
     </div>
 </div>
 <div class="main-cart">
-    <form action="" method="post">
+    <form action="/gio-hang" method="post">
         @if (count($products) != 0)
             <main class="cart border mb-4 d-flex justify-content-between">
                 <div class="main-left ">
@@ -79,6 +83,7 @@
                     </div>
                     <h3 class="mb-0 mt-5">Thông tin giao hàng</h3>
                     <hr class="mt-3">
+                    @include('client.layouts.alert')
                     <div class="FormThongTin">
                         <div class="row">
                             <div class="form-group col-6">
@@ -93,13 +98,19 @@
                         </div>
                         <div class="row">
                             <div class="form-group col-4">
-                                <input class="form-control form-control-lg" name="TP" type="text" placeholder="Tỉnh/TP" autocomplete="off">
+                                <select class="form-select form-control form-control-lg form-select-sm mb-3"  name="TP" id="city" aria-label=".form-select-sm">
+                                    <option value="" selected>Tỉnh/Thành</option>
+                                </select>
                             </div>
                             <div class="form-group col-4">
-                                <input class="form-control form-control-lg" name="quan" type="text" placeholder="Quận/Huyện">
+                                <select class="form-select form-control form-control-lg form-select-sm mb-3"  name="Quan" id="district" aria-label=".form-select-sm">
+                                    <option value="" selected>Chọn quận huyện</option>
+                                </select>
                             </div>
                             <div class="form-group col-4">
-                                <input class="form-control form-control-lg" name="phuong" type="text" placeholder="Phường/Xã">
+                                <select class="form-select form-control form-control-lg form-select-sm" name="Phuong" id="ward" aria-label=".form-select-sm">
+                                    <option value="" selected>Chọn phường xã</option>
+                                </select>
                             </div>
                         </div>
                         <div class="form-group">
@@ -109,11 +120,11 @@
                             <textarea class="form-control form-control-lg" height="500px" name="note" type="text" placeholder="Yêu cầu khác (Không bắt buộc)"></textarea>
                         </div>
                     </div>
-                    <button type="submit" class="btn-cart btn btn-primary btn-lg btn-block" name="thanhtoan" formaction="/gio-hang">Thanh toán </button>
+                    <button type="submit" class="btn-cart btn btn-primary btn-lg btn-block" name="thanhtoan" >Thanh toán </button>
                 </div>
             </main>
         @else
-            <h2 class="text-center">Giỏ hàng trống  </h2>
+            <h2 class="text-center">Giỏ hàng trống</h2>
         @endif
 
     </form>

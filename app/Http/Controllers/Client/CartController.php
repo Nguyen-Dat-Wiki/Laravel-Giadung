@@ -57,9 +57,21 @@ class CartController extends Controller
 
     public function addCart(Request $request)
     {
-        dd($request->all());
+        $this->validation($request);
         $this->cartService->addCart($request);
 
         return redirect()->back();
+    }
+
+    public function validation(Request $request)
+    {
+        return $this->validate($request,[
+            'fullname' => 'required|max:255',
+            'phonenumber' => 'required|max:255',
+            'email' => 'required|email:filter',
+            'TP' => 'required|max:255',
+            'Quan' => 'required|max:255',
+            'address' => 'required|max:255'
+        ]);
     }
 }

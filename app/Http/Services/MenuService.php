@@ -86,15 +86,21 @@ class MenuService
     {
         return Menu::where('id', $id)->where('active', 1)->firstOrFail();
     }
+    public function getChill_id($id)
+    {
+        $child_menu= Menu::where('parent_id',$id)->where('active',1)->get(); //Lay danh muc con
+        $arr = array();
+        foreach ($child_menu as $key => $value) {
+            $arr[] = $value->id;
+        }
+        array_push($arr,$id);
+        return $arr;   //mảng chứa ID cha và ID con
+    }
 
     public function getProduct($menu, $request)
     {
-        $start= $request->input('start');
-        $end = $request->input('end');
-
-        $query = $menu->products()
-            ->select('id', 'name', 'price', 'price_sale', 'thumb')
-            ->where('active', 1);
+        $tinhtrang_new = ($request->input('tinhtrang')!=null) ? (int)$request->input('tinhtrang') : 1 ;
+        $query = Product::whereIn('menu_id',$menu)->where('active',$tinhtrang_new);   //whereIn dùng để lấy id trong mảng
 
         if ($request->input('price')) {
             $query->orderBy('price_sale', $request->input('price'));
@@ -109,21 +115,20 @@ class MenuService
             $query->where('price_sale', '>', $start)
                 ->where('price_sale', '<', $end);
         }
+        else if($request->input('LocSP')){
+            $query->orderBy('name',$request->input('LocSP'));
+        } 
 
         return $query
-            ->orderByDesc('id')
             ->paginate(10)
             ->withQueryString();
     } 
     public function getProductAll($request)
     {   
+        $tinhtrang_new = ($request->input('tinhtrang')!=null) ? (int)$request->input('tinhtrang') : 1 ;
 
-       
-
-        $query = Product::select('id', 'name', 'price', 'price_sale', 'thumb')->where('active',1);
-
+        $query = Product::select('id', 'name', 'price', 'price_sale', 'thumb')->where('active',$tinhtrang_new);
         
-
         if ($request->input('price')) {
             $query->orderBy('price_sale', $request->input('price'));
         }
@@ -137,15 +142,11 @@ class MenuService
             $query->where('price_sale', '>', $request->input('start'))
                 ->where('price_sale', '<', $request->input('end'));
         }
-        else if($request->input('tinhtrang')){
-            $query->where('active',  $request->input('tinhtrang'));
-        }
         else if($request->input('LocSP')){
             $query->orderBy('name',$request->input('LocSP'));
         } 
 
         return $query
-            ->orderByDesc('id')
             ->paginate(10)
             ->withQueryString();
     } 
