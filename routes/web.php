@@ -2,14 +2,14 @@
 
 use Illuminate\Support\Facades\Route;
 use  App\Http\Controllers\LoginController;
-use  App\Http\Controllers\MainController;
 use  App\Http\Controllers\Client;
 use  App\Http\Controllers\MenuController;
 use  App\Http\Controllers\ProductController;
 use  App\Http\Controllers\SliderController;
 use  App\Http\Controllers\CartController;
 use  App\Http\Controllers\UploadController;
-
+use App\Http\Controllers\HomeController;
+use App\Http\Controllers\UserController;
 use Illuminate\Http\Request;
 
 
@@ -26,15 +26,14 @@ use Illuminate\Http\Request;
 
 
 /* admin */
-Route::get('/admin/login', [LoginController::class, 'index'])->name('login');
-Route::post('/admin/login', [LoginController::class, 'login']);
+
 
 Route::middleware(['auth'])->group(function () {
-
+    
     Route::prefix('admin')->group(function () {
 
-        Route::get('/', [MainController::class, 'index'])->name('index');
-        Route::get('main', [MainController::class, 'index']);
+        Route::get('/', [HomeController::class, 'index'])->name('index');
+        Route::get('main', [HomeController::class, 'index']);
 
         Route::prefix('menu')->group(function () {
             Route::get('add', [MenuController::class, 'create']);
@@ -76,19 +75,20 @@ Route::middleware(['auth'])->group(function () {
         Route::post('customers/view/{customer}', [CartController::class, 'active']);
         Route::DELETE('customers/destroy', [CartController::class, 'destroy']);
 
-        #Money
-        Route::get('users',[UserController::class,'index']);
-        Route::get('users/view/{users}', [UserController::class, 'show']);
-        Route::post('users/users/{users}', [UserController::class, 'active']);
+        #User
+        Route::get('user',[UserController::class,'index']);
+        Route::get('user/view/{id}', [UserController::class, 'show']);
+        Route::post('user/view/{id}', [UserController::class, 'active']);
     });
-
 });
+
 
 
 /* client */
 
 
-Route::get('/',[Client\MainController::class, 'index'])->name('trangchu');
+Route::get('/',[Client\MainController::class, 'index'])->name('home');
+Route::get('/home',[Client\MainController::class, 'index']);
 Route::get('/gioi-thieu',[Client\MainController::class, 'intro']);
 Route::get('/thanh-toan',[Client\MainController::class, 'pay']);
 Route::get('/bao-hanh',[Client\MainController::class, 'insur']);
@@ -96,7 +96,6 @@ Route::get('/lien-he',[Client\MainController::class, 'contact']);
 Route::post('/lien-he',[Client\MailController::class, 'sendMail']);
 
 
-Route::get('/Login',[Client\Login\LoginController::class, 'index']);
 
 Route::get('/search/autocomplete', [Client\MenuController::class, 'search'])->name('autocomplete');
 Route::get('/search', [Client\MenuController::class, 'showSearch'])->name('search');
@@ -111,3 +110,7 @@ Route::post('gio-hang', [Client\CartController::class, 'addCart']);
 Route::post('/update-cart', [Client\CartController::class, 'update']);
 Route::get('gio-hang/delete/{id}', [Client\CartController::class, 'remove']);
 
+//Check quyền admin/ user
+Auth::routes();
+
+Route::get('admin', [HomeController::class, 'adminHome'])->name('admin_home')->middleware('is_admin');
