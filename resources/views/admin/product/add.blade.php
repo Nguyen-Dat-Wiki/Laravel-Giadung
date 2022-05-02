@@ -28,14 +28,21 @@
             </div>
 
             <div class="row">
-                <div class="col-md-6">
+                <div class="col-md-4">
+                    <div class="form-group">
+                        <label for="menu">Số lượng</label>
+                        <input type="number" name="quantity" value="{{ old('quantity') }}" class="form-control"  placeholder="Số lượng" min="1">
+                    </div>
+                </div>
+
+                <div class="col-md-4">
                     <div class="form-group">
                         <label for="menu">Giá Gốc</label>
                         <input type="number" name="price" value="{{ old('price') }}"  class="form-control" >
                     </div>
                 </div>
 
-                <div class="col-md-6">
+                <div class="col-md-4">
                     <div class="form-group">
                         <label for="menu">Giá Giảm</label>
                         <input type="number" name="price_sale" value="{{ old('price_sale') }}"  class="form-control" >

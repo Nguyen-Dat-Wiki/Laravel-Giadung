@@ -50,6 +50,10 @@ $(document).ready(function() {
 
 $(document).on('input', '.num_product', function(e) {
     for (let index = 0; index < $('.num_product').length; index++) {
-        $('#autoclick').click();
+        if ($('.num_product').val() > 0) {
+            $('#autoclick').click();
+        } else {
+            alert('Không được chỉnh về 0');
+        }
     }
 })

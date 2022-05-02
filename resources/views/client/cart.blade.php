@@ -1,7 +1,8 @@
 @extends('client.index')
 
-@section('head')
-    
+@section('js')
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.21.1/axios.min.js"></script>
+    <script src="/asset/js/coutry.js"></script>
 @endsection
 
 @section('content_new')
@@ -38,11 +39,15 @@
                                         $total += $priceEnd;
                                     @endphp
                                     <tr>
+                                        
                                         <th scope="row"><a href="gio-hang/delete/{{$product->id}}"><img src="{{$product->thumb}}" width="100px" alt=""></a></th>
                                         <td>{{$product->name}}</td>
-                                        <td><input type="number" class="num_product" name="num_product[{{ $product->id }}]" value="{{$carts[$product->id]}}" min="1" max="100"></td>
-                                        <td>{{number_format($priceEnd)}}</td>
+                                        <td>
+                                            <input type="number" class="num_product" name="num_product[{{ $product->id }}]" value="{{$carts[$product->id]}}" min="1" max="{{$product->quantity}}">
+                                        </td>
+                                        <td>{{ number_format($priceEnd, 0, '', '.') }}</td>
                                     </tr>
+                                    <input type="number" class="num_product_add" hidden value="{{$product->quantity}}">
                                 @endforeach
                             </tbody>
                         </table>
@@ -120,6 +125,7 @@
                             <textarea class="form-control form-control-lg" height="500px" name="note" type="text" placeholder="Yêu cầu khác (Không bắt buộc)"></textarea>
                         </div>
                     </div>
+                    <input type="text" name='total' hidden value="{{$total}}">
                     <button type="submit" class="btn-cart btn btn-primary btn-lg btn-block" name="thanhtoan" >Thanh toán </button>
                 </div>
             </main>

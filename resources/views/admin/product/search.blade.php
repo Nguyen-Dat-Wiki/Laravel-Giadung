@@ -14,6 +14,7 @@
         <tr>
             <th style="width: 50px">ID</th>
             <th>Tên Sản Phẩm</th>
+            <th>Số lượng</th>
             <th>Danh Mục</th>
             <th>Giá Gốc</th>
             <th>Giá Khuyến Mãi</th>
@@ -27,6 +28,7 @@
             <tr>
                 <td>{{ $product->id }}</td>
                 <td>{{ $product->name }}</td>
+                <td>{{ $product->quantity }}</td>
                 <td>{{ $product->menu->name}}</td>
                 <td>{{ $product->price }}</td>
                 <td>{{ $product->price_sale }}</td>

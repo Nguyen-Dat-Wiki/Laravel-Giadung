@@ -73,6 +73,7 @@ Route::middleware(['auth'])->group(function () {
         #Cart
         Route::get('customers', [CartController::class, 'index']);
         Route::get('customers/view/{customer}', [CartController::class, 'show']);
+        Route::post('customers/view/{customer}', [CartController::class, 'active']);
         Route::DELETE('customers/destroy', [CartController::class, 'destroy']);
         
     });
@@ -83,8 +84,19 @@ Route::middleware(['auth'])->group(function () {
 /* client */
 
 
-Route::get('/',[Client\MainController::class, 'index']);
+Route::get('/',[Client\MainController::class, 'index'])->name('trangchu');
+Route::get('/gioi-thieu',[Client\MainController::class, 'intro']);
+Route::get('/thanh-toan',[Client\MainController::class, 'pay']);
+Route::get('/bao-hanh',[Client\MainController::class, 'insur']);
+Route::get('/lien-he',[Client\MainController::class, 'contact']);
+Route::post('/lien-he',[Client\MailController::class, 'sendMail']);
+
+
 Route::get('/Login',[Client\Login\LoginController::class, 'index']);
+
+Route::get('/search/autocomplete', [Client\MenuController::class, 'search'])->name('autocomplete');
+Route::get('/search', [Client\MenuController::class, 'showSearch'])->name('search');
+
 Route::get('danh-muc', [Client\MenuController::class, 'show']);
 Route::get('danh-muc/{id}-{slug}', [Client\MenuController::class, 'index']);
 Route::get('san-pham/{id}-{slug}', [Client\ProductController::class, 'index']);
@@ -94,3 +106,4 @@ Route::get('gio-hang', [Client\CartController::class, 'show']);
 Route::post('gio-hang', [Client\CartController::class, 'addCart']);
 Route::post('/update-cart', [Client\CartController::class, 'update']);
 Route::get('gio-hang/delete/{id}', [Client\CartController::class, 'remove']);
+

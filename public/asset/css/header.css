@@ -519,7 +519,7 @@ header .navbar {
     position: relative;
 }
 
-.search span {
+.search span button {
     float: left;
     width: 43px;
     height: 41px;
@@ -534,6 +534,7 @@ header .navbar {
     top: 2px;
     border-radius: 3px;
     background-color: gray;
+    border: 0px;
 }
 
 .search input {

@@ -60,24 +60,39 @@
 <div class="main-product">
     <div class="row">
         <div class="cards col-xs-auto col-sm-12 col-md-12 col-lg-12">
-            @foreach ($products as $product)
-                <div class="card">
-                    <div class="card-body">
-                        <div class="card-img">
-                            <a href="/san-pham/{{ $product->id }}-{{ Str::slug($product->name, '-') }}"><img class="img-product" src="{{$product->thumb}}" alt="..."></a>
-                            <span class="sale">-{{  (int)( ( ($product->price - $product->price_sale) * 100) / $product->price ) }}%</span>
-                        </div>
-                        <div class="card-top">
-                            <h3 class="card-title" style="text-align: center;"><a href="/san-pham/{{ $product->id }}-{{ Str::slug($product->name, '-') }}" style="color: black;">{{$product->name}}</a></h3>
-                        </div>
-                        <p class="card-user">
-                            <span class="moneyold">{{number_format($product->price)}}đ</span>&nbsp;&nbsp;
-                            <span class="moneysale">{{number_format($product->price_sale)}}đ</span>
-                        </p>
-                        <div class="d-lg-flex justify-content-center"><button class="bg-white border-primary text-dark" type="submit">Mua ngay&nbsp; <i class="fa-solid fa-basket-shopping-simple"></i></button></div>
+            @if (count($products)>0)
+                @foreach ($products as $product)
+                    <div class="card">
+                        <form action="/add-cart" method="post">
+                            <div class="card-body">
+                                <div class="card-img">
+                                    <a href="/san-pham/{{ $product->id }}-{{ Str::slug($product->name, '-') }}.html"><img class="img-product" src="{{$product->thumb}}" alt="..."></a>
+                                    <span class="sale">-{{  (int)( ( ($product->price - $product->price_sale) * 100) / $product->price ) }}%</span>
+                                </div>
+                                <div class="card-top">
+                                    <h3 class="card-title" style="text-align: center;"><a href="/san-pham/{{ $product->id }}-{{ Str::slug($product->name, '-') }}" style="color: black;">{{$product->name}}</a></h3>
+                                </div>
+                                @if ($product->quantity == 0)
+                                    <div class="text-center lien_he">
+                                        <a class="h3" href="/san-pham/{{ $product->id }}-{{ Str::slug($product->name, '-') }}">Liên hệ</a>
+                                    </div>
+                                @else
+                                    <p class="card-user">
+                                        <span class="moneyold">{{number_format($product->price)}}đ</span>&nbsp;&nbsp;
+                                        <span class="moneysale">{{number_format($product->price_sale)}}đ</span>
+                                    </p>
+                                @endif
+                                <div class="d-lg-flex justify-content-center"><button class="bg-white border-primary text-dark" type="submit">Mua ngay&nbsp; <i class="fa-solid fa-basket-shopping-simple"></i></button></div>
+                            </div>
+                            <input type="number" name="num_product" hidden value="1">
+                            <input type="hidden" name="product_id" value="{{ $product->id }}">
+                            @csrf
+                        </form>
                     </div>
-                </div>
-            @endforeach
+                @endforeach
+            @else
+                <h2 class="mx-auto mb-4">Không tìm thấy sản phẩm</h2>
+            @endif
         </div>
     </div>
     <div class="paganation d-flex justify-content-center">

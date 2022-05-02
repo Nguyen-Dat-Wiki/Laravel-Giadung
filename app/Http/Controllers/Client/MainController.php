@@ -37,4 +37,28 @@ class MainController extends Controller
             'category_4',
             'category_5'));
     }
+    public function intro()
+    {
+        return view('client.Info.intro',[
+            'title' =>'Giới thiệu'
+        ]);
+    }
+    public function pay()
+    {
+        return view('client.Info.pay',[
+            'title' =>'Thanh toán'
+        ]);
+    }
+    public function insur()
+    {
+        return view('client.Info.insurance',[
+            'title' =>'Bảo hành'
+        ]);
+    }
+    public function contact()
+    {
+        return view('client.Info.contact',[
+            'title' =>'Liên hệ'
+        ]);
+    }
 }
