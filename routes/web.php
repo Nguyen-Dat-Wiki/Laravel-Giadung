@@ -75,7 +75,11 @@ Route::middleware(['auth'])->group(function () {
         Route::get('customers/view/{customer}', [CartController::class, 'show']);
         Route::post('customers/view/{customer}', [CartController::class, 'active']);
         Route::DELETE('customers/destroy', [CartController::class, 'destroy']);
-        
+
+        #Money
+        Route::get('users',[UserController::class,'index']);
+        Route::get('users/view/{users}', [UserController::class, 'show']);
+        Route::post('users/users/{users}', [UserController::class, 'active']);
     });
 
 });

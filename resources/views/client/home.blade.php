@@ -77,15 +77,15 @@
                                 <h3 class="card-title" style="text-align: center;"><a href="/san-pham/{{ $product->id }}-{{ Str::slug($product->name, '-') }}.html" style="color: black;">{{$product->name}}</a></h3>
                             </div>
                             @if ($product->quantity == 0)
-                                        <div class="text-center lien_he">
-                                            <a class="h3" href="/san-pham/{{ $product->id }}-{{ Str::slug($product->name, '-') }}">Liên hệ</a>
-                                        </div>
-                                    @else
-                                        <p class="card-user">
-                                            <span class="moneyold">{{number_format($product->price)}}đ</span>&nbsp;&nbsp;
-                                            <span class="moneysale">{{number_format($product->price_sale)}}đ</span>
-                                        </p>
-                                    @endif
+                                <div class="text-center lien_he">
+                                    <a class="h3" href="/san-pham/{{ $product->id }}-{{ Str::slug($product->name, '-') }}">Liên hệ</a>
+                                </div>
+                            @else
+                                <p class="card-user">
+                                    <span class="moneyold">{{number_format($product->price)}}đ</span>&nbsp;&nbsp;
+                                    <span class="moneysale">{{number_format($product->price_sale)}}đ</span>
+                                </p>
+                            @endif
                             <div class="d-lg-flex justify-content-center"><button class="bg-white border-primary text-dark" type="submit">Mua ngay&nbsp; <i class="fa-solid fa-basket-shopping-simple"></i></button></div>
                         </div>
                     </div>

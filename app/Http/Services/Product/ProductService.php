@@ -13,7 +13,7 @@ class ProductService
     public function getNew()
     {
         $limit  = 5;
-        return Product::select('id','name','price','price_sale','thumb')
+        return Product::select('id','quantity','name','price','price_sale','thumb')
             ->where('active',1)
             ->inRandomOrder()   
             ->limit($limit)

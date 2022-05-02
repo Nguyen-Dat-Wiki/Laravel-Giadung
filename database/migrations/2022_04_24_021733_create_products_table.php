@@ -17,7 +17,8 @@ class CreateProductsTable extends Migration
             $table->id();
             $table->string('name');
             $table->text('description');
-            $table->longText('content');
+            $table->unsignedBigInteger('quantity');
+            $table->integer('content');
             $table->integer('menu_id');
             $table->integer('price')->nullable();
             $table->integer('price_sale')->nullable();
