@@ -22,7 +22,7 @@
             <p>Tôi xin phép đặt câu hỏi như sau: <strong>{{($content)}}</strong></p>
         </div>
         <div class="footer ">
-            <p>Cảm ơn quý khách đã tin tưởng và lựa chọn mua hàng tại hệ thống cửa hàng Phong Vũ </p>
+            <p>Cảm ơn quý khách đã tin tưởng và lựa chọn mua hàng tại hệ thống cửa hàng Hago </p>
             <p>Đây là Email tự động, Quý khách vui lòng không trả lời Email này.</p>
             <p> Trân trọng./</p>
         </div>

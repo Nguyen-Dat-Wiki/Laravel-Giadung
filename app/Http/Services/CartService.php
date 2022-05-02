@@ -94,14 +94,13 @@ class CartService
 
             if (is_null($carts))
                 return false;
-            
             $customer = Customer::create([
                 'name' => $request->input('fullname'),
                 'phone' => $request->input('phonenumber'),
                 'address' => $request->input('address').' ' .$request->input('Phường').' ' .$request->input('Quan').' ' .$request->input('TP'),
                 'email' => $request->input('email'),
                 'content' => $request->input('note'),
-                'active' => 1,
+                'user_id'=> $request->input('user_id'),
             ]);
             if($this->infoProductCart($carts, $customer->id)){
                 

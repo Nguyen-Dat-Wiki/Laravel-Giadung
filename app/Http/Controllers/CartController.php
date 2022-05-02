@@ -57,7 +57,7 @@ class CartController extends Controller
     {
         $result = $this->cart->updateActive($request);
         if ($result) {
-            return redirect('admin/customers');
+            return redirect('admin/user');
         }
         return redirect()->back();
     }

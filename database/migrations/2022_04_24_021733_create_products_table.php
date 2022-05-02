@@ -22,7 +22,8 @@ class CreateProductsTable extends Migration
             $table->integer('menu_id');
             $table->integer('price')->nullable();
             $table->integer('price_sale')->nullable();
-            $table->integer('active');
+            $table->unsignedBigInteger('user_id');
+            $table->integer('active')->default(1);
             $table->timestamps();
         });
     }

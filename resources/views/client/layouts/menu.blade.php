@@ -106,10 +106,32 @@
                             <a class="nav-link " href="/lien-he" title="Liên hệ ">Liên hệ
                             </a>
                         </li>
-                        <li class="nav-item ">
-                            <a class="nav-link " href="/Login" title="Liên hệ ">Đăng nhập
-                            </a>
-                        </li>
+                        @guest
+                            @if (Route::has('login'))
+                                <li class="nav-item">
+                                    <a class="nav-link" href="{{ route('login') }}">Đăng nhập</a>
+                                </li>
+                            @endif
+                        @else
+                            <li class="nav-item dropdown">
+                                <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">
+                                    <?php $fullname =  explode(" ",Auth::user()->name);
+                                        $lastName = array_pop($fullname);
+                                        echo $lastName;
+                                    ?>
+                                </a>
+                                <div class="dropdown-menu">
+                                    <a class=" dropdown-item" href="{{ route('logout') }}"
+                                        onclick="event.preventDefault();
+                                                    document.getElementById('logout-form').submit();">
+                                        Đăng xuất</a>
+                                    
+                                    <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
+                                        @csrf
+                                    </form>
+                                </div>
+                            </li>
+                        @endguest
                     </ul>
                 </div>
             </div>

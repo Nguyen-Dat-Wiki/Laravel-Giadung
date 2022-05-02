@@ -44,6 +44,14 @@ class Helper{
         return $active == 0 ? '<span class="btn btn-danger btn-xs">NO</span>'
             : '<span class="btn btn-success btn-xs">YES</span>';
     }
+
+
+    public static function Users($is_admin = 0): string
+    {
+        return $is_admin == 0 ? '<span class="btn btn-danger btn-xs">User</span>'
+            : '<span class="btn btn-success btn-xs">Admin</span>';
+    }
+
     public static function activeCustomer($active = 0): string
     {
         if($active == 0){
