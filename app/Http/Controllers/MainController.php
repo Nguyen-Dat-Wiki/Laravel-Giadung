@@ -9,7 +9,7 @@ class MainController extends Controller
     public function index()
     {   
         $title = 'Trang chủ';
-        return view('admin.index',compact('title'));
+        return view('admin.dashboard.home',compact('title'));
     }
 }
     

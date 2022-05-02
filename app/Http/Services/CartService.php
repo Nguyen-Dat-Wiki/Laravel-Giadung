@@ -151,6 +151,7 @@ class CartService
 
         $data = [];
         foreach ($products as $product) {
+            // check ton kho
             if($carts[$product->id] <= $product->quantity ){
                 $data[] = [
                     'customer_id' => $customer_id,
@@ -159,13 +160,9 @@ class CartService
                     'price' => $product->price_sale 
                 ];
 
-
-                $tonkho = $product->quantity - $carts[$product->id];
-
-
                 DB::table('products')
                 ->where('id',$product->id)
-                ->update(['quantity' => $tonkho]);
+                ->update(['quantity' => $product->quantity - $carts[$product->id]]);
             }
             else{
                 return false;
@@ -181,14 +178,14 @@ class CartService
     {
         return Customer::orderByDesc('id')->paginate(15);
     }
-
+    // get detail customer-cart
     public function getProductForCart($customer)
     {
         return $customer->carts()->with(['product' => function ($query) {
             $query->select('id', 'name', 'thumb');
         }])->get();
     }
-
+    // delete customer
     public function delete($request)
     {   
         $id = (int)$request->input('id');
@@ -198,12 +195,24 @@ class CartService
             Cart::where('customer_id', $id)->delete();
             return true;
         }
-
         return false;
     }
     
     public function updateActive($request)
     {   
+        if($request->input('actives')== 0){
+
+            $carts = Cart::where('customer_id', $request->input('customer_id'))->get();
+
+            foreach ($carts as $key => $value) {
+                $qty = Product::select('quantity')->where('id',$value->product_id)->get();
+                //update quantity product
+                DB::table('products')
+                ->where('id',$value->product_id)
+                ->update(['quantity' => ($value->pty + $qty[0]['quantity'] )   ]    );
+            }
+        }
+        // update active customer
         return DB::table('customers')
                 ->where('id',$request->input('customer_id'))
                 ->update(['active' => $request->input('actives')]);

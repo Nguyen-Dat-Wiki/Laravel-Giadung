@@ -7,6 +7,7 @@
             <li>Số điện thoại: <strong>{{ $customer->phone }}</strong></li>
             <li>Địa chỉ: <strong>{{ $customer->address }}</strong></li>
             <li>Email: <strong>{{ $customer->email }}</strong></li>
+            <li>Trạng thái: <strong>{!! \App\Helpers\Helper::activeCustomer($customer->active) !!}</strong></li>
             <li>Ghi chú: <strong>{{ $customer->content }}</strong></li>
         </ul>
     </div>
@@ -48,21 +49,23 @@
         </table>
         
         <div class="col-md-6">
-            <form action="" method="post">
-                <div class="form-group">
-                    <label>Trạng thái</label>
-                    <select class="form-control" name="actives">
-                        @foreach ($actives as $item)
-                            <option value="{{$item->active}}" {!! ($customer->active == $item->active) ? 'selected' : '' ; !!}>{{$item->name}}</option>
-                        @endforeach
-                        <input type="text" hidden name="customer_id" value="{{$customer->id}}">
-                    </select>
-                </div>
-                <div class="form-group">
-                    <button type="submit">Xác nhận</button>
-                    @csrf
-                </div>
-            </form>
+            @if ($customer->active == 1 || $customer->active == 2)
+                <form action="" method="post">
+                    <div class="form-group">
+                        <label>Trạng thái</label>
+                        <select class="form-control" name="actives">
+                            @foreach ($actives as $item)
+                                <option value="{{$item->active}}" {!! ($customer->active == $item->active) ? 'selected' : '' ; !!}>{{$item->name}}</option>
+                            @endforeach
+                            <input type="text" hidden name="customer_id" value="{{$customer->id}}">
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <button type="submit">Xác nhận</button>
+                        @csrf
+                    </div>
+                </form>
+            @endif
         </div>
         
     </div>

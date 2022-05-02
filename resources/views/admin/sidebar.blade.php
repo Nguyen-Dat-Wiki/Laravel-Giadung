@@ -35,6 +35,23 @@
             <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
                 <!-- Add icons to the links using the .nav-icon class
                      with font-awesome or any other icon font library -->
+
+                <li class="nav-item">
+                    <a href="#" class="nav-link">
+                        <i class="nav-icon fas fa-bars"></i>
+                        <p> Thống kê
+                            <i class="right fas fa-angle-left"></i>
+                        </p>
+                    </a>
+                    <ul class="nav nav-treeview">
+                        <li class="nav-item">
+                            <a href="/admin/money" class="nav-link">
+                                <i class="far fa-circle nav-icon"></i>
+                                <p>Doanh thu</p>
+                            </a>
+                        </li>
+                    </ul>
+                </li>
                 <li class="nav-item">
                     <a href="#" class="nav-link">
                         <i class="nav-icon fas fa-bars"></i>
@@ -119,6 +136,25 @@
                             <a href="/admin/customers" class="nav-link">
                                 <i class="far fa-circle nav-icon"></i>
                                 <p>Danh Sách Đơn Hàng</p>
+                            </a>
+                        </li>
+
+                    </ul>
+                </li>
+
+
+                <li class="nav-item">
+                    <a href="#" class="nav-link">
+                        <i class="nav-icon fas fa-user"></i>
+                        <p> Người dùng
+                            <i class="right fas fa-angle-left"></i>
+                        </p>
+                    </a>
+                    <ul class="nav nav-treeview">
+                        <li class="nav-item">
+                            <a href="/admin/user" class="nav-link">
+                                <i class="far fa-circle nav-icon"></i>
+                                <p>Danh Sách Người Dùng</p>
                             </a>
                         </li>
 
