@@ -221,3 +221,8 @@ tbody tr td {
     background-color: #eeeeee;
     padding: 7px 15px;
 }
+
+.content-article img {
+    width: 100%;
+    object-fit: cover;
+}

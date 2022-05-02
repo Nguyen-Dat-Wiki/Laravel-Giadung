@@ -4,9 +4,10 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Customer;
+use App\Models\Active;
 use App\Http\Services\CartService;
 use Illuminate\Http\JsonResponse;
-
+use DB;
 
 
 class CartController extends Controller
@@ -28,11 +29,12 @@ class CartController extends Controller
     public function show(Customer $customer)
     {
         $carts = $this->cart->getProductForCart($customer);
-
+        $actives = DB::select('select * from actives ');
         return view('admin.carts.detail', [
             'title' => 'Chi Tiết Đơn Hàng: ' . $customer->name,
             'customer' => $customer,
-            'carts' => $carts
+            'carts' => $carts,
+            'actives' =>$actives
         ]);
     }
 
@@ -49,5 +51,14 @@ class CartController extends Controller
         return response()->json([
             'error' => true
         ]);
+    }
+
+    public function active(Request $request)
+    {
+        $result = $this->cart->updateActive($request);
+        if ($result) {
+            return redirect('admin/customers');
+        }
+        return redirect()->back();
     }
 }

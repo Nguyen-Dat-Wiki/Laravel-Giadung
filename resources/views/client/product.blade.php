@@ -23,24 +23,31 @@
                 </div>
             </div>
             <hr>
-            <div class="product_info_left">
-                <div class="product_info_price_value-final text-center mb-3"><span class="nk-price-final h3 font-weight-bold">{{number_format($product->price_sale)}}đ</span></div>
-                <div class="price_promotion d-flex justify-content-center align-content-center">
-                    <span class="nk-product-discount-percent ">-{{  (int)( ( ($product->price - $product->price_sale) * 100) / $product->price ) }}%</span>
-                    <s class="product_info_price_value-real">{{number_format($product->price)}}đ</s>
+            @if ($product->quantity == 0)
+                <div class="text-center lien_he">
+                    <a class="h3" href="/san-pham/{{ $product->id }}-{{ Str::slug($product->name, '-') }}">Liên hệ</a>
                 </div>
-            </div>
-            <hr>
-            <form action="/add-cart" method="POST">
-                <div class="button-order mb-3">
-                    <button class="hoso col-5" type="submit">
-                        Thêm vào giỏ hàng
-                    </button>
+            @else
+                <div class="product_info_left">
+                    <div class="product_info_price_value-final text-center mb-3"><span class="nk-price-final h3 font-weight-bold">{{number_format($product->price_sale)}}đ</span></div>
+                    <div class="price_promotion d-flex justify-content-center align-content-center">
+                        <span class="nk-product-discount-percent ">-{{  (int)( ( ($product->price - $product->price_sale) * 100) / $product->price ) }}%</span>
+                        <s class="product_info_price_value-real">{{number_format($product->price)}}đ</s>
+                    </div>
                 </div>
-                <input type="number" name="num_product" hidden value="1">
-                <input type="hidden" name="product_id" value="{{ $product->id }}">
-                @csrf
-            </form>
+                <form action="/add-cart" method="POST">
+                    <div class="button-order mb-3">
+                        <button class="hoso col-5" type="submit">
+                            Thêm vào giỏ hàng
+                        </button>
+                    </div>
+                    <input type="number" name="num_product" hidden value="1">
+                    <input type="hidden" name="product_id" value="{{ $product->id }}">
+                    @csrf
+                </form>
+                
+            @endif
+            <hr>   
             <div class="banner">
                 <img src="/asset/img/OL-MDAW3-T04-home790.png" width="100%" alt="">
             </div>

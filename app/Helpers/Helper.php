@@ -44,6 +44,22 @@ class Helper{
         return $active == 0 ? '<span class="btn btn-danger btn-xs">NO</span>'
             : '<span class="btn btn-success btn-xs">YES</span>';
     }
+    public static function activeCustomer($active = 0): string
+    {
+        if($active == 0){
+            return '<span class="btn btn-danger btn-xs">Đã huỷ</span>';
+        }
+        else if($active == 1){
+            return'<span class="btn btn-primary btn-xs">Chờ xác nhận</span>';
+        }
+        else if($active == 2){
+            return'<span class="btn btn-warning btn-xs">Đang vận chuyển</span>';
+        }
+        else{
+            return '<span class="btn btn-success btn-xs">Đã hoàn thành</span>';
+        }
+        
+    }
     public static function menus($menus, $parent_id = 0) :string
     {   
         $html = '';

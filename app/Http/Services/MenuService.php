@@ -127,7 +127,7 @@ class MenuService
     {   
         $tinhtrang_new = ($request->input('tinhtrang')!=null) ? (int)$request->input('tinhtrang') : 1 ;
 
-        $query = Product::select('id', 'name', 'price', 'price_sale', 'thumb')->where('active',$tinhtrang_new);
+        $query = Product::where('active',$tinhtrang_new);
         
         if ($request->input('price')) {
             $query->orderBy('price_sale', $request->input('price'));
@@ -149,5 +149,11 @@ class MenuService
         return $query
             ->paginate(10)
             ->withQueryString();
-    } 
+    }
+
+    public function getSearch($request)
+    {
+        return Product::where('name', 'LIKE', "%{$request->input('search')}%")
+        ->paginate(10);
+    }
 }

@@ -1,4 +1,6 @@
     <!-- header -->
+@section('head')
+@endsection
 
     <div class="header">
         <div class="header-bottom container">
@@ -7,11 +9,21 @@
                     <img src="/asset/img/Logo.png" alt="" width="120px" height="50px">
                 </a>
                 <div class="search col-md-5">
-                    <form action="">
-                        <input type="text" id="keyword" placeholder="Nhập từ khóa tìm kiếm">
-                        <span class="fas fa-search "></span>
+                    <form action="{{route('search')}}" method="GET">
+                        <input type="text" id="keyword" name="search" placeholder="Nhập từ khóa tìm kiếm">
+                        <span><button class="fas fa-search"  type="submit"></button></span>
                     </form>
                 </div>
+                <script>
+                    var path = "{{ route('autocomplete') }}";
+                    $('#keyword').typeahead({
+                        source: function(query, process){
+                            return $.get(path, {query:query}, function(data){
+                                return process(data);
+                            });
+                        }
+                    });
+                </script>
                 <div class="hotline-right d-flex align-items-center justify-content-between col-md-5">
                     <a href="tel:0788911668 " class="hotline-header d-flex align-items-center justify-content-between ">
                         <i class="fas fa-phone icon "></i>

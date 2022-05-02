@@ -8,6 +8,7 @@
             <th>Tên Khách Hàng</th>
             <th>Số Điện Thoại</th>
             <th>Email</th>
+            <th>Trạng thái</th>
             <th>Ngày Đặt hàng</th>
             <th style="width: 100px">&nbsp;</th>
         </tr>
@@ -19,6 +20,7 @@
                 <td>{{ $customer->name }}</td>
                 <td>{{ $customer->phone }}</td>
                 <td>{{ $customer->email }}</td>
+                <td>{!! \App\Helpers\Helper::activeCustomer($customer->active) !!}</td>
                 <td>{{ $customer->created_at }}</td>
                 <td>
                     <a class="btn btn-primary btn-sm" href="/admin/customers/view/{{ $customer->id }}">
