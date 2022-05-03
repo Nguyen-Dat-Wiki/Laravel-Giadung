@@ -97,7 +97,7 @@
     </div>
     <div class="paganation d-flex justify-content-center">
         <nav aria-label="Page navigation example">
-            {{$products->links()}}
+            {{$products->appends(request()->query())->links()}}
         </nav>
     </div>
 </div>

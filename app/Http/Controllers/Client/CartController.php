@@ -66,6 +66,7 @@ class CartController extends Controller
     public function validation(Request $request)
     {
         return $this->validate($request,[
+            'HinhThuc' => 'required',
             'fullname' => 'required|max:255',
             'phonenumber' => 'required|max:255',
             'email' => 'required|email:filter',
