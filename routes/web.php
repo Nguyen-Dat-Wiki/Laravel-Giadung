@@ -96,19 +96,30 @@ Route::get('/lien-he',[Client\MainController::class, 'contact']);
 Route::post('/lien-he',[Client\MailController::class, 'sendMail']);
 
 
-
+//search
 Route::get('/search/autocomplete', [Client\MenuController::class, 'search'])->name('autocomplete');
 Route::get('/search', [Client\MenuController::class, 'showSearch'])->name('search');
 
+//danh muc
 Route::get('danh-muc', [Client\MenuController::class, 'show']);
 Route::get('danh-muc/{id}-{slug}', [Client\MenuController::class, 'index']);
 Route::get('san-pham/{id}-{slug}', [Client\ProductController::class, 'index']);
 
+//cart
 Route::post('/add-cart', [Client\CartController::class, 'index']);
 Route::get('gio-hang', [Client\CartController::class, 'show']);
 Route::post('gio-hang', [Client\CartController::class, 'addCart']);
 Route::post('/update-cart', [Client\CartController::class, 'update']);
 Route::get('gio-hang/delete/{id}', [Client\CartController::class, 'remove']);
+
+
+//setting
+
+Route::get('setting',[Client\SettingController::class,'index'])->name('setting');
+Route::post('setting',[Client\SettingController::class,'edit']);
+Route::get('setting/pass',[Client\SettingController::class,'pass'])->name('pass');
+Route::post('setting/pass',[Client\SettingController::class,'update']);
+Route::get('setting/{id}',[Client\SettingController::class,'show'])->name('show');
 
 //Check quyền admin/ user
 Auth::routes();

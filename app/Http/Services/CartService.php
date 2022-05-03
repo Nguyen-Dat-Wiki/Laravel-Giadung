@@ -11,7 +11,7 @@ use App\Models\Product;
 use Illuminate\Support\Facades\Session;
 use DB;
 use Mail;
-
+use Carbon\Carbon;
 
 class CartService
 {
@@ -147,7 +147,7 @@ class CartService
             ->where('active', 1)
             ->whereIn('id', $productId)
             ->get();
-
+        $time = Carbon::now('Asia/Ho_Chi_Minh');
         $data = [];
         foreach ($products as $product) {
             // check ton kho
@@ -156,7 +156,8 @@ class CartService
                     'customer_id' => $customer_id,
                     'product_id' => $product->id,
                     'pty'   => $carts[$product->id],
-                    'price' => $product->price_sale 
+                    'price' => $product->price_sale,
+                    'created_at' => $time
                 ];
 
                 DB::table('products')

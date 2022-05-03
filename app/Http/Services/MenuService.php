@@ -121,7 +121,8 @@ class MenuService
 
         return $query
             ->paginate(10)
-            ->withQueryString();
+            ->withQueryString()
+            ->appends(request()->query());
     } 
     public function getProductAll($request)
     {   
@@ -148,7 +149,8 @@ class MenuService
 
         return $query
             ->paginate(10)
-            ->withQueryString();
+            ->withQueryString()
+            ->appends(request()->query());
     }
 
     public function getSearch($request)
