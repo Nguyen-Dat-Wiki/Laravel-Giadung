@@ -33,7 +33,7 @@ Route::middleware(['auth'])->group(function () {
     Route::prefix('admin')->group(function () {
 
         Route::get('/', [HomeController::class, 'index'])->name('index');
-        Route::get('main', [HomeController::class, 'index']);
+        Route::post('/', [HomeController::class, 'post']);
 
         Route::prefix('menu')->group(function () {
             Route::get('add', [MenuController::class, 'create']);

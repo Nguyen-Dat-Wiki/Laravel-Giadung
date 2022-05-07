@@ -13,8 +13,8 @@
             </div>
         </div>
         <div class="footer-article ">
-            <div class="wrap-content d-flex align-items-start justify-content-between container">
-                <div class="footer-news col-md-5">
+            <div class="wrap-content d-flex align-items-start justify-content-between container flex-wrap">
+                <div class="footer-news col-md-5 ">
                     <div class="info-footer mt-4">
                         <p>Địa chỉ: 263d/2 Ba Đình Phường 8 Quận 8</p>
 
@@ -32,7 +32,7 @@
                     </div>
 
                 </div>
-                <div class="footer-news col-md-4">
+                <div class="footer-news col-md-4 ">
                     <h2 class="title-footer">Chính sách khách hàng</h2>
                     <ul class="footer-ul">
                         <li><a class="text-decoration-none" href="ho-tro-dat-hang" title="Hỗ trợ đặt hàng">Hỗ trợ đặt hàng</a></li>
@@ -42,9 +42,9 @@
                         <li><a class="text-decoration-none" href="chinh-sach-mua-hang" title="Chính sách mua hàng">Chính sách mua hàng</a></li>
                     </ul>
                 </div>
-                <div class="footer-news col-md-3">
+                <div class="footer-news col-md-3 ">
                     <h2 class="title-footer">Hình thức thanh toán</h2>
-                    <ul class="social social-thanhtoan flex-wrap d-lg-flex">
+                    <ul class="social social-thanhtoan d-flex">
                         <li>
                             <a href="http://vinahello.vn/thanh-toan" target="_blank"><img src="/asset/img/pttt-45-45060.png" alt=""></a>
                         </li>
@@ -56,7 +56,7 @@
                         </li>
                     </ul>
                     <h2 class="title-footer mt-10">Liên kết với chúng tôi</h2>
-                    <ul class="social social-footer flex-wrap d-lg-flex">
+                    <ul class="social social-footer d-flex">
                         <li>
                             <a href="" target="_blank"><i class="fab fa-facebook-square"></i></a>
                         </li>

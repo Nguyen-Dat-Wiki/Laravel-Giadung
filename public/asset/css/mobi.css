@@ -1,0 +1,204 @@
+@media screen and (min-width:1024px) and (max-width:1199px) {
+    .navbar .navbar-nav .nav-item {
+        margin: 0 1px!important;
+    }
+    .button-submit button {
+        padding: 10px;
+    }
+}
+
+@media screen and (min-width:776px) and (max-width: 1023px) {
+    .cards {
+        --spacing: 10px;
+        --columns: 3;
+    }
+    .hotline-header,
+    .cart-header {
+        padding: 0;
+    }
+    .icon {
+        padding: 10px;
+    }
+    .navbar>.container {
+        justify-content: start;
+    }
+    .BannerSlide div span,
+    .BannerSlide div span .item a img {
+        width: 100%;
+    }
+    .wrap-tieuchi {
+        display: none;
+    }
+    .wrap-tieuchi-mobi {
+        display: block;
+        background-color: rgb(17, 132, 253);
+        height: 150x;
+        margin-bottom: 5%;
+    }
+    .table thead tr,
+    .table tbody tr td {
+        white-space: nowrap;
+    }
+}
+
+@media screen and (min-width: 361px) and (max-width:776px) {
+    .cards {
+        --spacing: 10px;
+        --columns: 2;
+    }
+    .BannerSlide div {
+        margin-left: 0;
+    }
+    .BannerSlide div span,
+    .BannerSlide div span .item a img {
+        width: 100%;
+    }
+    .card-user {
+        flex-wrap: wrap;
+    }
+    .card-body {
+        padding: 0.25rem;
+    }
+    .card {
+        margin-top: auto;
+    }
+    .wrap-content>a {
+        justify-content: center;
+        height: 70px;
+    }
+    .hotline-header,
+    .cart-header {
+        padding: 0;
+    }
+    .navbar>.container {
+        justify-content: start;
+    }
+    .navbar>.container>button {
+        margin-top: -2%;
+    }
+    #scroll {
+        bottom: 5%;
+        width: 35px;
+        height: 35px;
+        z-index: 999;
+    }
+    .wrap-tieuchi-mobi {
+        display: block;
+        background-color: rgb(17, 132, 253);
+        height: 150x;
+        margin-bottom: 5%;
+    }
+    .owl-carousel .owl-item img {
+        width: 60%;
+    }
+    .icon {
+        padding: 7px;
+    }
+    .form-contact {
+        flex: 1;
+        width: 100%!important;
+        max-width: 100%!important;
+    }
+    .form-contact .input-contact {
+        margin-bottom: 2%;
+    }
+    .SlideBanner .slide,
+    .wrap-tieuchi,
+    .Img-group,
+    .TitleBox form:nth-child(2) {
+        display: none;
+    }
+    .listGroupProduct ul {
+        justify-content: center;
+    }
+    /* Gio hang */
+    .table thead tr,
+    .table tbody tr td {
+        white-space: nowrap;
+    }
+    .button-submit button {
+        padding: 7px;
+    }
+}
+
+@media screen and (max-width:360px) {
+    .cards {
+        --spacing: 7px;
+        --columns: 2;
+    }
+    .card-user {
+        flex-wrap: wrap;
+    }
+    .card-user span {
+        font-size: 14px!important;
+    }
+    .title-main {
+        font-size: 22px!important;
+    }
+    .title-main a {
+        padding: 7px!important;
+    }
+    .card-body {
+        padding: 0.25rem;
+    }
+    .button-submit button {
+        padding: 7px;
+    }
+    .card {
+        margin-top: auto;
+    }
+    .wrap-content>a {
+        justify-content: center;
+        height: 70px;
+    }
+    .navbar>.container {
+        justify-content: start;
+    }
+    .navbar>.container>button {
+        margin-top: -2%;
+    }
+    #scroll {
+        bottom: 5%;
+        width: 35px;
+        height: 35px;
+        z-index: 999;
+    }
+    .SlideBanner .slide,
+    .wrap-tieuchi,
+    .Img-group,
+    .TitleBox form:nth-child(2) {
+        display: none;
+    }
+    .wrap-tieuchi-mobi {
+        display: block;
+        background-color: rgb(17, 132, 253);
+        height: 150x;
+        margin-bottom: 5%;
+    }
+    .owl-carousel .owl-item img {
+        width: 60%;
+    }
+    .hotline-header,
+    .cart-header {
+        padding: 0;
+    }
+    .icon {
+        padding: 7px;
+    }
+    .form-contact {
+        flex: 1;
+        width: 100%!important;
+        max-width: 100%!important;
+    }
+    .form-contact .input-contact {
+        margin-bottom: 2%;
+    }
+    .listGroupProduct ul {
+        justify-content: center;
+    }
+    /* Gio hang */
+    .table thead tr,
+    .table tbody tr td {
+        white-space: nowrap;
+    }
+}

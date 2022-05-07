@@ -6,7 +6,7 @@
         </ol>
     </div>
 </div>
-<div class="left d-flex flex-column col-md-3">
+<div class="left d-flex flex-column col-md-3 col-sm-3">
     <ul class="navbar-nav">
         <li class="nav-item">
             <a href="{{route('setting')}}" class="nav-link text-dark {!!  (request()->url() == route('setting') ) ? 'active': ''  !!}"><span class="fa-solid fa-rectangle-list"></span>&nbsp; Thông tin cá nhân và sổ địa chỉ  </a>
@@ -19,7 +19,7 @@
         </li>
     </ul>
 </div>
-<div class="right col-md-9">
+<div class="right col-md-9 col-sm-9">
     <div class="user d-flex justify-content-between" > 
         <span>Chào bạn<b> {{Auth::user()->name}}</b> - <b>{{Auth::user()->phone}}</b></span>
     </div>

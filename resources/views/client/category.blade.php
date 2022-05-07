@@ -82,7 +82,7 @@
                                         <span class="moneysale">{{number_format($product->price_sale)}}đ</span>
                                     </p>
                                 @endif
-                                <div class="d-lg-flex justify-content-center"><button class="bg-white border-primary text-dark" type="submit">Mua ngay&nbsp; <i class="fa-solid fa-basket-shopping-simple"></i></button></div>
+                                <div class="button-submit d-flex justify-content-center"><button class="bg-white border-primary text-dark" type="submit">Mua ngay&nbsp; <i class="fa-solid fa-basket-shopping-simple"></i></button></div>
                             </div>
                             <input type="number" name="num_product" hidden value="1">
                             <input type="hidden" name="product_id" value="{{ $product->id }}">
@@ -97,7 +97,7 @@
     </div>
     <div class="paganation d-flex justify-content-center">
         <nav aria-label="Page navigation example">
-            {{$products->appends(request()->query())->links()}}
+            {{$products->appends(request()->query())->onEachSide(1)->links()}}
         </nav>
     </div>
 </div>

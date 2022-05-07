@@ -17,40 +17,42 @@
 <div class="main-cart">
     <form action="/gio-hang" method="post">
         @if (count($products) != 0)
-            <main class="cart border mb-4 d-flex justify-content-between">
-                <div class="main-left ">
+            <main class="cart border mb-4 d-flex justify-content-between flex-wrap">
+                <div class="left col-lg-7 ">
                     <form action="" method="post">
                         <h3 class="mb-0 mt-4">Giỏ hàng của bạn</h3>
                         <hr class="mt-3">
-                        <table class="table border">
-                            <thead class="thead-light">
-                                <tr>
-                                    <th scope="col">Hình ảnh</th>
-                                    <th scope="col">Tên sản phẩm</th>
-                                    <th scope="col">Số lượng</th>
-                                    <th scope="col">Thành tiền</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                @foreach ($products as $product )
-                                    @php
-                                        $price = $product->price_sale != 0 ? $product->price_sale : $product->price;
-                                        $priceEnd = $price * $carts[$product->id];
-                                        $total += $priceEnd;
-                                    @endphp
+                        <div class="table-responsive-sm table-responsive-lg">
+                            <table class="table border">
+                                <thead class="thead-light">
                                     <tr>
-                                        
-                                        <th scope="row"><a href="gio-hang/delete/{{$product->id}}"><img src="{{$product->thumb}}" width="100px" alt=""></a></th>
-                                        <td>{{$product->name}}</td>
-                                        <td>
-                                            <input type="number" class="num_product" name="num_product[{{ $product->id }}]" value="{{$carts[$product->id]}}" min="1" max="{{$product->quantity}}">
-                                        </td>
-                                        <td>{{ number_format($priceEnd, 0, '', '.') }}</td>
+                                        <th scope="col">Hình ảnh</th>
+                                        <th scope="col">Tên sản phẩm</th>
+                                        <th scope="col">Số lượng</th>
+                                        <th scope="col">Thành tiền</th>
                                     </tr>
-                                    <input type="number" class="num_product_add" hidden value="{{$product->quantity}}">
-                                @endforeach
-                            </tbody>
-                        </table>
+                                </thead>
+                                <tbody>
+                                    @foreach ($products as $product )
+                                        @php
+                                            $price = $product->price_sale != 0 ? $product->price_sale : $product->price;
+                                            $priceEnd = $price * $carts[$product->id];
+                                            $total += $priceEnd;
+                                        @endphp
+                                        <tr>
+                            
+                                            <th scope="row"><a href="gio-hang/delete/{{$product->id}}"><img src="{{$product->thumb}}" width="100px" alt=""></a></th>
+                                            <td>{{$product->name}}</td>
+                                            <td>
+                                                <input type="number" class="num_product" name="num_product[{{ $product->id }}]" value="{{$carts[$product->id]}}" min="1" max="{{$product->quantity}}">
+                                            </td>
+                                            <td>{{ number_format($priceEnd, 0, '', '.') }}</td>
+                                        </tr>
+                                        <input type="number" class="num_product_add" hidden value="{{$product->quantity}}">
+                                    @endforeach
+                                </tbody>
+                            </table>
+                        </div>
                         <div class="mb-4">
                             <button type="submit" id="autoclick" hidden class=" btn-cart btn btn-primary" name="thanhtoan" formaction="/update-cart">Cập nhật</button>
                             @csrf
@@ -61,7 +63,7 @@
                         </div>
                     </form>
                 </div>
-                <div class="main-right mb-4">
+                <div class="right mb-4 col-lg-5">
                     <h3 class="mb-0 mt-4">Hình thức thanh toán</h3>
                     <hr class="mt-3">
                     <div class="FormHinhThuc mb-4">

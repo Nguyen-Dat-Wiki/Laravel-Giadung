@@ -13,9 +13,32 @@ use Illuminate\Support\Facades\Auth;
 
 
 class UserService{
-    public function get()
+    public function get($request)
     {
-        return User::select('id','name','email','phone','is_admin','created_at')->orderbyDesc('id')->paginate(15);
+        $query =  DB::table('users');
+
+        if ($request->input('id')) {
+            $query->orderBy('id', $request->input('id'));
+        }
+        else if ($request->input('name')) {
+            $query->orderBy('name', $request->input('name'));
+        }
+        else if ($request->input('phone')) {
+            $query->orderBy('phone', $request->input('phone'));
+        }
+        else if ($request->input('email')) {
+            $query->orderBy('email',  $request->input('email'));
+        }
+        else if($request->input('is_admin')){
+            $query->orderBy('is_admin',$request->input('is_admin'));
+        } 
+        else if($request->input('created_at')){
+            $query->orderBy('created_at',$request->input('created_at'));
+        } 
+        return $query
+            ->paginate(15)
+            ->withQueryString()
+            ->appends(request()->query());
     }
     public function getDetail($request)
     {
