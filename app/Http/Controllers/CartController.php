@@ -18,11 +18,11 @@ class CartController extends Controller
         $this->cart = $cart;
     }
 
-    public function index()
+    public function index(Request $request)
     {
         return view('admin.carts.customer', [
             'title' => 'Danh Sách Đơn Đặt Hàng',
-            'customers' => $this->cart->getCustomer()
+            'customers' => $this->cart->getCustomer($request)
         ]);
     }
 

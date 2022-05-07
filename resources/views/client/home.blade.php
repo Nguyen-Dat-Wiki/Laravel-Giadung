@@ -5,7 +5,7 @@
     <div class="slide">
         <div class="container SlideBanner" style="padding: 0;">
 
-            <div class="col-lg-8 slide mt-3">
+            <div class="col-lg-8 col-md-8 col-sm-8 slide mt-3">
                 <div id="carousel-example-generic" class="carousel slide" data-ride="carousel">
                 
                     <!-- Hình ảnh -->
@@ -36,7 +36,7 @@
                     </a>
                 </div>
             </div>
-            <div class="col-lg-4 BannerSlide">
+            <div class="col-lg-4 col-md-4 col-sm-4 BannerSlide">
                 <div class="row mr-2">
                     <span>
                         <div class="item active">
@@ -86,7 +86,7 @@
                                     <span class="moneysale">{{number_format($product->price_sale)}}đ</span>
                                 </p>
                             @endif
-                            <div class="d-lg-flex justify-content-center"><button class="bg-white border-primary text-dark" type="submit">Mua ngay&nbsp; <i class="fa-solid fa-basket-shopping-simple"></i></button></div>
+                            <div class="button-submit d-flex justify-content-center"><button class="bg-white border-primary text-dark" type="submit">Mua ngay&nbsp; <i class="fa-solid fa-basket-shopping-simple"></i></button></div>
                         </div>
                     </div>
                 @endforeach
@@ -128,7 +128,7 @@
                                             <span class="moneysale">{{number_format($product->price_sale)}}đ</span>
                                         </p>
                                     @endif
-                                    <div class="d-lg-flex justify-content-center"><button class="bg-white border-primary text-dark" type="submit">Mua ngay&nbsp; <i class="fa-solid fa-basket-shopping-simple"></i></button></div>
+                                    <div class="button-submit d-flex justify-content-center"><button class="bg-white border-primary text-dark" type="submit">Mua ngay&nbsp; <i class="fa-solid fa-basket-shopping-simple"></i></button></div>
                                 </div>
                                 <input type="number" name="num_product" hidden value="1">
                                 <input type="hidden" name="product_id" value="{{ $product->id }}">
@@ -170,7 +170,7 @@
                                             <span class="moneysale">{{number_format($product->price_sale)}}đ</span>
                                         </p>
                                     @endif
-                                <div class="d-lg-flex justify-content-center"><button class="bg-white border-primary text-dark" type="submit">Mua ngay&nbsp; <i class="fa-solid fa-basket-shopping-simple"></i></button></div>
+                                <div class="button-submit d-flex justify-content-center"><button class="bg-white border-primary text-dark" type="submit">Mua ngay&nbsp; <i class="fa-solid fa-basket-shopping-simple"></i></button></div>
                             </div>
                             <input type="number" name="num_product" hidden value="1">
                             <input type="hidden" name="product_id" value="{{ $product->id }}">
@@ -212,7 +212,7 @@
                                             <span class="moneysale">{{number_format($product->price_sale)}}đ</span>
                                         </p>
                                     @endif
-                                    <div class="d-lg-flex justify-content-center"><button class="bg-white border-primary text-dark" type="submit">Mua ngay&nbsp; <i class="fa-solid fa-basket-shopping-simple"></i></button></div>
+                                    <div class="button-submit d-flex justify-content-center"><button class="bg-white border-primary text-dark" type="submit">Mua ngay&nbsp; <i class="fa-solid fa-basket-shopping-simple"></i></button></div>
                                 </div>
                                 <input type="number" name="num_product" hidden value="1">
                                 <input type="hidden" name="product_id" value="{{ $product->id }}">
@@ -228,7 +228,7 @@
 @section('category_4')
         <div class="category-1 mb-5">
             <div class="title-main mb-2 pl-5 border-primary border">
-                <span> Lọc không khí </span>
+                <span>Máy lọc </span>
                 <a class=" float-right mr-5 border-primary border" href="/danh-muc/9-loc-khong-khi.html">Xem tất cả >></a>
             </div>
             <div class="row">
@@ -254,7 +254,7 @@
                                             <span class="moneysale">{{number_format($product->price_sale)}}đ</span>
                                         </p>
                                     @endif
-                                    <div class="d-lg-flex justify-content-center"><button class="bg-white border-primary text-dark" type="submit">Mua ngay&nbsp; <i class="fa-solid fa-basket-shopping-simple"></i></button></div>
+                                    <div class="button-submit d-flex justify-content-center"><button class="bg-white border-primary text-dark" type="submit">Mua ngay&nbsp; <i class="fa-solid fa-basket-shopping-simple"></i></button></div>
                                 </div>
                                 <input type="number" name="num_product" hidden value="1">
                                 <input type="hidden" name="product_id" value="{{ $product->id }}">
@@ -296,7 +296,7 @@
                                         <span class="moneysale">{{number_format($product->price_sale)}}đ</span>
                                     </p>
                                 @endif
-                                <div class="d-lg-flex justify-content-center"><button class="bg-white border-primary text-dark" type="submit">Mua ngay&nbsp; <i class="fa-solid fa-basket-shopping-simple"></i></button></div>
+                                <div class="button-submit d-flex justify-content-center"><button class="bg-white border-primary text-dark" type="submit">Mua ngay&nbsp; <i class="fa-solid fa-basket-shopping-simple"></i></button></div>
                             </div>
                             <input type="number" name="num_product" hidden value="1">
                             <input type="hidden" name="product_id" value="{{ $product->id }}">
@@ -312,6 +312,47 @@
 
 
 @section('tieuchi')
+    <div class="col-md-12 wrap-tieuchi-mobi">
+        <div class="owl-clients owl-carousel text-center d-flex align-items-center">
+            <div class="service-item my-auto">
+                <div class="m box-buy-normal d-flex align-items-center justify-content-center">
+                    <p class="pic-buy-normal"><img src="/asset/img/593-9332.png" width="50px" alt="Uy Tín - Chất Lượng"></p>
+                    <div class="info-buy-normal">
+                        <h5 class="name-buy text-split" style="color: black">Uy Tín - Chất Lượng</h5>
+                        <p class="desc-buy text-split" style="color: black">Chúng tôi cam kết luôn mang đến cho quý khách hàng sự hài lòng tin cậy</p>
+                    </div>
+                </div>
+            </div>
+            <div class="service-item  my-auto">
+                <div class="box-buy-normal d-flex align-items-center justify-content-center ">
+                    <p class="pic-buy-normal"><img src="/asset/img/tc4093-9155.png"  width="50px"  alt="Sản phẩm chính hãng"></p>
+                    <div class="info-buy-normal">
+                        <h5 class="name-buy text-split" style="color: black" >Sản phẩm chính hãng</h5>
+                        <p class="desc-buy text-split" style="color: black">Nhập khẩu trực tiếp từ Nhật, hàng mới 100%</p>
+                    </div>
+                </div>
+            </div>
+            <div class="service-item  my-auto">
+                <div class="box-buy-normal d-flex align-items-center justify-content-center ">
+                    <p class="pic-buy-normal"><img src="/asset/img/1593-5763.png" width="50px"  alt="Vận chuyển toàn quốc"></p>
+                    <div class="info-buy-normal">
+                        <h5 class="name-buy text-split" style="color: black">Vận chuyển toàn quốc</h5>
+                        <p class="desc-buy text-split"  style="color: black">Ship code 63 tỉnh thành Việt Nam. Đơn vị giao hàng nhanh chóng</p>
+                    </div>
+                </div>
+            </div>
+            <div class="service-item  my-auto">
+                <div class="box-buy-normal d-flex align-items-center justify-content-center">
+                    <p class="pic-buy-normal"><img src="/asset/img/tc40-4680.png" width="50px"  alt="Hỗ trợ tư vấn 24/7"></p>
+                    <div class="info-buy-normal">
+                        <h5 class="name-buy text-split" style="color: black">Hỗ trợ tư vấn 24/7</h5>
+                        <p class="desc-buy text-split"  style="color: black">Đội ngũ nhân viên cskh luôn sẵn sàng tư vấn </p>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
     <div class="wrap-tieuchi content">
         <div class="wrap-content mb-5">
             <div class="slick-track d-flex " role="listbox">

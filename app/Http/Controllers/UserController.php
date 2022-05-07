@@ -14,11 +14,11 @@ class UserController extends Controller
     {
         $this->User = $User;
     }
-    public function index()
+    public function index(Request $request)
     {
         return view('admin.users.list', [
             'title' => 'Danh sách người dùng',
-            'users' => $this->User->get()
+            'users' => $this->User->get($request)
         ]);
     }
     public function show($id)

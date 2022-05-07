@@ -2,8 +2,8 @@
 
 @section('content')
     
-    <div class="">
-        <table class="table">
+    <div class="table-responsive table-responsive-lg">
+        <table class="table table-bordered">
             <thead>
                 <tr>
                     <th style="width: 50px">ID</th>
@@ -17,7 +17,9 @@
                 {!! \App\Helpers\Helper::menu($menus) !!}
             </tbody>
         </table>
-        {{ $menus->links()}}
+        {{$menus->appends(request()->query())->onEachSide(1)->links()}}
+
+
     </div>
 @endsection
 

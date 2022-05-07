@@ -11,17 +11,66 @@
     </form>
     <table class="table">
         <thead>
-        <tr>
-            <th style="width: 50px">ID</th>
-            <th>Tên Sản Phẩm</th>
-            <th>Số lượng</th>
-            <th>Danh Mục</th>
-            <th>Giá Gốc</th>
-            <th>Giá Khuyến Mãi</th>
-            <th>Active</th>
-            <th>Update</th>
-            <th style="width: 100px">&nbsp;</th>
-        </tr>
+            <tr  id="table">
+                <th style="width: 60px">ID
+                    @if(request()->getQueryString() == 'id=desc')
+                        <a href="{{request()->url()}}?id=asc"> <i class="fas fa-sort-up"></i></a>
+                    @elseif(request()->getQueryString() == 'id=asc')
+                        <a href="{{request()->url()}}?id=desc"> <i class="fas fa-sort-down"></i></a>
+                    @else
+                        <a href="{{request()->url()}}?id=asc"> <i class="fas fa-sort"></i></a>
+                    @endif
+                </th>
+                <th>Tên Sản Phẩm
+                    @if(request()->getQueryString() == 'name=desc')
+                        <a href="{{request()->url()}}?name=asc"> <i class="fas fa-sort-up"></i></a>
+                    @elseif(request()->getQueryString() == 'name=asc')
+                        <a href="{{request()->url()}}?name=desc"> <i class="fas fa-sort-down"></i></a>
+                    @else
+                        <a href="{{request()->url()}}?name=asc"> <i class="fas fa-sort"></i></a>
+                    @endif
+                </th>
+                <th>Số lượng
+                    @if(request()->getQueryString() == 'quantity=desc')
+                        <a href="{{request()->url()}}?quantity=asc"> <i class="fas fa-sort-up"></i></a>
+                    @elseif(request()->getQueryString() == 'quantity=asc')
+                        <a href="{{request()->url()}}?quantity=desc"> <i class="fas fa-sort-down"></i></a>
+                    @else
+                        <a href="{{request()->url()}}?quantity=asc"> <i class="fas fa-sort"></i></a>
+                    @endif
+                </th>
+                <th>Danh Mục</th>
+                <th>Giá Gốc
+                    @if(request()->getQueryString() == 'price=desc')
+                        <a href="{{request()->url()}}?price=asc"> <i class="fas fa-sort-up"></i></a>
+                    @elseif(request()->getQueryString() == 'price=asc')
+                        <a href="{{request()->url()}}?price=desc"> <i class="fas fa-sort-down"></i></a>
+                    @else
+                        <a href="{{request()->url()}}?price=asc"> <i class="fas fa-sort"></i></a>
+                    @endif
+    
+                </th>
+                <th>Giá sale
+                    @if(request()->getQueryString() == 'price_sale=desc')
+                        <a href="{{request()->url()}}?price_sale=asc"> <i class="fas fa-sort-up"></i></a>
+                    @elseif(request()->getQueryString() == 'price_sale=asc')
+                        <a href="{{request()->url()}}?price_sale=desc"> <i class="fas fa-sort-down"></i></a>
+                    @else
+                        <a href="{{request()->url()}}?price_sale=asc"> <i class="fas fa-sort"></i></a>
+                    @endif
+                </th>
+                <th>Active</th>
+                <th>Create
+                    @if(request()->getQueryString() == 'created_at=desc')
+                        <a href="{{request()->url()}}?created_at=asc"> <i class="fas fa-sort-up"></i></a>
+                    @elseif(request()->getQueryString() == 'created_at=asc')
+                        <a href="{{request()->url()}}?created_at=desc"> <i class="fas fa-sort-down"></i></a>
+                    @else
+                        <a href="{{request()->url()}}?created_at=asc"> <i class="fas fa-sort"></i></a>
+                    @endif
+                </th>
+                <th style="width: 100px">&nbsp;</th>
+            </tr>
         </thead>
         <tbody>
             @foreach($products as $key => $product)
@@ -49,7 +98,8 @@
     </table>
 
     <div class="card-footer clearfix">
-        {!! $products->links() !!}
+        {{$products->appends(request()->query())->onEachSide(1)->links()}}
+
 
     </div>
 @endsection     

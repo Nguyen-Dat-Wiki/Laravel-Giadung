@@ -13,8 +13,17 @@
 <!-- Theme style -->
 <link rel="stylesheet" href="/template/admin/dist/css/adminlte.min.css">
 
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css">
+
+
 <meta name="csrf-token" content="{{ csrf_token() }}">
 
+<style>
+.table thead tr,
+.table tbody tr td {
+    white-space: nowrap;
+}
+</style>
 @yield('head')
 
 

@@ -6,7 +6,11 @@ namespace App\Http\Services\Product;
 
 use App\Models\Menu;
 use App\Models\Product;
+use App\Models\Customer;
+use App\Models\Cart;
 use Illuminate\Support\Facades\Session;
+use DB;
+
 
 class ProductAdminService
 {
@@ -51,10 +55,32 @@ class ProductAdminService
         return  true;
     }
 
-    public function get()
+    public function get($request)
     {
-        return Product::with('menu')
-            ->orderByDesc('id')->paginate(15);
+        $query =  Product::with('menu');
+
+        if ($request->input('id')) {
+            $query->orderBy('id', $request->input('id'));
+        }
+        else if ($request->input('name')) {
+            $query->orderBy('name', $request->input('name'));
+        }
+        else if ($request->input('quantity')) {
+            $query->orderBy('quantity', $request->input('quantity'));
+        }
+        else if ($request->input('price')) {
+            $query->orderBy('price',  $request->input('price'));
+        }
+        else if($request->input('price_sale')){
+            $query->orderBy('price_sale',$request->input('price_sale'));
+        } 
+        else if($request->input('created_at')){
+            $query->orderBy('created_at',$request->input('created_at'));
+        } 
+        return $query
+            ->paginate(15)
+            ->withQueryString()
+            ->appends(request()->query());
     }
 
     public function update($request, $product)
@@ -90,5 +116,55 @@ class ProductAdminService
         return Product::where('name', 'like', '%' . $search . '%')
             ->orderByDesc('id')->paginate(15); 
     }
+    public function search_money_all($request)
+    {
+        $query = Customer::whereIn('active',[2,3])
+            ->with('carts');
+        if ($request->input('id')) {
+            $query->orderBy('id', $request->input('id'));
+        }
+        else if ($request->input('name')) {
+            $query->orderBy('name', $request->input('name'));
+        }
+        else if ($request->input('address')) {
+            $query->orderBy('address', $request->input('address'));
+        }
+        else if ($request->input('email')) {
+            $query->orderBy('email',  $request->input('email'));
+        }
+        else if($request->input('created_at')){
+            $query->orderBy('created_at',$request->input('created_at'));
+        } 
+        return $query
+            ->paginate(15)
+            ->withQueryString()
+            ->appends(request()->query());
+    }
 
+    public function searchMoney($request)
+    {
+        $query = Customer::whereIn('active',[2,3])
+        ->whereBetween('created_at',[$request->input('start'),$request->input('end')])
+        ->with('carts');
+        
+        if ($request->input('id')) {
+            $query->orderBy('id', $request->input('id'));
+        }
+        else if ($request->input('name')) {
+            $query->orderBy('name', $request->input('name'));
+        }
+        else if ($request->input('address')) {
+            $query->orderBy('address', $request->input('address'));
+        }
+        else if ($request->input('email')) {
+            $query->orderBy('email',  $request->input('email'));
+        }
+        else if($request->input('created_at')){
+            $query->orderBy('created_at',$request->input('created_at'));
+        } 
+        return $query
+            ->paginate(15)
+            ->withQueryString()
+            ->appends(request()->query());
+    }
 }

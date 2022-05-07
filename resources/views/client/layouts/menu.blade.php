@@ -4,11 +4,11 @@
 
     <div class="header">
         <div class="header-bottom container">
-            <div class="wrap-content d-flex align-items-center justify-content-between">
-                <a href="/" class="d-flex align-items-center mb-2 mb-lg-0 text-white text-decoration-none">
-                    <img src="/asset/img/Logo.png" alt="" width="120px" height="50px">
+            <div class="wrap-content d-flex align-items-center justify-content-between flex-wrap">
+                <a href="/" class="d-flex align-items-center m mb-2 mb-lg-0 text-white text-decoration-none col-md-2 col-lg-2">
+                    <img src="/asset/img/Logo.png" alt=""height="100%" width="100%">
                 </a>
-                <div class="search col-md-5">
+                <div class="search col-md-4 col-lg-5">
                     <form action="{{route('search')}}" method="GET">
                         <input type="text" id="keyword" name="search" placeholder="Nhập từ khóa tìm kiếm">
                         <span><button class="fas fa-search"  type="submit"></button></span>
@@ -24,7 +24,7 @@
                         }
                     });
                 </script>
-                <div class="hotline-right d-flex align-items-center justify-content-between col-md-5">
+                <div class="hotline-right d-flex align-items-center justify-content-between col-lg-5 col-md-6">
                     <a href="tel:0788911668 " class="hotline-header d-flex align-items-center justify-content-between ">
                         <i class="fas fa-phone icon "></i>
                         <div class="combo-right ">

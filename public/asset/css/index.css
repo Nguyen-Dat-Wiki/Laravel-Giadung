@@ -17,8 +17,8 @@
 
 @media screen and (min-width: 361px) and (max-width:776px) {
     .cards {
-        --spacing: 15px;
-        --columns: 3;
+        --spacing: 10px;
+        --columns: 2;
     }
 }
 
@@ -39,7 +39,6 @@
     display: flex;
     flex-direction: column;
     flex: 1;
-    margin-top: auto;
 }
 
 .card-user,
@@ -81,6 +80,7 @@
 /* ------- Title  --------- */
 
 .card-title {
+    height: 34px;
     font-weight: 500;
     margin: 15px 0;
     display: -webkit-box;

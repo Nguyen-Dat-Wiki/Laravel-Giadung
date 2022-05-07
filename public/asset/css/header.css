@@ -215,7 +215,6 @@ header .navbar {
     content: '';
     position: absolute;
     top: 1px;
-    border-right: 1px solid rgb(210 210 210 / 19%);
     height: 45px;
     right: -34px;
 }
@@ -563,6 +562,14 @@ header .navbar {
 
 
 /* footer */
+
+.wrap-tieuchi-mobi {
+    display: none;
+}
+
+.social-thanhtoan {
+    flex-wrap: wrap;
+}
 
 .content-mail {
     background-color: #1b1818;

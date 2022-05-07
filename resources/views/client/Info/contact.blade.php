@@ -55,9 +55,9 @@
                 <h5 class="text-center h4 text-success font-weight-bold">Hago Team</h5>
             </div>
 
-            <div id="map" class="mx-auto mb-4 mt-4">
-                <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d5543.3960033461535!2d106.68037913965553!3d10.751977764766485!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x31752f01c3de51d1%3A0x8928a2ecd89d398b!2zMjYzRC8yIELhur9uIEJhIMSQw6xuaCwgUGjGsOG7nW5nIDgsIFF14bqtbiA4LCBUaMOgbmggcGjhu5EgSOG7kyBDaMOtIE1pbmgsIFZp4buHdCBOYW0!5e0!3m2!1svi!2s!4v1649905944435!5m2!1svi!2s"
-                    width="1100" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+            <div id="map" class="container mb-4 mt-4 ">
+                <iframe style="width: 100%" src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d5543.3960033461535!2d106.68037913965553!3d10.751977764766485!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x31752f01c3de51d1%3A0x8928a2ecd89d398b!2zMjYzRC8yIELhur9uIEJhIMSQw6xuaCwgUGjGsOG7nW5nIDgsIFF14bqtbiA4LCBUaMOgbmggcGjhu5EgSOG7kyBDaMOtIE1pbmgsIFZp4buHdCBOYW0!5e0!3m2!1svi!2s!4v1649905944435!5m2!1svi!2s"
+                    height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
             </div>
         </div>
 

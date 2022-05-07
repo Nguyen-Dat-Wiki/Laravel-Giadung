@@ -86,8 +86,8 @@ class CartService
 
     public function addCart($request)
     {   
-        
         try {
+            
             DB::beginTransaction();
 
             $carts = Session::get('carts');
@@ -99,7 +99,7 @@ class CartService
                 'phone' => $request->input('phonenumber'),
                 'address' => $request->input('address').' ' .$request->input('Phường').' ' .$request->input('Quan').' ' .$request->input('TP'),
                 'email' => $request->input('email'),
-                'content' => $request->input('note'),
+                'content' => ($request->input('note')==null) ? null : $request->input('note'),
                 'user_id'=> $request->input('user_id'),
             ]);
             if($this->infoProductCart($carts, $customer->id)){
@@ -174,9 +174,32 @@ class CartService
 
 
     //admin
-    public function getCustomer()
+    public function getCustomer($request)
     {
-        return Customer::orderByDesc('id')->paginate(15);
+        $query =  DB::table('customers');
+
+        if ($request->input('id')) {
+            $query->orderBy('id', $request->input('id'));
+        }
+        else if ($request->input('name')) {
+            $query->orderBy('name', $request->input('name'));
+        }
+        else if ($request->input('phone')) {
+            $query->orderBy('phone', $request->input('phone'));
+        }
+        else if ($request->input('email')) {
+            $query->orderBy('email',  $request->input('email'));
+        }
+        else if($request->input('active')){
+            $query->orderBy('active',$request->input('active'));
+        } 
+        else if($request->input('created_at')){
+            $query->orderBy('created_at',$request->input('created_at'));
+        } 
+        return $query
+            ->paginate(15)
+            ->withQueryString()
+            ->appends(request()->query());
     }
     // get detail customer-cart
     public function getProductForCart($customer)
