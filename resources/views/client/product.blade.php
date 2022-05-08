@@ -19,7 +19,7 @@
                     <a title="" class="last-item" href="/san-pham/{{ $product->id }}-{{ Str::slug($product->name, '-') }}">{{$product->name}} </a>
                 </div>
                 <div class="wrap_name_vote">
-                    <h3 class="product_info_name">{{$product->name}}1</h3>
+                    <h3 class="product_info_name">{{$product->name}}</h3>
                 </div>
             </div>
             <hr>

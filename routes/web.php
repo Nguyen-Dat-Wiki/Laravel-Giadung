@@ -120,6 +120,7 @@ Route::post('setting',[Client\SettingController::class,'edit']);
 Route::get('setting/pass',[Client\SettingController::class,'pass'])->name('pass');
 Route::post('setting/pass',[Client\SettingController::class,'update']);
 Route::get('setting/{id}',[Client\SettingController::class,'show'])->name('show');
+Route::get('setting/delete/{cus_id}',[Client\SettingController::class,'delete']);
 
 //Check quyền admin/ user
 Auth::routes();

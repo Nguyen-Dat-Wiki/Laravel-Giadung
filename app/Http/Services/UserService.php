@@ -76,12 +76,14 @@ class UserService{
             $cart = Cart::with('product')->where('customer_id',$value->id)->get();
             foreach ($cart as $key => $item) {
                 $data[]= [
+                    'id'=>$item->product->id,
                     'name'=>$item->product->name,
                     'thumb'=>$item->product->thumb,
                     'quantity'=>$item->pty,
                     'price'=>$item->price,
                     'active'=>$value->active,
                     'time'=>$value->created_at,
+                    'customer_id'=>$value->id
                 ];
             }
         }
@@ -105,5 +107,11 @@ class UserService{
             Session::flash('error','Mật khẩu cũ sai');
             return false;
         }
+    }
+    public function delete($request)
+    {   
+        return DB::table('customers')
+                ->where('id',$request->cus_id)
+                ->update(['active' => 0]);
     }
 }

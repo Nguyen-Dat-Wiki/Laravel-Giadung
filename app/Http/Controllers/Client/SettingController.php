@@ -65,5 +65,11 @@ class SettingController extends Controller
             'confirm_pass' => 'required|same:new_pass',
         ]);
     }
-
+    public function delete(Request $request)
+    {
+        $result= $this->user->delete($request);
+        if($result){
+            return redirect()->back();
+        }
+    }
 }
