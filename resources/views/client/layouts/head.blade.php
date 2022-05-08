@@ -11,12 +11,12 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-3-typeahead/4.0.2/bootstrap3-typeahead.min.js" ></script>
 
 
-<link rel="stylesheet" href="/asset/CSS/mobi.css">
 <link rel="stylesheet" href="/asset/CSS/owl.css">
 <link rel="stylesheet" href="/asset/css/bootstrap.css">
 <link rel="stylesheet" href="/asset/CSS/index.css">
 <link rel="stylesheet" href="/asset/CSS/header.css">
 <link rel="stylesheet" href="/asset/CSS/product.css">
+<link rel="stylesheet" href="/asset/CSS/mobi.css">
 
 
 <meta name="csrf-token" content="{{ csrf_token() }}">

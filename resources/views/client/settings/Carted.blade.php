@@ -27,8 +27,9 @@
                                     <th class="column-3">Số lượng</th>
                                     <th class="column-4">Tổng tiền</th>
                                     <th class="column-5">Thời gian</th>
+                                    <th class="column-6">&nbsp;</th>
                                 </tr>
-                        
+                                
                                 @php $total = 0 @endphp
                                 @foreach ($carts as $key => $item)
                         
@@ -47,6 +48,11 @@
                                             <td class="column-4">{{ $item['quantity'] }}</td>
                                             <td class="column-3">{{ number_format($price, 0, '', '.') }}</td>
                                             <td class="column-5">{{$item['time']}}</td>
+                                            <td class="column-6">
+                                                <a class="btn btn-danger btn-sm" href="/setting/delete/{{$item['customer_id']}}">
+                                                    <i class="fas fa-trash"></i>
+                                                </a>
+                                        </td>
                                         </tr>
                                     @endif
                                 @endforeach
