@@ -3,7 +3,7 @@
 @section('content')
     <div class="">
         <form action="" method="post">
-            <div class="row mx-3 my-3 v">
+            <div class="row mx-3 my-3 ">
                 <div class="mr-4">
                     <input type="datetime-local" value="{!! isset($start)? $start : date('Y-m-d').'T00:00' !!}" name="start" id="">
                 </div>
@@ -14,6 +14,9 @@
                 <div class="ml-4">
                     <button type="submit">Lọc</button>
                     @csrf
+                </div>
+                <div class="ml-auto">
+                    <a class="btn btn-primary" href="/admin/export">Export Excel</a>
                 </div>
                 @php $total = 0 @endphp
                 
@@ -32,6 +35,7 @@
             </div>
         </form>
     </div>
+    
     <div class="content table-responsive table-responsive-lg">
         <table class="table table-bordered " >
             <thead>

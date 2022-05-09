@@ -7,6 +7,9 @@ use App\Http\Services\SliderService;
 use App\Http\Services\CartService;
 use App\Http\Services\Product\ProductAdminService;
 
+use App\Exports\MoneyExport;
+use Maatwebsite\Excel\Facades\Excel;
+
 class HomeController extends Controller
 {
     /**
@@ -42,5 +45,9 @@ class HomeController extends Controller
             'start'=>$req->start,
             'end'=>$req->end,
         ]);
+    }
+    public function export()
+    {
+        return Excel::download(new MoneyExport, 'Doanhthu.xlsx');
     }
 }

@@ -20,6 +20,7 @@ class CreateCustomersTable extends Migration
             $table->string('address', 255);
             $table->string('email', 255);
             $table->integer('active');
+            $table->string('payment',255);
             $table->text('content');
             $table->timestamps();
 

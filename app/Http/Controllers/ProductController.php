@@ -7,6 +7,9 @@ use App\Http\Services\Product\ProductAdminService;
 use App\Models\Product;
 use Illuminate\Http\Request;
 
+use App\Exports\ProductExport;
+use Maatwebsite\Excel\Facades\Excel;
+
 class ProductController extends Controller
 {
 
@@ -81,5 +84,9 @@ class ProductController extends Controller
             'title' => 'Tìm kiếm Sản Phẩm',
             'products' => $this->productService->getSearch($request)
         ]);
+    }
+    public function export()
+    {
+        return Excel::download(new ProductExport, 'Product.xlsx');
     }
 }

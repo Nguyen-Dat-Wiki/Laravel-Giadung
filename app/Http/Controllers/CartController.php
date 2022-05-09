@@ -8,7 +8,7 @@ use App\Models\Active;
 use App\Http\Services\CartService;
 use Illuminate\Http\JsonResponse;
 use DB;
-
+use PDF;
 
 class CartController extends Controller
 {
@@ -60,5 +60,25 @@ class CartController extends Controller
             return redirect('admin/customers');
         }
         return redirect()->back();
+    }
+    public function print(Customer $customer)
+    {
+        $carts = $this->cart->getProductForCart($customer);
+        $actives = DB::select('select * from actives ');
+
+        $data = [
+            'heading' => 'Hoá đơn của '.$customer->name,
+            'customer' => $customer,
+            'carts' => $carts,
+        ];
+        $pdf = PDF::loadView('admin.PDF.yourpdf', $data);
+        return $pdf->download('Hoadon.pdf'); 
+
+        /* return view('admin.PDF.yourpdf', [
+            'heading' => 'Chi Tiết Đơn Hàng: ' . $customer->name,
+            'customer' => $customer,
+            'carts' => $carts,
+            'actives' =>$actives
+        ]); */
     }
 }

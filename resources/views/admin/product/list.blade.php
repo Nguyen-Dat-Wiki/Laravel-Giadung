@@ -1,7 +1,7 @@
 @extends('admin.index')
 
 @section('content')
-<div class="row">
+<div class="row mt-3">
     <form action="" method="POST" class=" col-lg-5">
         <div class="input-group mb-3">
             <input type="text" class="form-control" name="search" placeholder="Search name">
@@ -9,6 +9,9 @@
         </div>
         @csrf
     </form>
+    <div class="ml-auto mr-4">
+        <a class="btn btn-primary" href="/admin/products/export">Export Excel</a>
+    </div>
 </div>
 
     <div class="table-responsive table-responsive-lg">
