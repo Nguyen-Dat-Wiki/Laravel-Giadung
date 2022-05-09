@@ -1,15 +1,22 @@
 @extends('admin.index')
 
 @section('content')
-    <div class="customer mt-3">
-        <ul>
-            <li>Tên khách hàng: <strong>{{ $customer->name }}</strong></li>
-            <li>Số điện thoại: <strong>{{ $customer->phone }}</strong></li>
-            <li>Địa chỉ: <strong>{{ $customer->address }}</strong></li>
-            <li>Email: <strong>{{ $customer->email }}</strong></li>
-            <li>Trạng thái: <strong>{!! \App\Helpers\Helper::activeCustomer($customer->active) !!}</strong></li>
-            <li>Ghi chú: <strong>{{ $customer->content }}</strong></li>
-        </ul>
+    <div class="row m-0">
+        <div class="customer mt-3">
+            <ul>
+                <li>Tên khách hàng: <strong>{{ $customer->name }}</strong></li>
+                <li>Số điện thoại: <strong>{{ $customer->phone }}</strong></li>
+                <li>Địa chỉ: <strong>{{ $customer->address }}</strong></li>
+                <li>Email: <strong>{{ $customer->email }}</strong></li>
+                <li>Trạng thái: <strong>{!! \App\Helpers\Helper::activeCustomer($customer->active) !!}</strong></li>
+                <li>Ghi chú: <strong>{{ $customer->content }}</strong></li>
+            </ul>
+        </div>
+        @if ($customer->active == 2 || $customer->active == 3)
+            <div class="mx-auto mt-3">
+                <a href="{{$customer->id}}/print" class="btn btn-primary">Print</a>
+            </div>
+        @endif
     </div>
 
     <div class="carts">

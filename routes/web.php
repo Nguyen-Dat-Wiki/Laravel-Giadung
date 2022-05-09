@@ -34,6 +34,7 @@ Route::middleware(['auth'])->group(function () {
 
         Route::get('/', [HomeController::class, 'index'])->name('index');
         Route::post('/', [HomeController::class, 'post']);
+        Route::get('/export',[HomeController::class, 'export']);
 
         Route::prefix('menu')->group(function () {
             Route::get('add', [MenuController::class, 'create']);
@@ -42,6 +43,7 @@ Route::middleware(['auth'])->group(function () {
             Route::get('edit/{menu}', [MenuController::class, 'edit']);
             Route::post('edit/{menu}', [MenuController::class, 'update']);
             Route::DELETE('destroy', [MenuController::class, 'destroy']);
+
         });
 
         #Product
@@ -53,6 +55,8 @@ Route::middleware(['auth'])->group(function () {
             Route::get('edit/{product}', [ProductController::class, 'show']);
             Route::post('edit/{product}', [ProductController::class, 'update']);
             Route::DELETE('destroy', [ProductController::class, 'destroy']);
+            Route::get('export',[ProductController::class, 'export']);
+
         });
 
         #Slider
@@ -72,6 +76,7 @@ Route::middleware(['auth'])->group(function () {
         #Cart
         Route::get('customers', [CartController::class, 'index']);
         Route::get('customers/view/{customer}', [CartController::class, 'show']);
+        Route::get('customers/view/{customer}/print',[CartController::class, 'print']);
         Route::post('customers/view/{customer}', [CartController::class, 'active']);
         Route::DELETE('customers/destroy', [CartController::class, 'destroy']);
 

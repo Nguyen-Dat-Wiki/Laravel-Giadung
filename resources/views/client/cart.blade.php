@@ -69,19 +69,19 @@
                     <div class="FormHinhThuc mb-4">
                         <ul class="ChoseHinhThuc">
                             <li>
-                                <input type="radio" id="taicho" name="HinhThuc">
+                                <input type="radio" id="taicho" name="HinhThuc" value="Cash on Delivery">
                                 <label for="taicho">
                                     <div class="border ">Thanh toán trực tiếp tại cửa hàng</div>
                                 </label>
                             </li>
                             <li>
-                                <input type="radio" id="MV" name="HinhThuc">
+                                <input type="radio" id="MV" name="HinhThuc" value="Cash on Delivery">
                                 <label for="MV">
                                     <div class="border ">Thanh toán tại điểm giao hàng</div>
                                 </label>
                             </li>
                             <li>
-                                <input type="radio" id="Chuyenkhoan" name="HinhThuc">
+                                <input type="radio" id="Chuyenkhoan" name="HinhThuc" value="Transfer Payments">
                                 <label for="Chuyenkhoan">
                                     <div class="border ">Thanh toán bằng chuyển khoản</div>
                                 </label>

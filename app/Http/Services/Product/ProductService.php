@@ -21,7 +21,13 @@ class ProductService
     }
     public function getAll($id)
     {
-        return Product::where('menu_id',$id)
+        $child_menu= Menu::where('parent_id',$id)->where('active',1)->get(); //Lay danh muc con
+        $arr = array();
+        foreach ($child_menu as $key => $value) {
+            $arr[] = $value->id;
+        }
+        array_push($arr,$id);
+        return Product::whereIn('menu_id',$arr)
         ->limit(5)
         ->get();
     }
