@@ -5,8 +5,10 @@ namespace App\Http\Services\Product;
 
 use App\Models\Menu;
 use App\Models\Product;
+use App\Models\Comment;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Http\Request;
+use DB;
 
 class ProductService
 {
@@ -47,6 +49,32 @@ class ProductService
             ->orderByDesc('id')
             ->limit(8)
             ->get();
+    }
+
+    public function comment($request)
+    {
+        Comment::create([
+            'name'=>$request->input('name'),
+            'user_id' =>  ($request->input('user_id') == null ) ? null : $request->input('user_id') ,
+            'post_id' => 0,
+            'product_id'=>$request->input('product_id'),
+            'content'=>$request->input('content')
+        ]);
+        return true;
+    }
+    public function get($id)
+    {
+        return DB::table('Comments')->where('product_id',$id)->orderby('created_at', 'desc')->paginate(5);
+    }
+    public function deleteComment($post_id)
+    {
+        $id = (int)$post_id;
+        $Comment = Comment::where('id', $id)->first();
+        if ($Comment) {
+            Comment::where('id', $id)->delete();
+            return true;
+        }
+        return false;
     }
 }
     

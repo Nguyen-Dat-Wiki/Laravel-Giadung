@@ -33,7 +33,7 @@
                                 @php $total = 0 @endphp
                                 @foreach ($carts as $key => $item)
                         
-                                    @if ($item['active'] == 1)
+                                    @if ($item['active'] == 2)
                                         @php
                                         $price = $item['price'] * $item['quantity'];
                                         $total += $price;
@@ -76,7 +76,7 @@
                                 @php $total = 0 @endphp
                                 @foreach ($carts as $key => $item)
                         
-                                    @if ($item['active'] == 2)
+                                    @if ($item['active'] == 3)
                                         @php
                                         $price = $item['price'] * $item['quantity'];
                                         $total += $price;
@@ -114,7 +114,7 @@
                                 @php $total = 0 @endphp
                                 @foreach ($carts as $key => $item)
                         
-                                    @if ($item['active'] == 3)
+                                    @if ($item['active'] == 4)
                                         @php
                                         $price = $item['price'] * $item['quantity'];
                                         $total += $price;
@@ -152,7 +152,7 @@
                                 @php $total = 0 @endphp
                                 @foreach ($carts as $key => $item)
                         
-                                    @if ($item['active'] == 0)
+                                    @if ($item['active'] == 1)
                                         @php
                                         $price = $item['price'] * $item['quantity'];
                                         $total += $price;
