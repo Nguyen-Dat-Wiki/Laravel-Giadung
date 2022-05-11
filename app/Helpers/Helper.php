@@ -54,13 +54,13 @@ class Helper{
 
     public static function activeCustomer($active = 0): string
     {
-        if($active == 0){
+        if($active == 1){
             return '<span class="btn btn-danger btn-xs">Đã huỷ</span>';
         }
-        else if($active == 1){
+        else if($active == 2){
             return'<span class="btn btn-primary btn-xs">Chờ xác nhận</span>';
         }
-        else if($active == 2){
+        else if($active == 3){
             return'<span class="btn btn-warning btn-xs">Đang vận chuyển</span>';
         }
         else{

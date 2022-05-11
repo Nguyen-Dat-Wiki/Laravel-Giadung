@@ -49,7 +49,7 @@
                     </tr>
                 @endforeach
                     <tr>
-                        <td colspan="4" class="text-right">Tổng Tiền</td>
+                        <td colspan="4" class="text-right"><strong>Tổng Tiền</strong></td>
                         <td>{{ number_format($total, 0, '', '.') }}</td>
                     </tr>
                 </tbody>
@@ -57,13 +57,13 @@
         </div>
         
         <div class="col-md-6">
-            @if ($customer->active == 1 || $customer->active == 2)
+            @if ($customer->active == 2 || $customer->active == 3)
                 <form action="" method="post">
                     <div class="form-group">
                         <label>Trạng thái</label>
                         <select class="form-control" name="actives">
                             @foreach ($actives as $item)
-                                <option value="{{$item->active}}" {!! ($customer->active == $item->active) ? 'selected' : '' ; !!}>{{$item->name}}</option>
+                                <option value="{{$item->id}}" {!! ($customer->active == $item->id) ? 'selected' : '' ; !!}>{{$item->name}}</option>
                             @endforeach
                             <input type="text" hidden name="customer_id" value="{{$customer->id}}">
                         </select>

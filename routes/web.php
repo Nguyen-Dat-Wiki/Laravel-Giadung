@@ -110,6 +110,10 @@ Route::get('danh-muc', [Client\MenuController::class, 'show']);
 Route::get('danh-muc/{id}-{slug}', [Client\MenuController::class, 'index']);
 Route::get('san-pham/{id}-{slug}', [Client\ProductController::class, 'index']);
 
+// comment
+Route::post('san-pham/{id}-{slug}', [Client\ProductController::class, 'comment']);
+Route::get('san-pham/{id}-{slug}/delete={post_id}', [Client\ProductController::class, 'delete']);
+
 //cart
 Route::post('/add-cart', [Client\CartController::class, 'index']);
 Route::get('gio-hang', [Client\CartController::class, 'show']);

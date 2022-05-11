@@ -54,6 +54,11 @@
             </div>
         </div>
     </div>
+    <div class="zalo">
+        <div class="zalo-chat-widget" data-oaid="579745863508352884" data-welcome-message="Rất vui khi được hỗ trợ bạn!" data-autopopup="2" data-width="" data-height=""></div>
+    </div>
+
+    <script src="https://sp.zalo.me/plugins/sdk.js"></script>
 
     <!-- backtop -->
     <div class="icon_back_top">

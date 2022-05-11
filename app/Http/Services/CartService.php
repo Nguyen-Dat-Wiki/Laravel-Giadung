@@ -100,7 +100,7 @@ class CartService
                 'address' => $request->input('address').' ' .$request->input('Phường').' ' .$request->input('Quan').' ' .$request->input('TP'),
                 'email' => $request->input('email'),
                 'content' => ($request->input('note')==null) ? null : $request->input('note'),
-                'user_id'=> $request->input('user_id'),
+                'user_id'=> ($request->input('user_id')==null) ? null : $request->input('user_id'),
                 'payment'=>$request->input('HinhThuc')
             ]);
             if($this->infoProductCart($carts, $customer->id)){

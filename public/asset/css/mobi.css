@@ -8,6 +8,10 @@
 }
 
 @media screen and (min-width:776px) and (max-width: 1023px) {
+    .zalo-chat-widget {
+        top: 75%;
+        right: 3%!important;
+    }
     .cards {
         --spacing: 10px;
         --columns: 3;
@@ -42,6 +46,9 @@
 }
 
 @media screen and (min-width: 361px) and (max-width:776px) {
+    .zalo-chat-widget {
+        right: 1%!important;
+    }
     .cards {
         --spacing: 10px;
         --columns: 2;

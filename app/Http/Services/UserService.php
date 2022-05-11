@@ -110,8 +110,17 @@ class UserService{
     }
     public function delete($request)
     {   
+        $carts = Cart::where('customer_id', $request->cus_id)->get();
+
+        foreach ($carts as $key => $value) {
+            $qty = Product::select('quantity')->where('id',$value->product_id)->get();
+            //update quantity product
+            DB::table('products')
+            ->where('id',$value->product_id)
+            ->update(['quantity' => ($value->pty + $qty[0]['quantity'] )   ]    );
+        }
         return DB::table('customers')
                 ->where('id',$request->cus_id)
-                ->update(['active' => 0]);
+                ->update(['active' => 1]);
     }
 }

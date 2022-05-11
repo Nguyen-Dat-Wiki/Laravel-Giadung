@@ -128,7 +128,7 @@
                         </div>
                     </div>
                     <input type="text" name='total' hidden value="{{$total}}">
-                    <input type="text" name="user_id" hidden value="{!!  isset(Auth::user()->id) ? Auth::user()->id : 0 !!}">
+                    <input type="text" name="user_id" hidden value="{!!  isset(Auth::user()->id) ? Auth::user()->id : null !!}">
                     <button type="submit" class="btn-cart btn btn-primary btn-lg btn-block" name="thanhtoan" >Thanh toán </button>
                     @csrf
                 </div>
