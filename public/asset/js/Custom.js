@@ -90,3 +90,13 @@ $(document).ready(function() {
         });
     }
 });
+
+$(document).ready(function() {
+
+    $(document).on('click', '.reply', function() {
+        var comment_id = $(this).attr("id");
+        $('#comment_id').val(comment_id);
+        $('#comment_name').focus();
+    });
+
+});

@@ -98,8 +98,6 @@
 @endsection
 
 
-
-
 @section('main-bottom')
 <hr>
 <div class="main-bottom ">
@@ -114,71 +112,70 @@
                     </select>
                 </span>
             </div>
-            <div class="d-flex justify-content">
-                @if (Auth::check())
-                <input class="col-10" name='content' type="text" width="100%" height="50px" placeholder="Thêm bình luận" required>
-                <div class="ml-auto" >
-                    <button class="btn btn-primary" type="submit" id="btn-submit" style="height: 50px">Gửi bình luận </button>
-                    <input type="text" hidden name="user_id" value="{!!  (isset(Auth::user()->id)) ? Auth::user()->id : '' ; !!}">
-                    <input type="text" name="product_id" hidden value="{{$product->id}}">
-                    <input type="text" name="name" hidden value="{!!  (isset(Auth::user()->name)) ? Auth::user()->name : 'Khách' ; !!}">
-                </div>
-                @else
-                <input class="col-10" disabled name='content' type="text" width="100%" height="70px" placeholder="Vui lòng đăng nhập để bình luận" required>
-                <div class="ml-auto" >
-                    <button class="btn btn-primary" disabled type="submit" id="btn-submit" style="height: 50px">Gửi bình luận </button>
-                </div>
-                @endif
-            </div>
-            @csrf
         </form>
-        <div class="contentCmt mt-4 ">
-            @foreach ($comment  as $key => $item) 
-                    <div class="c-comment-box d-flex mb-4 align-items-center box-comment border">
-                        <div class="comment-avatar border p-5 rounded ">
-                            <?php
-                                $fullname =  explode(" ",$item->name);
-                                $lastName = array_pop($fullname);
-                                echo $lastName[0];
-                            ?>
-                        </div>
-                        <div class="c-comment-box_content ml-3 " >
-                            <div class="c-comment-name d-flex h4 m-0 align-items-center">
-                                <span>{{$item->name}}</span>
-                                <span class="time h6 ml-2" style="color: #99a2aa">
-                                @php
-                                    Carbon\Carbon::setLocale('vi');
-                                    echo Carbon\Carbon::create($item->created_at)->diffForHumans();
-                                    $time =  explode(" ",Carbon\Carbon::create($item->created_at)->diffForHumans());
-                                @endphp
-                                </span>
-                            </div>
-                            <div class="c-comment-text">
-                                <span class="content-show">{{$item->content}}</span>
-                            </div>
-                        </div>
-                        @if (Auth::check())
-                            @if (Auth::user()->id == $item->user_id)
-                                @if ($time[1]== 'giờ' || $time[1] == 'phút' ||  $time[1] == 'giây' )
-                                    <div class="dropdown ml-auto d-flex flex-column">
-                                        <a class=" btn-setting btn-secondary dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                        ...
-                                        </a>
-                                        <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-                                            <a class="dropdown-item" href="{{request()->url()}}/delete={{$item->id}}">Delete</a>
-                                        </div>
-                                    </div>
-
-                                @endif
-                            @endif
-                        @endif
-                    </div> 
-            @endforeach
+        <form method="POST" action="" id="comment_form">
+            <div class="form-group">
+             <input type="text" name="name" id="comment_name" class="form-control" placeholder="Enter Name" />
+            </div>
+            <div class="form-group">
+             <textarea name="content" id="comment_content" class="form-control" placeholder="Enter Comment" rows="5"></textarea>
+            </div>
+            <div class="form-group">
+                <input type="hidden" name="product_id" value="{{$product->id}}" />
+                <input type="hidden" name="comment_id" id="comment_id" value="0" />
+                <button type="submit" name="submit" id="submit" class="btn btn-info" >Gửi bình luận</button>
+                @csrf
+            </div>
+        </form>
+        <div id="display_comment">
+            {!! \App\Helpers\Helper::fetch_comment($comment,$product->id) !!}
         </div>
-        <div class="text-center">
+        <div class="">
             {{$comment->links()}}
         </div>
     </div>
 </div>
     
+@endsection
+
+
+@section('tieuchi')
+<div class="main-product">
+    <div class="">
+        <h4>Sản phẩm khác</h4>
+    </div>
+    <div class="row">
+        <div class="cards col-xs-auto col-sm-12 col-md-12 col-lg-12">
+            @foreach ($products as $product)
+                <div class="card">
+                    <form action="/add-cart" method="post">
+                        <div class="card-body">
+                            <div class="card-img">
+                                <a href="/san-pham/{{ $product->id }}-{{ Str::slug($product->name, '-') }}.html"><img class="img-product" src="{{$product->thumb}}" alt="..."></a>
+                                <span class="sale">-{{  (int)( ( ($product->price - $product->price_sale) * 100) / $product->price ) }}%</span>
+                            </div>
+                            <div class="card-top">
+                                <h3 class="card-title" style="text-align: center;"><a href="/san-pham/{{ $product->id }}-{{ Str::slug($product->name, '-') }}" style="color: black;">{{$product->name}}</a></h3>
+                            </div>
+                            @if ($product->quantity == 0)
+                                <div class="text-center lien_he">
+                                    <a class="h3" href="/san-pham/{{ $product->id }}-{{ Str::slug($product->name, '-') }}">Liên hệ</a>
+                                </div>
+                            @else
+                                <p class="card-user">
+                                    <span class="moneyold">{{number_format($product->price)}}đ</span>&nbsp;&nbsp;
+                                    <span class="moneysale">{{number_format($product->price_sale)}}đ</span>
+                                </p>
+                            @endif
+                            <div class="button-submit d-flex justify-content-center"><button class="bg-white border-primary text-dark" type="submit">Mua ngay&nbsp; <i class="fa-solid fa-basket-shopping-simple"></i></button></div>
+                        </div>
+                        <input type="number" name="num_product" hidden value="1">
+                        <input type="hidden" name="product_id" value="{{ $product->id }}">
+                        @csrf
+                    </form>
+                </div>
+            @endforeach
+        </div>
+    </div>
+</div>
 @endsection

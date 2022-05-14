@@ -19,24 +19,19 @@ class ProductController extends Controller
     {
         $product = $this->productService->show($id);
         $productsMore = $this->productService->more($id);
-        $comment = $this->productService->get($id);
+        $comment = $this->productService->showComment($id);
+
         return view('client.product', [
             'title' => $product->name,
             'product' => $product,
             'products' => $productsMore,
-            'comment'=> $comment
+            'comment'=>$comment
         ]);
     }
+
     public function comment(Request $request)
     {
-        $this->productService->comment($request);
+        $this->productService->add_comment($request);
         return redirect()->back();
-    }
-    public function delete($id = '', $slug = '', $post_id= 0)
-    {
-        $resu = $this->productService->deleteComment($post_id);
-        if($resu){
-            return redirect()->back();
-        }
     }
 }

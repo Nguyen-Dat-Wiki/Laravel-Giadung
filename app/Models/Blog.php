@@ -5,13 +5,16 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Comment extends Model
+class Blog extends Model
 {
     use HasFactory;
+
     protected $fillable = [
+        'title',
         'name',
-        'product_id',
-        'parent_id',
-        'content',
+        'thumb',
+        'description',
+        'active',
+        'content'
     ];
 }

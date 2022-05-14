@@ -5,17 +5,20 @@ namespace App\Http\Controllers\Client;
 use App\Http\Services\Product\ProductService;
 use App\Http\Controllers\Controller;
 use App\Http\Services\SliderService;
+use App\Http\Services\NewsService;
 use Illuminate\Http\Request;
 
 class MainController extends Controller
 {
     protected $Slider;
     protected $product;
+    protected $news;
 
-    public function __construct(SliderService $Slider, ProductService $product)
+    public function __construct(SliderService $Slider, ProductService $product, NewsService $news)
     {
         $this->Slider = $Slider;
         $this->product = $product;
+        $this->news = $news;
     }
     public function index()
     {
@@ -59,6 +62,26 @@ class MainController extends Controller
     {
         return view('client.Info.contact',[
             'title' =>'Liên hệ'
+        ]);
+    }
+    public function news()
+    {
+        return view('client.blogs.news',[
+            'title' =>'Tin tức',
+            'slider'=>$this->Slider->show(),
+            'news' =>$this->news->get(),
+            'news_time'=>$this->news->getTime()
+        ]);
+    }
+    public function detail_news($id = '', $slug = '')
+    {
+        $news = $this->news->show($id);
+
+        return view('client.blogs.detail', [
+            'title' => $news->title,
+            'new' => $news,
+            'news_time'=>$this->news->getTime(),
+            'slider'=>$this->Slider->show(),
         ]);
     }
 }

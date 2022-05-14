@@ -47,7 +47,7 @@ class ProductService
         return Product::where('active', 1)
             ->where('id', '!=', $id)
             ->orderByDesc('id')
-            ->limit(8)
+            ->limit(5)
             ->get();
     }
 
@@ -76,5 +76,22 @@ class ProductService
         }
         return false;
     }
+    public function add_comment($request)
+    {
+        Comment::create([
+            'name' => $request->input('name'),
+            'content' => $request->input('content'),
+            'product_id' => $request->input('product_id'),
+            'parent_id'=>$request->input('comment_id'),
+        ]);
+        return true;
+    }
+    public function showComment ($id)
+    {
+        
+        return Comment::where('product_id',$id)
+        ->paginate(5);
+    }
+    
 }
     

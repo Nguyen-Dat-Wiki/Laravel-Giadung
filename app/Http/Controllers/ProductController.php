@@ -80,11 +80,12 @@ class ProductController extends Controller
     public function search(Request $request)
     {   
         
-        return view('admin.product.search', [
+        return view('admin.product.list', [
             'title' => 'Tìm kiếm Sản Phẩm',
             'products' => $this->productService->getSearch($request)
         ]);
     }
+
     public function export()
     {
         return Excel::download(new ProductExport, 'Product.xlsx');
