@@ -133,8 +133,10 @@ Route::get('san-pham/{id}-{slug}/delete={post_id}', [Client\ProductController::c
 Route::post('/add-cart', [Client\CartController::class, 'index']);
 Route::get('gio-hang', [Client\CartController::class, 'show']);
 Route::post('gio-hang', [Client\CartController::class, 'addCart']);
+Route::post('gio-hang/vnpay', [Client\CartController::class, 'vnpay']);
 Route::post('/update-cart', [Client\CartController::class, 'update']);
 Route::get('gio-hang/delete/{id}', [Client\CartController::class, 'remove']);
+Route::get('/vnpay_php/return', [Client\CartController::class, 'vnpay_return']);
 
 
 //setting

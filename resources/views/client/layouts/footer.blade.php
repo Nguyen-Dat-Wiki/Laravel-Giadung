@@ -75,12 +75,6 @@
             <div class="footer-powered">
                 <div class="wrap-content d-flex align-items-center justify-content-between">
                     <p class="copyright">2022 Copyright . Design by ThanhDat</p>
-                    <p class="statistic">
-                        <span>Đang online: 2</span>
-                        <span>Tuần: 44</span>
-                        <span>Tháng: 3863</span>
-                        <span>Tổng truy cập: 23513</span>
-                    </p>
                 </div>
             </div>
         </div>

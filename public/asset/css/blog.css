@@ -15,14 +15,20 @@
 
 @media screen and (min-width: 361px) and (max-width:776px) {
     .cards {
-        --spacing: 10px;
-        --columns: 2;
+        --spacing: 5px;
+        --columns: 1;
+    }
+    .slider-QC {
+        display: none;
     }
 }
 
 @media screen and (max-width:360px) {
     .cards {
-        --columns: 2;
+        --columns: 1;
+    }
+    .slider-QC {
+        display: none;
     }
 }
 

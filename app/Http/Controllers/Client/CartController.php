@@ -75,4 +75,19 @@ class CartController extends Controller
             'address' => 'required|max:255'
         ]);
     }
+
+    public function vnpay(Request $request)
+    {
+        $this->validation($request);
+        $this->cartService->vnpay($request);
+
+        return redirect()->back();
+    }
+    public function vnpay_return()
+    {
+        $carts = Session::get('carts');
+        Session::flash('success', 'Đặt Hàng Thành Công');
+        Session::forget('carts');
+        return redirect()->back();
+    }
 }

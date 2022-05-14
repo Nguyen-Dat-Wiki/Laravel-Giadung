@@ -100,3 +100,20 @@ $(document).ready(function() {
     });
 
 });
+
+$(document).ready(function() {
+    $(document).on('click', '#Chuyenkhoan', function() {
+        $('#redirect').removeClass('d-none');
+        $('#thanhtoan').addClass('d-none');
+    })
+    $(document).on('click', '#taicho', function() {
+        $('#thanhtoan').removeClass('d-none');
+        $('#redirect').addClass('d-none');
+
+    })
+    $(document).on('click', '#MV', function() {
+        $('#thanhtoan').removeClass('d-none');
+        $('#redirect').addClass('d-none');
+
+    })
+});

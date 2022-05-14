@@ -45,7 +45,7 @@
                         </tr>
                         <tr>
                             <td class="m_-3452303451081584177mauxanh m_-3452303451081584177cachtrai20">Số hóa đơn</td>
-                            <td><strong>00008551</strong></td>
+                            <td><strong>{{$id}}</strong></td>
                         </tr>
                         <tr>
                             <td class="m_-3452303451081584177mauxanh m_-3452303451081584177cachtrai20">Ngày hóa đơn</td>

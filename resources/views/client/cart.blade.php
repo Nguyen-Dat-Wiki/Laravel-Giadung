@@ -129,11 +129,13 @@
                     </div>
                     <input type="text" name='total' hidden value="{{$total}}">
                     <input type="text" name="user_id" hidden value="{!!  isset(Auth::user()->id) ? Auth::user()->id : null !!}">
-                    <button type="submit" class="btn-cart btn btn-primary btn-lg btn-block" name="thanhtoan" >Thanh toán </button>
+                    <button type="submit" class="btn-cart btn btn-primary btn-lg btn-block" id="thanhtoan" name="thanhtoan" >Thanh toán </button>
+                    <button type="submit" class="btn-cart btn btn-primary btn-lg btn-block d-none" id="redirect" name="redirect" formaction="gio-hang/vnpay">Thanh toán</button>
                     @csrf
                 </div>
             </main>
         @else
+            @include('admin.layouts.alert')
             <h2 class="text-center">Giỏ hàng trống</h2>
         @endif
 

@@ -35,9 +35,9 @@
 
         <p><span>STK: 1068 6879 7515</span></p>
 
-        <p><span>&nbsp; - Techcombank</span></p>
+        <p><span>&nbsp; - NCB</span></p>
 
-        <p><span>STK: 19 0358 6382 3012.</span><br> &nbsp;
+        <p><span>STK: 9704 1985 2619 1432 198</span><br> &nbsp;
         </p>
     </div>
 </div>
