@@ -3,6 +3,8 @@
 namespace App\Helpers;
 
 use Illuminate\Support\Str;
+use App\Models\Comment;
+use Carbon;
 
 
 class Helper{
@@ -106,5 +108,53 @@ class Helper{
             }
         }
         return false;
+    }
+
+    public static function fetch_comment($comment,$product_id):string
+    {
+        $html = '';
+        foreach($comment as $row){
+            if($row->parent_id == 0){
+                Carbon\Carbon::setlocale('vi');
+                $time= Carbon\Carbon::create($row['created_at'])->diffForHumans();
+                $html .= '
+                    <div class="panel panel-default">
+                        <div class="panel-heading">By <b>'.$row["name"].'</b> on <i>'. $time .'</i></div>
+                        <div class="panel-body">'.$row["content"].'</div>
+                        <div class="panel-footer" align="right"><button type="button" class="btn btn-default reply" id="'.$row["id"].'">Reply</button></div>
+                    </div>
+                ';
+                $html .= self::get_reply_comment($row["id"],0,$product_id);
+            }
+        }
+        return $html;
+    }
+    public static function get_reply_comment($parent_id = 0, $marginleft = 0,$product_id){
+        $result = Comment::where('parent_id',$parent_id)->get();
+        $html = '';
+        if($parent_id == 0){
+            $marginleft = 0;
+        }
+        else{
+            $marginleft = $marginleft + 48;
+        }
+        if(count($result) > 0){
+            
+            foreach($result as $row){
+                if($row->product_id == $product_id){
+                    Carbon\Carbon::setlocale('vi');
+                    $time= Carbon\Carbon::create($row['created_at'])->diffForHumans();
+                    $html .= '
+                        <div class="panel panel-default" style="margin-left:'.$marginleft.'px">
+                            <div class="panel-heading">By <b>'.$row["name"].'</b> on <i>'.$time.'</i></div>
+                            <div class="panel-body">'.$row["content"].'</div>
+                            <div class="panel-footer" align="right"><button type="button" class="btn btn-default reply" id="'.$row["id"].'">Reply</button></div>
+                        </div>
+                        ';
+                    $html .=  self::get_reply_comment($row["id"], $marginleft,$product_id);
+                }
+            }
+        }
+        return $html;
     }
 }

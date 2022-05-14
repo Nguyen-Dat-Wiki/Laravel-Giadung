@@ -11,14 +11,16 @@
                     <!-- Hình ảnh -->
                     <div class="carousel-inner" role="listbox">
                         @foreach ($slider as $Slider)
-                            @if ($Slider->id == 2)
-                                <div class="item active">
-                                    <img src="{{$Slider->thumb}}">
-                                </div>
-                            @else
-                                <div class="item">
-                                    <img src="{{$Slider->thumb}}">
-                                </div>
+                            @if ($Slider->sort_by == 1)
+                                @if ($Slider->id == 2)
+                                    <div class="item active">
+                                        <img src="{{$Slider->thumb}}">
+                                    </div>
+                                @else
+                                    <div class="item">
+                                        <img src="{{$Slider->thumb}}">
+                                    </div>
+                                @endif
                             @endif
                         @endforeach
 
@@ -60,6 +62,7 @@
 @endsection
 
 @section('content_new')
+
     <div class="main_product_new mt-4">
         <div class="title-main mb-2 border-primary border text-center">
             <span>SẢN PHẨM MỚI</span>

@@ -149,7 +149,7 @@ header .navbar {
 .navbar .navbar-nav .nav-link.show,
 .navbar .navbar-nav .show>.nav-link {
     color: blueviolet;
-    padding-bottom: 20px;
+    padding-bottom: 13px;
     border-bottom: 3px solid #f33f3f;
 }
 

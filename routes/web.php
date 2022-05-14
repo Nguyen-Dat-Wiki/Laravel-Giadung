@@ -10,6 +10,7 @@ use  App\Http\Controllers\CartController;
 use  App\Http\Controllers\UploadController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\BlogController;
 use Illuminate\Http\Request;
 
 
@@ -69,6 +70,18 @@ Route::middleware(['auth'])->group(function () {
             Route::DELETE('destroy', [SliderController::class, 'destroy']);
         });
 
+        #Blog
+        Route::prefix('blogs')->group(function () {
+            Route::get('add', [BlogController::class, 'create']);
+            Route::post('add', [BlogController::class, 'store']);
+            Route::get('list', [BlogController::class, 'index']);
+            Route::post('list', [BlogController::class, 'search']);
+            Route::get('edit/{blog}', [BlogController::class, 'show']);
+            Route::post('edit/{blog}', [BlogController::class, 'update']);
+            Route::DELETE('destroy', [BlogController::class, 'destroy']);
+
+        });
+
         #Upload
         
         Route::post('upload/services', [UploadController::class, 'store']);
@@ -99,6 +112,8 @@ Route::get('/thanh-toan',[Client\MainController::class, 'pay']);
 Route::get('/bao-hanh',[Client\MainController::class, 'insur']);
 Route::get('/lien-he',[Client\MainController::class, 'contact']);
 Route::post('/lien-he',[Client\MailController::class, 'sendMail']);
+Route::get('/tin-tuc',[Client\MainController::class, 'news']);
+Route::get('/tin-tuc/{id}-{slug}',[Client\MainController::class, 'detail_news']);
 
 
 //search

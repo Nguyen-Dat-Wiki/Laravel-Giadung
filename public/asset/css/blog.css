@@ -1,0 +1,182 @@
+.cards {
+    --spacing: 15px;
+    --columns: 3;
+    display: flex;
+    padding: 0;
+    flex-wrap: wrap;
+    margin-left: calc(-1 * var(--spacing)/2);
+}
+
+@media screen and (min-width:776px) and (max-width: 1023px) {
+    .cards {
+        --columns: 2;
+    }
+}
+
+@media screen and (min-width: 361px) and (max-width:776px) {
+    .cards {
+        --spacing: 10px;
+        --columns: 2;
+    }
+}
+
+@media screen and (max-width:360px) {
+    .cards {
+        --columns: 2;
+    }
+}
+
+.card-content {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    padding: 7px;
+}
+
+.card-body {
+    padding: 0
+}
+
+.card-top {
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+}
+
+.card-user,
+.card-top {
+    margin-top: auto;
+    flex-shrink: 0;
+}
+
+.card {
+    display: flex;
+    flex-direction: column;
+}
+
+
+/* ------------- product --------------- */
+
+.card {
+    border-radius: 5px;
+    overflow: hidden;
+    box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+    width: calc(calc(100% / var(--columns)) - var(--spacing));
+    margin-left: var(--spacing);
+    margin-bottom: var(--spacing);
+}
+
+.card .img-product {
+    padding: 10px;
+    width: 100%;
+    object-fit: cover;
+}
+
+.card:hover {
+    transition: 0.4s;
+    transform: scale(1.03);
+}
+
+.card-user span {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 2;
+    font-size: 14px;
+    line-height: normal;
+    font-weight: normal;
+    padding: 0 10px;
+}
+
+
+/* ------- Title  --------- */
+
+.card-title {
+    height: 34px;
+    font-weight: 500;
+    margin: 15px 0;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    word-break: break-word;
+    font-size: 15px;
+}
+
+
+/* search */
+
+.search_blog {
+    background: #fff;
+    border: 1px solid #E1E1E1;
+    border-radius: 5px;
+    position: relative;
+    height: 45px;
+}
+
+.search_blog span button {
+    float: left;
+    width: 43px;
+    height: 41px;
+    line-height: 41px;
+    cursor: pointer;
+    text-align: center;
+    margin: 0px;
+    font-size: 15px;
+    text-transform: uppercase;
+    position: absolute;
+    right: 0;
+    border-radius: 3px;
+    background-color: gray;
+    border: 0px;
+}
+
+.search_blog input {
+    width: 100%;
+    height: 41px;
+    float: left;
+    outline: none;
+    padding: 0px;
+    border: 0;
+    background: transparent;
+    text-indent: 10px;
+    font-size: 12px;
+}
+
+.search span {
+    font-size: 18px;
+}
+
+.border-blog {
+    height: 3px;
+    display: block;
+    background-color: rgba(0, 0, 0, 0.1);
+    margin: 1em 0 1em;
+    width: 100%;
+    max-width: 30px;
+}
+
+.main-blog>div {
+    border: 1px solid #dee2e6;
+    border-bottom: 0px;
+}
+
+.main-blog ul li {
+    padding: 5px;
+}
+
+.main-blog ul li a {
+    color: black;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    word-break: break-word;
+}
+
+hr {
+    margin: 1rem 0px;
+}
