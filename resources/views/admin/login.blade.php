@@ -22,37 +22,14 @@
 <link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
 <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/js/bootstrap.min.js"></script>
 <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
-<link rel="stylesheet" href="/asset/css/login.css">
-
+<link rel="stylesheet" href="/asset/css/login_client.css">
 
 </head>
 <body>
-    <div class="container">
-        <div class="row">
-            <div class="col-md-6 col-md-offset-3">
-                <div class="panel panel-login border my-auto">
-                    <div class="panel-heading">
-                        <div class="row ">
-                            <div class="col-xs-12 d-flex justify-content-center">
-                                <a href="#" class="active h3" id="login-form-link">@yield('title')</a>
-                            </div>
-                        </div>
-                        <hr>
-                    </div>
-                    <div class="panel-body">
-                        <div class="row">
-                            <div class="col-lg-12 ">
-                                @include('admin.layouts.alert')
+    <div id="logreg-forms">
+        @include('admin.layouts.alert')
 
-                                @yield('content')
-
-                               
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
+        @yield('content')
     </div>
 </body>
 </html>

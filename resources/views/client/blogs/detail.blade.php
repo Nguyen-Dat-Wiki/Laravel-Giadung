@@ -16,37 +16,7 @@
 </div>
 
 <div class="news">
-    <div class="d-flex">
-        <div class="main-news col-lg-9">
-            <div class="border px-3 mb-4">
-                <div class="title-main text-dark  text-capitalize">
-                    <span>{{($title)}}</span>
-                    <div class="border-blog my-4"></div>
-                </div>
-                <div class="time mb-4">
-                    <span>Đăng lúc {{date_format($new->created_at,'d-m-Y')}}</span>
-                    <span>bởi {{Str::upper($new->name)}}</span>
-                </div>
-                <div class="main">
-                    <div class="thumb">
-                        <img src="{{$new->thumb}}" width="100%" alt="">
-                    </div>
-                    <style>
-                        .content img{
-                            width: 100%
-                        }
-                        ::marker {
-                            padding-left: 4%                            
-                        }
-                    </style>
-
-                    <div class="content">
-                        {!! $new->content !!}
-                    </div>
-                </div>
-            </div>
-           
-        </div>
+    <div class="d-flex  flex-wrap">
         <div class="slider-news col-lg-3">
             {{-- search blog --}}
             <div class="search_blog mb-4">
@@ -86,6 +56,36 @@
                     </div>
                 </div>
             </div>
+        </div>
+        <div class="main-news col-lg-9">
+            <div class="border px-3 mb-4">
+                <div class="title-main text-dark  text-capitalize">
+                    <span>{{($title)}}</span>
+                    <div class="border-blog my-4"></div>
+                </div>
+                <div class="time mb-4">
+                    <span>Đăng lúc {{date_format($new->created_at,'d-m-Y')}}</span>
+                    <span>bởi {{Str::upper($new->name)}}</span>
+                </div>
+                <div class="main">
+                    <div class="thumb">
+                        <img src="{{$new->thumb}}" width="100%" alt="">
+                    </div>
+                    <style>
+                        .content img{
+                            width: 100%
+                        }
+                        ::marker {
+                            padding-left: 4%                            
+                        }
+                    </style>
+
+                    <div class="content">
+                        {!! $new->content !!}
+                    </div>
+                </div>
+            </div>
+           
         </div>
     </div>
 </div>

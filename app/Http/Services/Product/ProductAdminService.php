@@ -118,7 +118,7 @@ class ProductAdminService
     }
     public function search_money_all($request)
     {
-        $query = Customer::whereIn('active',[2,3])
+        $query = Customer::whereIn('active',[3,4])
             ->with('carts');
         if ($request->input('id')) {
             $query->orderBy('id', $request->input('id'));
@@ -143,7 +143,7 @@ class ProductAdminService
 
     public function searchMoney($request)
     {
-        $query = Customer::whereIn('active',[2,3])
+        $query = Customer::whereIn('active',[3,4])
         ->whereBetween('created_at',[$request->input('start'),$request->input('end')])
         ->with('carts');
         
