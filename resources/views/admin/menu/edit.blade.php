@@ -55,6 +55,7 @@
 
         <div class="card-footer">
             <button type="submit" class="btn btn-primary">Cập Nhật Danh Mục</button>
+            <input type="text" name='user_id' hidden value="{{Auth::user()->id}}">
         </div>
         @csrf
     </form>

@@ -19,7 +19,14 @@ class Blog extends Migration
             $table->string('thumb');  //img
             $table->string('description');
             $table->longText('content');
+            $table->int('active');
+            $table->string('name');
+            $table->unsignedBigInteger('user_id');
             $table->timestamps();
+            $table->foreign('user_id')
+                ->references('id')
+                ->on('users')
+                ->onDelete('restrict');
         });
     }
 

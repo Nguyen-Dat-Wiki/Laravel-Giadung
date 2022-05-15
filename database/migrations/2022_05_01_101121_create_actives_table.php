@@ -15,8 +15,8 @@ class CreateActivesTable extends Migration
     {
         Schema::create('actives', function (Blueprint $table) {
             $table->id();
-            $table->active();
-            $table->name();
+            $table->int('active');
+            $table->string('name',255);
             $table->timestamps();
         });
     }

@@ -16,7 +16,8 @@ class Menu extends Model
         'parent_id',
         'description',
         'content',
-        'active'
+        'active',
+        'user_id',
     ];
 
     public function products()

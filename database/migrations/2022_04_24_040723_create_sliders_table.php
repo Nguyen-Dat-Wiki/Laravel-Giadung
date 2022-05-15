@@ -19,8 +19,13 @@ class CreateSlidersTable extends Migration
             $table->string('url', 255)->nullable();
             $table->string('thumb', 255);
             $table->integer('sort_by');
+            $table->unsignedBigInteger('user_id');
             $table->integer('active');
             $table->timestamps();
+            $table->foreign('user_id')
+                ->references('id')
+                ->on('users')
+                ->onDelete('restrict');
         });
     }
 

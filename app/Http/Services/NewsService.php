@@ -9,6 +9,15 @@ use Illuminate\Support\Facades\Session;
 use DB;
 class NewsService{
 
+    public function getsearch($request)
+    {
+        return Blog::where('active',1)
+        ->where('title','LIKE', "%{$request->input('search')}%")
+        ->orderby('created_at','desc')
+        ->paginate(9)
+        ->appends(request()->query());
+    }
+    
     public function get()
     {
         return Blog::where('active',1)
@@ -99,4 +108,5 @@ class NewsService{
             ->where('active', 1)
             ->firstOrFail();
     }
+
 }

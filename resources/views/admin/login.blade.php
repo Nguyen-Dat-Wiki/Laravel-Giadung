@@ -26,10 +26,8 @@
 
 </head>
 <body>
-    <div id="logreg-forms">
         @include('admin.layouts.alert')
 
         @yield('content')
-    </div>
 </body>
 </html>

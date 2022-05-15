@@ -4,13 +4,14 @@
     Đăng nhập
 @endsection
 @section('content')
-
+<div id="logreg-forms">
     <form class="form-signin"  method="POST" action="{{ route('login') }}">
         @csrf
         <h1 class="h3 mb-3 font-weight-normal" style="text-align: center">Đăng nhập</h1>
         <div class="social-login">
-            <button class="btn facebook-btn social-btn" type="button"><span class="h6"><i class="fab fa-facebook-f"></i> Sign in with Facebook</span> </button>
-            <button class="btn google-btn social-btn" type="button"><span class="h6"><i class="fab fa-google-plus-g"></i> Sign in with Google+</span> </button>
+            {{-- <button class="btn facebook-btn social-btn" type="button"><span class="h6"><i class="fab fa-facebook-f"></i> Sign in with Facebook</span> </button> --}}
+            <a href="{{ url('/auth/redirect/facebook') }}" style="padding: 6px 12px" class="d-inline-block btn facebook-btn social-btn"><span class="h6"><i class="fab fa-facebook-f"></i>Sign in with Facebook</span></a>
+            <a href="{{ url('/auth/redirect/google') }}" style="padding: 6px 12px" class="d-inline-block btn google-btn social-btn"><span class="h6"><i class="fab fa-google-plus-g"></i> Sign in with Google+</span></a>
         </div>
         <p style="text-align:center"> OR  </p>
         <input id="email" type="email" class="form-control mb-3 @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}" required  placeholder="Email" autocomplete="email" autofocus>
@@ -51,4 +52,5 @@
             <i class="fas fa-user-plus"></i> {{ __('Đăng ký') }}
         </a>
         </form>
+</div>
 @endsection

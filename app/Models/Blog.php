@@ -15,6 +15,7 @@ class Blog extends Model
         'thumb',
         'description',
         'active',
-        'content'
+        'content',
+        'user_id'
     ];
 }

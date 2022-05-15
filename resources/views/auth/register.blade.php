@@ -5,13 +5,15 @@
 @endsection
 
 @section('content')
+<div id="logreg-forms">
+
     <h3 class="text-center ">Thông tin tài khoản</h3>
     <form  class="form-signup" method="POST" action="{{ route('register') }}">
         <div class="social-login">
-            <button class="btn facebook-btn social-btn" type="button"><span><i class="fab fa-facebook-f"></i> Sign up with Facebook</span> </button>
+            <a href="{{ url('/auth/redirect/facebook') }}" style="padding: 6px 12px" class="d-inline-block btn facebook-btn social-btn"><span class="h6"><i class="fab fa-facebook-f"></i>Sign up with Facebook</span></a>
         </div>
         <div class="social-login">
-            <button class="btn google-btn social-btn" type="button"><span><i class="fab fa-google-plus-g"></i> Sign up with Google+</span> </button>
+            <a href="{{ url('/auth/redirect/google') }}" style="padding: 6px 12px" class="d-inline-block btn google-btn social-btn"><span class="h6"><i class="fab fa-google-plus-g"></i> Sign up with Google+</span></a>
         </div>
         
         <p style="text-align:center">OR</p>
@@ -51,4 +53,5 @@
             <i class="fas fa-angle-left"></i> {{ __('Back') }}
         </a>
     </form>
+</div>
 @endsection

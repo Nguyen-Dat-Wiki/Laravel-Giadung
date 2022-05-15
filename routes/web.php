@@ -11,6 +11,7 @@ use  App\Http\Controllers\UploadController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\BlogController;
+/* use App\Http\Controllers\Auth; */
 use Illuminate\Http\Request;
 
 
@@ -112,8 +113,11 @@ Route::get('/thanh-toan',[Client\MainController::class, 'pay']);
 Route::get('/bao-hanh',[Client\MainController::class, 'insur']);
 Route::get('/lien-he',[Client\MainController::class, 'contact']);
 Route::post('/lien-he',[Client\MailController::class, 'sendMail']);
-Route::get('/tin-tuc',[Client\MainController::class, 'news']);
-Route::get('/tin-tuc/{id}-{slug}',[Client\MainController::class, 'detail_news']);
+
+//blog
+Route::get('/tin-tuc',[Client\BlogController::class, 'news']);
+Route::get('/tin-tuc/search',[Client\BlogController::class, 'search'])->name('search_blog');
+Route::get('/tin-tuc/{id}-{slug}',[Client\BlogController::class, 'detail_news']);
 
 
 //search
@@ -145,6 +149,7 @@ Route::get('setting',[Client\SettingController::class,'index'])->name('setting')
 Route::post('setting',[Client\SettingController::class,'edit']);
 Route::get('setting/pass',[Client\SettingController::class,'pass'])->name('pass');
 Route::post('setting/pass',[Client\SettingController::class,'update']);
+Route::post('setting/passnew',[Client\SettingController::class,'create_pass']);
 Route::get('setting/{id}',[Client\SettingController::class,'show'])->name('show');
 Route::get('setting/delete/{cus_id}',[Client\SettingController::class,'delete']);
 
@@ -152,3 +157,6 @@ Route::get('setting/delete/{cus_id}',[Client\SettingController::class,'delete'])
 Auth::routes();
 
 Route::get('admin', [HomeController::class, 'adminHome'])->name('admin_home')->middleware('is_admin');
+
+Route::get('/auth/redirect/{provider}', [App\Http\Controllers\Auth\LoginController::class, 'redirect']);
+Route::get('/callback/{provider}', [App\Http\Controllers\Auth\LoginController::class, 'callback']);
