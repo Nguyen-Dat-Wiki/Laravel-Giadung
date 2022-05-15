@@ -57,10 +57,18 @@ class SettingController extends Controller
 
 
     }
+
+    public function create_pass(Request $request)
+    {
+        $result = $this->user->passnew($request);
+        if ($result) {
+            return redirect('/'); 
+        }
+        return redirect()->back();
+    }
     public function validation(Request $request)
     {
         return $this->validate($request,[
-            'old_pass' => 'required',
             'new_pass' => 'required|min:6|max:100',
             'confirm_pass' => 'required|same:new_pass',
         ]);

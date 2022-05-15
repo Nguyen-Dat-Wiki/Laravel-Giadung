@@ -43,6 +43,7 @@ class MenuService
                 'parent_id' => (int)$request->input('parent_id'),
                 'description' => (string)$request->input('description'),
                 'content' => (string)$request->input('content'),
+                'user_id'=> (int)$request->input('user_id'),
                 'active' => (string)$request->input('active')
             ]);
 
@@ -76,12 +77,13 @@ class MenuService
         $menu->description = (string)$request->input('description');
         $menu->content = (string)$request->input('content');
         $menu->active = (string)$request->input('active');
+        $menu->user_id = (string)$request->input('user_id');
         $menu->save();
 
         Session::flash('success', 'Cập nhật thành công Danh mục');
         return true;
     }
-
+    //client
     public function getId($id)
     {
         return Menu::where('id', $id)->where('active', 1)->firstOrFail();

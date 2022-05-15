@@ -90,6 +90,15 @@ class UserService{
         return $data;
     }
 
+    public function passnew($request)
+    {
+        $user = User::find(Auth::id()); 
+        $user->password = Hash::make($request->new_pass);
+        $user->save();
+        Session::flash('success','Đã đổi mật khẩu');
+        return true;
+    }
+
     public function pass($request)
     {
         

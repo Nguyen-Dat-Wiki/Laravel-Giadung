@@ -15,6 +15,7 @@ class Slider extends Model
         'url',
         'thumb',
         'sort_by',
-        'active'
+        'active',
+        'user_id'
     ];
 }
