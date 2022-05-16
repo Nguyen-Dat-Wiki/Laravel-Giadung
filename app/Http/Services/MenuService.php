@@ -88,21 +88,18 @@ class MenuService
     {
         return Menu::where('id', $id)->where('active', 1)->firstOrFail();
     }
-    public function getChill_id($id)
+
+    public function getProduct($id, $request)
     {
         $child_menu= Menu::where('parent_id',$id)->where('active',1)->get(); //Lay danh muc con
         $arr = array();
         foreach ($child_menu as $key => $value) {
             $arr[] = $value->id;
         }
-        array_push($arr,$id);
-        return $arr;   //mảng chứa ID cha và ID con
-    }
+        array_push($arr,$id); //mảng chứa ID cha và ID con
 
-    public function getProduct($menu, $request)
-    {
         $tinhtrang_new = ($request->input('tinhtrang')!=null) ? (int)$request->input('tinhtrang') : 1 ;
-        $query = Product::whereIn('menu_id',$menu)->where('active',$tinhtrang_new);   //whereIn dùng để lấy id trong mảng
+        $query = Product::whereIn('menu_id',$arr)->where('active',$tinhtrang_new);   //whereIn dùng để lấy id trong mảng
 
         if ($request->input('price')) {
             $query->orderBy('price_sale', $request->input('price'));

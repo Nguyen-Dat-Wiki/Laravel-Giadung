@@ -25,6 +25,13 @@ class CartController extends Controller
             'customers' => $this->cart->getCustomer($request)
         ]);
     }
+    public function index2(Request $request)
+    {
+        return view('admin.carts.customer', [
+            'title' => 'Danh Sách Đơn Yêu Cầu Chờ Xác Nhận',
+            'customers' => $this->cart->getCustomerActive($request)
+        ]);
+    }
 
     public function show(Customer $customer)
     {

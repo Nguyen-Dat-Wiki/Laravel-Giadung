@@ -52,7 +52,7 @@ Route::middleware(['auth'])->group(function () {
         Route::prefix('products')->group(function () {
             Route::get('add', [ProductController::class, 'create']);
             Route::post('add', [ProductController::class, 'store']);
-            Route::get('list', [ProductController::class, 'index']);
+            Route::get('list', [ProductController::class, 'index'])->name('allproduct');
             Route::post('list', [ProductController::class, 'search']);
             Route::get('edit/{product}', [ProductController::class, 'show']);
             Route::post('edit/{product}', [ProductController::class, 'update']);
@@ -88,16 +88,21 @@ Route::middleware(['auth'])->group(function () {
         Route::post('upload/services', [UploadController::class, 'store']);
 
         #Cart
-        Route::get('customers', [CartController::class, 'index']);
-        Route::get('customers/view/{customer}', [CartController::class, 'show']);
-        Route::get('customers/view/{customer}/print',[CartController::class, 'print']);
-        Route::post('customers/view/{customer}', [CartController::class, 'active']);
-        Route::DELETE('customers/destroy', [CartController::class, 'destroy']);
-
+        Route::prefix('customers')->group(function () {
+            Route::get('/', [CartController::class, 'index'])->name('allcustomer');
+            Route::get('/{request}', [CartController::class, 'index2'])->name('request');
+            Route::get('view/{customer}', [CartController::class, 'show']);
+            Route::get('view/{customer}/print',[CartController::class, 'print']);
+            Route::post('view/{customer}', [CartController::class, 'active']);
+            Route::DELETE('destroy', [CartController::class, 'destroy']);
+        });
         #User
-        Route::get('user',[UserController::class,'index']);
-        Route::get('user/view/{id}', [UserController::class, 'show']);
-        Route::post('user/view/{id}', [UserController::class, 'active']);
+        Route::prefix('user')->group(function () {
+            Route::get('/',[UserController::class,'index'])->name('alluser');
+            Route::get('view/{id}', [UserController::class, 'show']);
+            Route::post('view/{id}', [UserController::class, 'active']);
+        });
+
     });
 });
 

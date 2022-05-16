@@ -46,7 +46,7 @@ class ProductService
     {
         return Product::where('active', 1)
             ->where('id', '!=', $id)
-            ->orderByDesc('id')
+            ->inRandomOrder()   
             ->limit(5)
             ->get();
     }
@@ -88,7 +88,6 @@ class ProductService
     }
     public function showComment ($id)
     {
-        
         return Comment::where('product_id',$id)
         ->paginate(5);
     }

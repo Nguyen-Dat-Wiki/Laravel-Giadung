@@ -314,4 +314,32 @@ class CartService
                 ->where('id',$request->input('customer_id'))
                 ->update(['active' => $request->input('actives')]);
     }
+
+    public function getCustomerActive($request)
+    {
+        $query =  Customer::where('active',2);
+
+        if ($request->input('id')) {
+            $query->orderBy('id', $request->input('id'));
+        }
+        else if ($request->input('name')) {
+            $query->orderBy('name', $request->input('name'));
+        }
+        else if ($request->input('phone')) {
+            $query->orderBy('phone', $request->input('phone'));
+        }
+        else if ($request->input('email')) {
+            $query->orderBy('email',  $request->input('email'));
+        }
+        else if($request->input('active')){
+            $query->orderBy('active',$request->input('active'));
+        } 
+        else if($request->input('created_at')){
+            $query->orderBy('created_at',$request->input('created_at'));
+        } 
+        return $query
+            ->paginate(15)
+            ->withQueryString()
+            ->appends(request()->query());
+    }
 }

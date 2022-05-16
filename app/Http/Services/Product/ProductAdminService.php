@@ -8,6 +8,7 @@ use App\Models\Menu;
 use App\Models\Product;
 use App\Models\Customer;
 use App\Models\Cart;
+use App\Models\User;
 use Illuminate\Support\Facades\Session;
 use DB;
 
@@ -54,7 +55,6 @@ class ProductAdminService
 
         return  true;
     }
-
     public function get($request)
     {
         $query =  Product::with('menu');
@@ -116,6 +116,9 @@ class ProductAdminService
         return Product::where('name', 'like', '%' . $search . '%')
             ->orderByDesc('id')->paginate(15); 
     }
+
+    // home admin
+
     public function search_money_all($request)
     {
         $query = Customer::whereIn('active',[3,4])
@@ -167,4 +170,22 @@ class ProductAdminService
             ->withQueryString()
             ->appends(request()->query());
     }
+    
+    public function allproduct()
+    {
+        return DB::table('products')->get();
+    }
+    public function alluser()
+    {
+        return User::where('is_admin',0)->get();
+    }
+    public function customer()
+    {
+        return Customer::where('active',2)->get();
+    }
+    public function allcustomer()
+    {
+        return Customer::whereIn('active',[2,3,4])->get();
+    }
+
 }
