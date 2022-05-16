@@ -1,6 +1,112 @@
 @extends('admin.index')
 
 @section('content')
+<style>
+</style>
+<div class="row">
+    <div class="col-xl-3 col-md-6 mb-4">
+        <div class="card border-left-primary shadow h-100 py-2">
+            <div class="card-body">
+                <div class="row no-gutters align-items-center">
+                    <div class="col mr-2">
+                        <div class="text-xs font-weight-bold text-success text-uppercase mb-1">
+                            Sản phẩm</div>
+                        <div class="h5 mb-0 font-weight-bold text-gray-800">{{count($allproduct)}}</div>
+                    </div>
+                    <div class="col-auto">
+                        <i class="fas fa-box fa-2x text-gray-300"></i>
+                    </div>
+                </div>
+            </div>
+            <div class="card-last pl-3">
+                <div class="content">
+                    <span>
+                        <a href="{{route('allproduct')}}" >Danh sách sản phẩm
+                            <i class="fa fa-arrow-circle-right"></i>
+                        </a>
+                    </span>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- card người dùng -->
+    <div class="col-xl-3 col-md-6 mb-4">
+        <div class="card border-left-primary shadow h-100 py-2">
+            <div class="card-body">
+                <div class="row no-gutters align-items-center">
+                    <div class="col mr-2">
+                        <div class="text-xs font-weight-bold text-info text-uppercase mb-1">
+                            Tài khoản người dùng</div>
+                        <div class="h5 mb-0 font-weight-bold text-gray-800">{{count($alluser)}}</div>
+                    </div>
+                    <div class="col-auto">
+                        <i class="fas fa-user-plus fa-2x text-gray-300"></i>
+                    </div>
+                </div>
+            </div>
+            <div class="card-last pl-3">
+                <div class="content">
+                    <span>
+                        <a href="{{route('alluser')}}" >Danh sách người dùng
+                        <i class="fa fa-arrow-circle-right"></i></a>
+                    </span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    {{-- card yêu cầu xử lý --}}
+    <div class="col-xl-3 col-md-6 mb-4">
+        <div class="card border-left-warning shadow h-100 py-2">
+            <div class="card-body">
+                <div class="row no-gutters align-items-center">
+                    <div class="col mr-2">
+                        <div class="text-xs font-weight-bold text-warning text-uppercase mb-1">
+                            Yêu cầu cần xử lý</div>
+                        <div class="h5 mb-0 font-weight-bold text-gray-800">{{count($customer)}}</div>
+                    </div>
+                    <div class="col-auto">
+                        <i class="fas fa-comments fa-2x text-gray-300"></i>
+                    </div>
+                </div>
+            </div>
+            <div class="card-last pl-3">
+                <div class="content">
+                    <span>
+                        <a href="{{route('request',[2])}}" >Danh sách đơn hàng
+                        <i class="fa fa-arrow-circle-right"></i></a>
+                    </span>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-xl-3 col-md-6 mb-4">
+        <div class="card border-left-warning shadow h-100 py-2">
+            <div class="card-body">
+                <div class="row no-gutters align-items-center">
+                    <div class="col mr-2">
+                        <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">
+                            Tổng đơn hàng</div>
+                        <div class="h5 mb-0 font-weight-bold text-gray-800">{{count($allcustomer)}}</div>
+                    </div>
+                    <div class="col-auto">
+                        <i class="fas fa-shopping-cart fa-2x text-gray-300"></i>
+                    </div>
+                </div>
+            </div>
+            <div class="card-last pl-3">
+                <div class="content">
+                    <span>
+                        <a href="{{route('allcustomer')}}">Danh sách đơn hàng</a>
+                        <i class="fa fa-arrow-circle-right"></i>
+                    </span>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+    <hr>
     <div class="">
         <form action="" method="post">
             <div class="row mx-3 my-3 ">

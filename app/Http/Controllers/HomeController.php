@@ -32,6 +32,10 @@ class HomeController extends Controller
         
         $title = 'Trang chủ';
         return view('admin.dashboard.home',[
+            'allproduct'=>$this->product->allproduct(),
+            'alluser'=>$this->product->alluser(),
+            'customer'=>$this->product->customer(),
+            'allcustomer'=>$this->product->allcustomer(),
             'title'=> 'Trang chủ',
             'carts' => $this->product->search_money_all($req),
         ]);
@@ -40,6 +44,10 @@ class HomeController extends Controller
     {
         $title = 'Trang chủ';
         return view('admin.dashboard.home',[
+            'allproduct'=>$this->product->allproduct(),
+            'alluser'=>$this->product->alluser(),
+            'customer'=>$this->product->customer(),
+            'allcustomer'=>$this->product->allcustomer(),
             'title'=> 'Trang chủ',
             'carts' => $this->product->searchMoney($req),
             'start'=>$req->start,

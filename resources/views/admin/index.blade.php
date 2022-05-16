@@ -51,38 +51,22 @@
             <!-- Main content -->
             <section class="content">
                 <div class="container-fluid">
-
                     @include('admin.layouts.alert')
-
                     <div class="row">
-                        <!-- left column -->
                         <div class="col-md-12">
-                            <!-- jquery validation -->
                             <div class="card card-primary mt-3">
                                 <div class="card-header">
                                     <h3 class="card-title">{{ $title }}</h3>
                                 </div>
-
                                 @yield('content')
-
                             </div>
-                            <!-- /.card -->
                         </div>
-                        <!--/.col (left) -->
-                        <!-- right column -->
-                        <div class="col-md-6">
-                            {{-- render content --}}
-                        </div>
-                        <!--/.col (right) -->
                     </div>
-                    <!-- /.row -->
                 </div><!-- /.container-fluid -->
             </section>
             <!-- /.content -->
         </div>
 
-
-        <!-- /.content-wrapper -->
         <footer class="main-footer">
             <div class="float-right d-none d-sm-block">
                 <b>Version</b> 3.1.0
