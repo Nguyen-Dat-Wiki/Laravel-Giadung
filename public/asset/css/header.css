@@ -31,6 +31,10 @@ a:hover {
     padding-bottom: 0!important;
 }
 
+.img {
+    object-fit: cover;
+}
+
 
 /* slidbar */
 

@@ -89,7 +89,8 @@ class ProductService
     public function showComment ($id)
     {
         return Comment::where('product_id',$id)
-        ->paginate(5);
+        ->orderby('created_at','desc')
+        ->paginate(7);
     }
     
 }

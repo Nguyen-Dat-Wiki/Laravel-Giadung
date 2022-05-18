@@ -10,7 +10,6 @@
                 <button class="btn btn-outline-secondary" type="submit" >Tìm kiếm</button>
             </div>
         </div>
-        
         <div class="col-lg-3">
             <div class="form-group d-flex align-items-center">
                 <label class="col-auto">Trạng thái</label>

@@ -121,7 +121,7 @@ class Helper{
                     <div class="panel panel-default">
                         <div class="panel-heading">By <b>'.$row["name"].'</b> on <i>'. $time .'</i></div>
                         <div class="panel-body">'.$row["content"].'</div>
-                        <div class="panel-footer" align="right"><button type="button" class="btn btn-default reply" id="'.$row["id"].'">Reply</button></div>
+                        <div class="panel-footer" align="right"><button type="button" class="btn btn-default reply" id="'.$row["id"].'">Trả lời</button></div>
                     </div>
                 ';
                 $html .= self::get_reply_comment($row["id"],0,$product_id);
@@ -148,7 +148,7 @@ class Helper{
                         <div class="panel panel-default" style="margin-left:'.$marginleft.'px">
                             <div class="panel-heading">By <b>'.$row["name"].'</b> on <i>'.$time.'</i></div>
                             <div class="panel-body">'.$row["content"].'</div>
-                            <div class="panel-footer" align="right"><button type="button" class="btn btn-default reply" id="'.$row["id"].'">Reply</button></div>
+                            <div class="panel-footer" align="right"><button type="button" class="btn btn-default reply" id="'.$row["id"].'">Trả lời</button></div>
                         </div>
                         ';
                     $html .=  self::get_reply_comment($row["id"], $marginleft,$product_id);

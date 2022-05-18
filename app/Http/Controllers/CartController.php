@@ -27,8 +27,9 @@ class CartController extends Controller
     }
     public function index2(Request $request)
     {
+        
         return view('admin.carts.customer', [
-            'title' => 'Danh Sách Đơn Yêu Cầu Chờ Xác Nhận',
+            'title' => 'Danh Sách Đơn Yêu Cầu',
             'customers' => $this->cart->getCustomerActive($request)
         ]);
     }
@@ -87,5 +88,12 @@ class CartController extends Controller
             'carts' => $carts,
             'actives' =>$actives
         ]); */
+    }
+    public function search(Request $request)
+    {
+        return view('admin.carts.search', [
+            'title' => 'Tìm kiếm Đơn Đặt Hàng',
+            'customers' => $this->cart->searchCustomer($request)
+        ]);
     }
 }

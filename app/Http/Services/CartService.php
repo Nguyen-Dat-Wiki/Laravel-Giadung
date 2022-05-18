@@ -162,7 +162,7 @@ class CartService
                     'price' => $product->price_sale,
                     'created_at' => $time
                 ];
-
+                //trừ hàng
                 DB::table('products')
                 ->where('id',$product->id)
                 ->update(['quantity' => $product->quantity - $carts[$product->id]]);
@@ -250,8 +250,7 @@ class CartService
     //admin
     public function getCustomer($request)
     {
-        $query =  DB::table('customers');
-
+        $query =  Customer::with('carts');
         if ($request->input('id')) {
             $query->orderBy('id', $request->input('id'));
         }
@@ -261,8 +260,33 @@ class CartService
         else if ($request->input('phone')) {
             $query->orderBy('phone', $request->input('phone'));
         }
-        else if ($request->input('email')) {
-            $query->orderBy('email',  $request->input('email'));
+        else if($request->input('active')){
+            $query->orderBy('active',$request->input('active'));
+        } 
+        else if($request->input('created_at')){
+            $query->orderBy('created_at',$request->input('created_at'));
+        } 
+        else if($request->all()== null){
+            $query->orderBy('created_at','desc');
+        }
+        return $query
+            ->paginate(15)
+            ->withQueryString()
+            ->appends(request()->query());
+    }
+
+    public function getCustomerActive($request)
+    {
+        $query =  Customer::where('active',$request->active);
+
+        if ($request->input('id')) {
+            $query->orderBy('id', $request->input('id'));
+        }
+        else if ($request->input('name')) {
+            $query->orderBy('name', $request->input('name'));
+        }
+        else if ($request->input('phone')) {
+            $query->orderBy('phone', $request->input('phone'));
         }
         else if($request->input('active')){
             $query->orderBy('active',$request->input('active'));
@@ -310,36 +334,41 @@ class CartService
             }
         }
         // update active customer
+        $customer = Customer::where('id',$request->customer_id)->get();
+        if($customer[0]['active'] == 3){
+            if ($request->actives == 2 ) {
+                Session::flash('error', 'Không được cập nhật ngược');
+                return false;
+            }
+        }
         return DB::table('customers')
                 ->where('id',$request->input('customer_id'))
                 ->update(['active' => $request->input('actives')]);
+        
     }
 
-    public function getCustomerActive($request)
+    public function searchCustomer($request)
     {
-        $query =  Customer::where('active',2);
-
-        if ($request->input('id')) {
-            $query->orderBy('id', $request->input('id'));
-        }
-        else if ($request->input('name')) {
-            $query->orderBy('name', $request->input('name'));
-        }
-        else if ($request->input('phone')) {
-            $query->orderBy('phone', $request->input('phone'));
-        }
-        else if ($request->input('email')) {
-            $query->orderBy('email',  $request->input('email'));
-        }
-        else if($request->input('active')){
-            $query->orderBy('active',$request->input('active'));
-        } 
-        else if($request->input('created_at')){
-            $query->orderBy('created_at',$request->input('created_at'));
-        } 
-        return $query
+        if($request->search){
+            return Customer::where('phone', 'like', '%' . $request->search . '%')
+            ->with('carts')
             ->paginate(15)
             ->withQueryString()
             ->appends(request()->query());
+        }
+        else if($request->actives !== 0){
+            return Customer::where('active',$request->actives )
+            ->with('carts')
+            ->paginate(15)
+            ->withQueryString()
+            ->appends(request()->query());
+        }
+        else{
+            return Customer::whereBetween('created_at',[$request->start,$request->end])
+            ->with('carts')
+            ->paginate(15)
+            ->withQueryString()
+            ->appends(request()->query());
+        }
     }
 }

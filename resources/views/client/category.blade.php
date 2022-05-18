@@ -40,11 +40,11 @@
     </div>
     <div class="listGroupProduct ">
         <ul>
-            <li><a href="{{request()->fullUrlWithQuery(['create_at' => 'asc'])}}">Hàng mới</a></li>
+            <li><a href="{{request()->url()}}?created_at=asc"">Hàng mới</a></li>
             <li><a href="# ">Xem Nhiều</a></li>
             <li><a href="{{request()->url()}} ">Giá Khuyến mãi</a></li>
-            <li><a href="{{request()->fullUrlWithQuery(['price' => 'asc'])}}">Giá Tăng dần</a></li>
-            <li><a href="{{ request()->fullUrlWithQuery(['price' => 'desc']) }}">Giá Giảm dần</a></li>
+            <li><a href="{{request()->url()}}?price=asc"">Giá Tăng dần</a></li>
+            <li><a href="{{request()->url()}}?price=desc""">Giá Giảm dần</a></li>
         </ul>
         <form action="" method="GET" id="Loc">
             <div class=" ">

@@ -1,9 +1,8 @@
 @extends('admin.index')
 
 @section('content')
-<style>
-</style>
-<div class="row">
+
+<div class="row justify-content-center">
     <div class="col-xl-3 col-md-6 mb-4">
         <div class="card border-left-primary shadow h-100 py-2">
             <div class="card-body">
@@ -55,8 +54,36 @@
             </div>
         </div>
     </div>
+    {{-- card tổng đơn --}}
 
-    {{-- card yêu cầu xử lý --}}
+    <div class="col-xl-3 col-md-6 mb-4">
+        <div class="card border-left-warning shadow h-100 py-2">
+            <div class="card-body">
+                <div class="row no-gutters align-items-center">
+                    <div class="col mr-2">
+                        <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">
+                            Tổng đơn hàng</div>
+                        <div class="h5 mb-0 font-weight-bold text-gray-800">{{count($allcustomer)}}</div>
+                    </div>
+                    <div class="col-auto">
+                        <i class="fas fa-shopping-cart fa-2x text-gray-300"></i>
+                    </div>
+                </div>
+            </div>
+            <div class="card-last pl-3">
+                <div class="content">
+                    <span>
+                        <a href="{{route('allcustomer')}}">Danh sách đơn hàng</a>
+                        <i class="fa fa-arrow-circle-right"></i>
+                    </span>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+{{-- card yêu cầu xử lý --}}
+<div class="row">
     <div class="col-xl-3 col-md-6 mb-4">
         <div class="card border-left-warning shadow h-100 py-2">
             <div class="card-body">
@@ -86,26 +113,75 @@
             <div class="card-body">
                 <div class="row no-gutters align-items-center">
                     <div class="col mr-2">
-                        <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">
-                            Tổng đơn hàng</div>
-                        <div class="h5 mb-0 font-weight-bold text-gray-800">{{count($allcustomer)}}</div>
+                        <div class="text-xs font-weight-bold text-warning text-uppercase mb-1">
+                            Đơn hàng đang vận chuyển</div>
+                        <div class="h5 mb-0 font-weight-bold text-gray-800">{{count($customer3)}}</div>
                     </div>
                     <div class="col-auto">
-                        <i class="fas fa-shopping-cart fa-2x text-gray-300"></i>
+                        <i class="fas fa-comments fa-2x text-gray-300"></i>
                     </div>
                 </div>
             </div>
             <div class="card-last pl-3">
                 <div class="content">
                     <span>
-                        <a href="{{route('allcustomer')}}">Danh sách đơn hàng</a>
-                        <i class="fa fa-arrow-circle-right"></i>
+                        <a href="{{route('request',[3])}}" >Danh sách đơn hàng
+                        <i class="fa fa-arrow-circle-right"></i></a>
+                    </span>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-xl-3 col-md-6 mb-4">
+        <div class="card border-left-warning shadow h-100 py-2">
+            <div class="card-body">
+                <div class="row no-gutters align-items-center">
+                    <div class="col mr-2">
+                        <div class="text-xs font-weight-bold text-warning text-uppercase mb-1">
+                            Đơn hàng đã hoàn thành</div>
+                        <div class="h5 mb-0 font-weight-bold text-gray-800">{{count($customer4)}}</div>
+                    </div>
+                    <div class="col-auto">
+                        <i class="fas fa-comments fa-2x text-gray-300"></i>
+                    </div>
+                </div>
+            </div>
+            <div class="card-last pl-3">
+                <div class="content">
+                    <span>
+                        <a href="{{route('request',[4])}}" >Danh sách đơn hàng
+                        <i class="fa fa-arrow-circle-right"></i></a>
+                    </span>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-xl-3 col-md-6 mb-4">
+        <div class="card border-left-warning shadow h-100 py-2">
+            <div class="card-body">
+                <div class="row no-gutters align-items-center">
+                    <div class="col mr-2">
+                        <div class="text-xs font-weight-bold text-warning text-uppercase mb-1">
+                            Đơn hàng đã bị huỷ </div>
+                        <div class="h5 mb-0 font-weight-bold text-gray-800">{{count($customer1)}}</div>
+                    </div>
+                    <div class="col-auto">
+                        <i class="fas fa-comments fa-2x text-gray-300"></i>
+                    </div>
+                </div>
+            </div>
+            <div class="card-last pl-3">
+                <div class="content">
+                    <span>
+                        <a href="{{route('request',[1])}}" >Danh sách đơn hàng
+                        <i class="fa fa-arrow-circle-right"></i></a>
                     </span>
                 </div>
             </div>
         </div>
     </div>
 </div>
+    
     <hr>
     <div class="">
         <form action="" method="post">
@@ -141,7 +217,9 @@
             </div>
         </form>
     </div>
-    
+    <div class="card-header">
+        <h3 class="card-title">Danh sách đơn hàng đã đang hoàn thành</h3>
+    </div>
     <div class="content table-responsive table-responsive-lg">
         <table class="table table-bordered " >
             <thead>
@@ -171,13 +249,13 @@
                         @else
                             <a href="{{request()->url()}}?address=asc"> <i class="fas fa-sort"></i></a>
                         @endif 
-                    <th class="column-4">Email 
-                        @if(request()->getQueryString() == 'email=desc')
-                            <a href="{{request()->url()}}?email=asc"> <i class="fas fa-sort-up"></i></a>
-                        @elseif(request()->getQueryString() == 'email=asc')
-                            <a href="{{request()->url()}}?email=desc"> <i class="fas fa-sort-down"></i></a>
+                    <th class="column-4">Trạng thái 
+                        @if(request()->getQueryString() == 'active=desc')
+                            <a href="{{request()->url()}}?active=asc"> <i class="fas fa-sort-up"></i></a>
+                        @elseif(request()->getQueryString() == 'active=asc')
+                            <a href="{{request()->url()}}?active=desc"> <i class="fas fa-sort-down"></i></a>
                         @else
-                            <a href="{{request()->url()}}?email=asc"> <i class="fas fa-sort"></i></a>
+                            <a href="{{request()->url()}}?active=asc"> <i class="fas fa-sort"></i></a>
                         @endif 
                     <th class="column-5">Ngày 
                         @if(request()->getQueryString() == 'created_at=desc')
@@ -202,7 +280,7 @@
                         <th scope="row" >{{$customer->id}}</th>
                         <td style="white-space:nowrap">{{ $customer->name }}</td>
                         <td style="white-space:nowrap">{{ $customer->address }}</td>
-                        <td style="white-space:nowrap">{{ $customer->email }}</td>
+                        <td style="white-space:nowrap">{!! \App\Helpers\Helper::activeCustomer($customer->active) !!}</td>
                         <td style="white-space:nowrap">{{ date_format($customer->created_at,"d-m-Y") }}</td>
                         <td style="white-space:nowrap">{{ number_format($total, 0, '', '.') }}</td>
                     </tr>
