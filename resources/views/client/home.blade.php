@@ -101,12 +101,7 @@
             </div>
         </div>
     </div>
-    <div class="Banner mb-5 mt-4">
-        <img class="pr-5" src="/asset/img/banner-1-4-03-4857.jpg" alt="" width="100%">
-    </div>
 @endsection
-
-
 @section('category_1')
         <div class="category-1 mb-5">
             <div class="title-main mb-2 pl-5 border-primary border">

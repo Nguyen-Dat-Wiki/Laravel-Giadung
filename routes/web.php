@@ -90,7 +90,8 @@ Route::middleware(['auth'])->group(function () {
         #Cart
         Route::prefix('customers')->group(function () {
             Route::get('/', [CartController::class, 'index'])->name('allcustomer');
-            Route::get('/{request}', [CartController::class, 'index2'])->name('request');
+            Route::post('/search', [CartController::class, 'search'])->name('searchcustomer');
+            Route::get('/{active}', [CartController::class, 'index2'])->name('request');
             Route::get('view/{customer}', [CartController::class, 'show']);
             Route::get('view/{customer}/print',[CartController::class, 'print']);
             Route::post('view/{customer}', [CartController::class, 'active']);

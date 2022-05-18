@@ -183,9 +183,21 @@ class ProductAdminService
     {
         return Customer::where('active',2)->get();
     }
+    public function customer3()
+    {
+        return Customer::where('active',3)->get();
+    }
+    public function customer4()
+    {
+        return Customer::where('active',4)->get();
+    }
+    public function customer1()
+    {
+        return Customer::where('active',1)->get();
+    }
     public function allcustomer()
     {
-        return Customer::whereIn('active',[2,3,4])->get();
+        return Customer::whereIn('active',[1,2,3,4])->get();
     }
 
 }

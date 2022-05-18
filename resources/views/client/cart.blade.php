@@ -69,21 +69,21 @@
                     <div class="FormHinhThuc mb-4">
                         <ul class="ChoseHinhThuc">
                             <li>
-                                <input type="radio" id="taicho" name="HinhThuc" value="Cash on Delivery">
-                                <label for="taicho">
-                                    <div class="border ">Thanh toán trực tiếp tại cửa hàng</div>
-                                </label>
-                            </li>
-                            <li>
                                 <input type="radio" id="MV" name="HinhThuc" value="Cash on Delivery">
                                 <label for="MV">
                                     <div class="border ">Thanh toán tại điểm giao hàng</div>
                                 </label>
                             </li>
                             <li>
-                                <input type="radio" id="Chuyenkhoan" name="HinhThuc" value="Transfer Payments">
-                                <label for="Chuyenkhoan">
-                                    <div class="border ">Thanh toán bằng chuyển khoản</div>
+                                <input type="radio" id="Vnpay" name="HinhThuc" value="Transfer Payments">
+                                <label for="Vnpay">
+                                    <div class="border ">Thanh toán bằng Vnpay</div>
+                                </label>
+                            </li>
+                            <li>
+                                <input type="radio" id="Momo" name="HinhThuc" value="Transfer Payments">
+                                <label for="Momo">
+                                    <div class="border ">Thanh toán bằng Momo</div>
                                 </label>
                             </li>
                         </ul>
@@ -130,7 +130,7 @@
                     <input type="text" name='total' hidden value="{{$total}}">
                     <input type="text" name="user_id" hidden value="{!!  isset(Auth::user()->id) ? Auth::user()->id : null !!}">
                     <button type="submit" class="btn-cart btn btn-primary btn-lg btn-block" id="thanhtoan" name="thanhtoan" >Thanh toán </button>
-                    <button type="submit" class="btn-cart btn btn-primary btn-lg btn-block d-none" id="redirect" name="redirect" formaction="gio-hang/vnpay">Thanh toán</button>
+                    <button type="submit" class="btn-cart btn btn-primary btn-lg btn-block d-none" id="redirect" name="redirect" formaction="gio-hang/vnpay">Thanh toán Vnpay</button>
                     @csrf
                 </div>
             </main>
