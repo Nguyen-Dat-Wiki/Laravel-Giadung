@@ -1,4 +1,4 @@
-jQuery(document).ready(function($) {
+$(document).ready(function($) {
 
 
     "use strict";
@@ -102,18 +102,21 @@ $(document).ready(function() {
 });
 
 $(document).ready(function() {
-    $(document).on('click', '#Chuyenkhoan', function() {
+    $(document).on('click', '#Vnpay', function() {
         $('#redirect').removeClass('d-none');
         $('#thanhtoan').addClass('d-none');
-    })
-    $(document).on('click', '#taicho', function() {
-        $('#thanhtoan').removeClass('d-none');
-        $('#redirect').addClass('d-none');
-
+        $('#redirect2').addClass('d-none');
     })
     $(document).on('click', '#MV', function() {
         $('#thanhtoan').removeClass('d-none');
         $('#redirect').addClass('d-none');
+        $('#redirect2').addClass('d-none');
+
+    })
+    $(document).on('click', '#Momo', function() {
+        $('#thanhtoan').addClass('d-none');
+        $('#redirect').addClass('d-none');
+        $('#redirect2').removeClass('d-none');
 
     })
 });

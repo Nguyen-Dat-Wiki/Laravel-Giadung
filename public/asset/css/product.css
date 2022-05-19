@@ -243,3 +243,17 @@ tbody tr td {
 .box-comment:hover .btn-setting {
     display: block;
 }
+
+.parameter-info li {
+    display: flex;
+    padding: 5px 0;
+    align-items: center;
+    line-height: 2;
+}
+
+.parameter-info li:nth-child(1),
+.parameter-info li:nth-child(3),
+.parameter-info li:nth-child(5),
+.parameter-info li:nth-child(7) {
+    background-color: #f5f5f5;
+}

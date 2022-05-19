@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Requests\ProductRequest;
 use App\Http\Services\Product\ProductAdminService;
 use App\Models\Product;
+use App\Models\Info;
 use Illuminate\Http\Request;
 
 use App\Exports\ProductExport;
@@ -49,6 +50,7 @@ class ProductController extends Controller
         return view('admin.product.edit', [
             'title' => 'Chỉnh Sửa Sản Phẩm',
             'product' => $product,
+            'info'=>$this->productService->getInfo($product->id),
             'menus' => $this->productService->getMenu()
         ]);
     }

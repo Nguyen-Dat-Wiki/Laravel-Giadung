@@ -277,7 +277,7 @@
                         $total += $price;
                     @endphp
                     <tr>
-                        <th scope="row" >{{$customer->id}}</th>
+                        <th scope="row" ><a href="/admin/customers/view/{{ $customer->id }}" style="color: black">{{$customer->id}}</a></th>
                         <td style="white-space:nowrap">{{ $customer->name }}</td>
                         <td style="white-space:nowrap">{{ $customer->address }}</td>
                         <td style="white-space:nowrap">{!! \App\Helpers\Helper::activeCustomer($customer->active) !!}</td>

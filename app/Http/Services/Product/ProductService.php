@@ -5,6 +5,7 @@ namespace App\Http\Services\Product;
 
 use App\Models\Menu;
 use App\Models\Product;
+use App\Models\Info;
 use App\Models\Comment;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Http\Request;
@@ -33,7 +34,10 @@ class ProductService
         ->limit(5)
         ->get();
     }
-    
+    public function getInfo($id)
+    {
+        return Info::where('product_id',$id)->firstOrFail();
+    }
     public function show($id)
     {
         return Product::where('id', $id)

@@ -40,9 +40,8 @@
                                             $total += $priceEnd;
                                         @endphp
                                         <tr>
-                            
                                             <th scope="row"><a href="gio-hang/delete/{{$product->id}}"><img src="{{$product->thumb}}" width="100px" alt=""></a></th>
-                                            <td>{{$product->name}}</td>
+                                            <td><a href="/san-pham/{{ $product->id }}-{{ Str::slug($product->name, '-') }}.html" style="color: black">{{$product->name}}</a></td>
                                             <td>
                                                 <input type="number" class="num_product" name="num_product[{{ $product->id }}]" value="{{$carts[$product->id]}}" min="1" max="{{$product->quantity}}">
                                             </td>
@@ -131,6 +130,7 @@
                     <input type="text" name="user_id" hidden value="{!!  isset(Auth::user()->id) ? Auth::user()->id : null !!}">
                     <button type="submit" class="btn-cart btn btn-primary btn-lg btn-block" id="thanhtoan" name="thanhtoan" >Thanh toán </button>
                     <button type="submit" class="btn-cart btn btn-primary btn-lg btn-block d-none" id="redirect" name="redirect" formaction="gio-hang/vnpay">Thanh toán Vnpay</button>
+                    <button type="submit" class="btn-cart btn btn-primary btn-lg btn-block d-none" id="redirect2" name="redirect" formaction="gio-hang/momo">Thanh toán Momo</button>
                     @csrf
                 </div>
             </main>

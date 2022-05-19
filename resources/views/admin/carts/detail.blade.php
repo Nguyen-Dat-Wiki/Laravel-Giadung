@@ -12,7 +12,7 @@
                 <li>Ghi chú: <strong>{{ $customer->content }}</strong></li>
             </ul>
         </div>
-        @if ($customer->active == 2 || $customer->active == 3)
+        @if ($customer->active == 3 || $customer->active == 4)
             <div class="mx-auto mt-3">
                 <a href="{{$customer->id}}/print" class="btn btn-primary">Print</a>
             </div>
@@ -39,10 +39,10 @@
                     <tr>
                         <td class="column-1">
                             <div class="how-itemcart1">
-                                <img src="{{ $cart->product->thumb }}" alt="IMG" style="width: 100px">
+                                <a href="/san-pham/{{ $cart->product->id}}-{{ Str::slug($cart->product->name, '-') }}.html"><img src="{{ $cart->product->thumb }}" alt="IMG" style="width: 100px"></a>
                             </div>
                         </td>
-                        <td class="column-2">{{ $cart->product->name }}</td>
+                        <td class="column-2"><a href="/san-pham/{{ $cart->product->id}}-{{ Str::slug($cart->product->name, '-') }}.html" style="color: black">{{ $cart->product->name }}</a></td>
                         <td class="column-3">{{ number_format($cart->price, 0, '', '.') }}</td>
                         <td class="column-4">{{ $cart->pty }}</td>
                         <td class="column-5">{{ number_format($price, 0, '', '.') }}</td>

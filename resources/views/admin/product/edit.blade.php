@@ -52,6 +52,52 @@
                 </div>
             </div>
 
+            <div class="row">
+                <div class="col-md-4">
+                    <div class="form-group">
+                        <label for="menu">Công suất</label>
+                        <input type="text" name="wattage" value="{{ $info[0]['wattage'] }}" class="form-control"  placeholder="Công suất" min="1">
+                    </div>
+                </div>
+
+                <div class="col-md-4">
+                    <div class="form-group">
+                        <label for="menu">Điều khiển</label>
+                        <input type="text" name="control" value="{{  $info[0]['control'] }}"  class="form-control" >
+                    </div>
+                </div>
+
+                <div class="col-md-4">
+                    <div class="form-group">
+                        <label for="menu">Kích thước</label>
+                        <input type="text" name="size" value="{{ $info[0]['size']}}"  class="form-control" >
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-md-4">
+                    <div class="form-group">
+                        <label for="menu">Tiện ích</label>
+                        <input type="text" name="utilities" value="{{  $info[0]['utilities']}}" class="form-control"  placeholder="Tiện ích" min="1">
+                    </div>
+                </div>
+
+                <div class="col-md-4">
+                    <div class="form-group">
+                        <label for="menu">Thương hiệu</label>
+                        <input type="text" name="trademark" value="{{  $info[0]['trademark'] }}"  class="form-control" >
+                    </div>
+                </div>
+
+                <div class="col-md-4">
+                    <div class="form-group">
+                        <label for="menu">Sản xuất</label>
+                        <input type="text" name="produce" value="{{  $info[0]['produce']}}"  class="form-control" >
+                    </div>
+                </div>
+            </div>
+
             <div class="form-group">
                 <label>Mô Tả </label>
                 <textarea name="description" class="form-control">{{ $product->description }}</textarea>

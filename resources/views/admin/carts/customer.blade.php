@@ -2,7 +2,7 @@
 
 @section('content')
 
-<form action="{{route('searchcustomer')}}" method="post">
+<form action="{{route('searchcustomer')}}" method="GET">
     <div class="row mx-0 my-2">
         <div class="col-lg-5">
             <div class="input-group mb-3">
@@ -24,7 +24,6 @@
             </div>
         </div>
     </div>
-    @csrf
 </form>
 
 
