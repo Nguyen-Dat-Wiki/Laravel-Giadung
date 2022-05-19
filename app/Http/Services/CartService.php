@@ -277,7 +277,7 @@ class CartService
 
     public function getCustomerActive($request)
     {
-        $query =  Customer::where('active',$request->active);
+        $query =  Customer::where('active',$request->actives);
 
         if ($request->input('id')) {
             $query->orderBy('id', $request->input('id'));

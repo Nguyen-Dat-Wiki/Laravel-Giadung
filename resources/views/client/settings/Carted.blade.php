@@ -18,15 +18,16 @@
             </ul>
             <div class="tab-content">
                 <div role="tabpanel" class="tab-pane active " id="Reply">
-                    <div class="table-responsive-sm table-responsive-lg">
+                    <div class="table-responsive">
                         <table class="table">
                             <tbody>
                                 <tr class="table_head">
+                                    <th class="column-1">#</th>
                                     <th class="column-1">Hình ảnh</th>
-                                    <th class="column-2">Tên sản phẩm</th>
-                                    <th class="column-3">Số lượng</th>
-                                    <th class="column-4">Tổng tiền</th>
-                                    <th class="column-5">Thời gian</th>
+                                    <th class="column-2"style="white-space:nowrap">Tên sản phẩm</th>
+                                    <th class="column-3"style="white-space:nowrap">Số lượng</th>
+                                    <th class="column-4"style="white-space:nowrap">Tổng tiền</th>
+                                    <th class="column-5"style="white-space:nowrap">Thời gian</th>
                                     <th class="column-6">&nbsp;</th>
                                 </tr>
                                 
@@ -39,20 +40,23 @@
                                         $total += $price;
                                         @endphp
                                         <tr>
+                                            <td>
+                                                {{ $item['customer_id'] }}
+                                            </td>
                                             <td class="column-1">
                                                 <div class="how-itemcart1">
-                                                    <img src="{{ $item['thumb'] }}" alt="IMG" style="width: 100px">
+                                                    <a href="/san-pham/{{ $item['id'] }}-{{ Str::slug($item['name'], '-') }}.html"><img src="{{ $item['thumb'] }}" alt="IMG" style="width: 100px"></a>
                                                 </div>
                                             </td>
-                                            <td class="column-2">{{ $item['name'] }}</td>
-                                            <td class="column-4">{{ $item['quantity'] }}</td>
-                                            <td class="column-3">{{ number_format($price, 0, '', '.') }}</td>
-                                            <td class="column-5">{{$item['time']}}</td>
-                                            <td class="column-6">
+                                            <td class="column-2" style="white-space:nowrap"><a href="/san-pham/{{ $item['id'] }}-{{ Str::slug($item['name'], '-') }}.html" style="color:black;">{{ $item['name'] }}</a></td>
+                                            <td class="column-4" style="white-space:nowrap">{{ $item['quantity'] }}</td>
+                                            <td class="column-3"style="white-space:nowrap">{{ number_format($price, 0, '', '.') }}</td>
+                                            <td class="column-5"style="white-space:nowrap">{{$item['time']}}</td>
+                                            <td class="column-6" style="white-space:nowrap">
                                                 <a class="btn btn-danger btn-sm" href="/setting/delete/{{$item['customer_id']}}">
                                                     <i class="fas fa-trash"></i>
                                                 </a>
-                                        </td>
+                                            </td>
                                         </tr>
                                     @endif
                                 @endforeach
@@ -66,11 +70,12 @@
                         <table class="table">
                             <tbody>
                                 <tr class="table_head">
+                                    <th class="column-1">#</th>
                                     <th class="column-1">Hình ảnh</th>
-                                    <th class="column-2">Tên sản phẩm</th>
-                                    <th class="column-3">Số lượng</th>
-                                    <th class="column-4">Tổng tiền</th>
-                                    <th class="column-5">Thời gian</th>
+                                    <th class="column-2"style="white-space:nowrap">Tên sản phẩm</th>
+                                    <th class="column-3"style="white-space:nowrap">Số lượng</th>
+                                    <th class="column-4"style="white-space:nowrap">Tổng tiền</th>
+                                    <th class="column-5"style="white-space:nowrap">Thời gian</th>
                                 </tr>
                         
                                 @php $total = 0 @endphp
@@ -82,15 +87,18 @@
                                         $total += $price;
                                         @endphp
                                         <tr>
+                                            <td>
+                                                {{ $item['customer_id'] }}
+                                            </td>
                                             <td class="column-1">
                                                 <div class="how-itemcart1">
-                                                    <img src="{{ $item['thumb'] }}" alt="IMG" style="width: 100px">
+                                                    <a href="/san-pham/{{ $item['id'] }}-{{ Str::slug($item['name'], '-') }}.html"><img src="{{ $item['thumb'] }}" alt="IMG" style="width: 100px"></a>
                                                 </div>
                                             </td>
-                                            <td class="column-2">{{ $item['name'] }}</td>
-                                            <td class="column-4">{{ $item['quantity'] }}</td>
-                                            <td class="column-3">{{ number_format($price, 0, '', '.') }}</td>
-                                            <td class="column-5">{{$item['time']}}</td>
+                                            <td class="column-2" style="white-space:nowrap"><a href="/san-pham/{{ $item['id'] }}-{{ Str::slug($item['name'], '-') }}.html" style="color:black;">{{ $item['name'] }}</a></td>
+                                            <td class="column-4" style="white-space:nowrap">{{ $item['quantity'] }}</td>
+                                            <td class="column-3"style="white-space:nowrap">{{ number_format($price, 0, '', '.') }}</td>
+                                            <td class="column-5"style="white-space:nowrap">{{$item['time']}}</td>
                                         </tr>
                                     @endif
                                 @endforeach
@@ -104,11 +112,12 @@
                         <table class="table">
                             <tbody>
                                 <tr class="table_head">
+                                    <th class="column-1">#</th>
                                     <th class="column-1">Hình ảnh</th>
-                                    <th class="column-2">Tên sản phẩm</th>
-                                    <th class="column-3">Số lượng</th>
-                                    <th class="column-4">Tổng tiền</th>
-                                    <th class="column-5">Thời gian</th>
+                                    <th class="column-2"style="white-space:nowrap">Tên sản phẩm</th>
+                                    <th class="column-3"style="white-space:nowrap">Số lượng</th>
+                                    <th class="column-4"style="white-space:nowrap">Tổng tiền</th>
+                                    <th class="column-5"style="white-space:nowrap">Thời gian</th>
                                 </tr>
                         
                                 @php $total = 0 @endphp
@@ -120,15 +129,18 @@
                                         $total += $price;
                                         @endphp
                                         <tr>
+                                            <td>
+                                                {{ $item['customer_id'] }}
+                                            </td>
                                             <td class="column-1">
                                                 <div class="how-itemcart1">
-                                                    <img src="{{ $item['thumb'] }}" alt="IMG" style="width: 100px">
+                                                    <a href="/san-pham/{{ $item['id'] }}-{{ Str::slug($item['name'], '-') }}.html"><img src="{{ $item['thumb'] }}" alt="IMG" style="width: 100px"></a>
                                                 </div>
                                             </td>
-                                            <td class="column-2">{{ $item['name'] }}</td>
-                                            <td class="column-4">{{ $item['quantity'] }}</td>
-                                            <td class="column-3">{{ number_format($price, 0, '', '.') }}</td>
-                                            <td class="column-5">{{$item['time']}}</td>
+                                            <td class="column-2" style="white-space:nowrap"><a href="/san-pham/{{ $item['id'] }}-{{ Str::slug($item['name'], '-') }}.html" style="color:black;">{{ $item['name'] }}</a></td>
+                                            <td class="column-4" style="white-space:nowrap">{{ $item['quantity'] }}</td>
+                                            <td class="column-3"style="white-space:nowrap">{{ number_format($price, 0, '', '.') }}</td>
+                                            <td class="column-5"style="white-space:nowrap">{{$item['time']}}</td>
                                         </tr>
                                     @endif
                                 @endforeach
@@ -142,11 +154,12 @@
                         <table class="table">
                             <tbody>
                                 <tr class="table_head">
+                                    <th class="column-1">#</th>
                                     <th class="column-1">Hình ảnh</th>
-                                    <th class="column-2">Tên sản phẩm</th>
-                                    <th class="column-3">Số lượng</th>
-                                    <th class="column-4">Tổng tiền</th>
-                                    <th class="column-5">Thời gian</th>
+                                    <th class="column-2"style="white-space:nowrap">Tên sản phẩm</th>
+                                    <th class="column-3"style="white-space:nowrap">Số lượng</th>
+                                    <th class="column-4"style="white-space:nowrap">Tổng tiền</th>
+                                    <th class="column-5"style="white-space:nowrap">Thời gian</th>
                                 </tr>
                         
                                 @php $total = 0 @endphp
@@ -158,15 +171,18 @@
                                         $total += $price;
                                         @endphp
                                         <tr>
+                                            <td>
+                                                {{ $item['customer_id'] }}
+                                            </td>
                                             <td class="column-1">
                                                 <div class="how-itemcart1">
-                                                    <img src="{{ $item['thumb'] }}" alt="IMG" style="width: 100px">
+                                                    <a href="/san-pham/{{ $item['id'] }}-{{ Str::slug($item['name'], '-') }}.html"><img src="{{ $item['thumb'] }}" alt="IMG" style="width: 100px"></a>
                                                 </div>
                                             </td>
-                                            <td class="column-2">{{ $item['name'] }}</td>
-                                            <td class="column-4">{{ $item['quantity'] }}</td>
-                                            <td class="column-3">{{ number_format($price, 0, '', '.') }}</td>
-                                            <td class="column-5">{{$item['time']}}</td>
+                                            <td class="column-2" style="white-space:nowrap"><a href="/san-pham/{{ $item['id'] }}-{{ Str::slug($item['name'], '-') }}.html" style="color:black;">{{ $item['name'] }}</a></td>
+                                            <td class="column-4" style="white-space:nowrap">{{ $item['quantity'] }}</td>
+                                            <td class="column-3"style="white-space:nowrap">{{ number_format($price, 0, '', '.') }}</td>
+                                            <td class="column-5"style="white-space:nowrap">{{$item['time']}}</td>
                                         </tr>
                                     @endif
                                 @endforeach

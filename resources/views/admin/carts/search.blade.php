@@ -2,7 +2,7 @@
 
 @section('content')
 
-<form action="{{route('searchcustomer')}}" method="post">
+<form action="{{route('searchcustomer')}}" method="GET">
     <div class="row mx-0 my-2">
         <div class="col-lg-5">
             <div class="input-group mb-3">
@@ -14,16 +14,15 @@
             <div class="form-group d-flex align-items-center">
                 <label class="col-auto">Trạng thái</label>
                 <select class="form-control" name="actives">
-                    <option value="0" >Chọn trạng thái</option>
-                    <option value="1" >Bị huỷ</option>
-                    <option value="2" >Chờ xác nhận</option>
-                    <option value="3" >Đang vận chuyển</option>
-                    <option value="4" >Đã hoàn thành</option>
+                    <option value="0"  >Chọn trạng thái</option>
+                    <option value="1" {!!  ($_REQUEST['actives'] == 1) ? 'selected' : '' ; !!} >Bị huỷ</option>
+                    <option value="2"{!!  ($_REQUEST['actives'] == 2) ? 'selected' : '' ; !!} >Chờ xác nhận</option>
+                    <option value="3" {!!  ($_REQUEST['actives'] == 3) ? 'selected' : '' ; !!}>Đang vận chuyển</option>
+                    <option value="4" {!!  ($_REQUEST['actives'] == 4) ? 'selected' : '' ; !!}>Đã hoàn thành</option>
                 </select>
             </div>
         </div>
     </div>
-    @csrf
 </form>
 
 

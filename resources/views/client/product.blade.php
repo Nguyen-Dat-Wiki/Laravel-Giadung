@@ -88,10 +88,55 @@
 
 
 @section('main-middle')
-<div class="main-middle">
+<div class="main-middle  col-lg-12">
     <div class="main-middle-content">
-        <div class="content-article">
-        {!! $product->content !!}
+        <ul class="nav-tabs nav navDH" role="tablist">
+            <li role="presentation"class="active"><a href="#Reply" class="text-dark" role="tab" data-toggle="tab">Thông tin sản phẩm</a></li>
+            <li role="presentation"><a href="#GH" class="text-dark" a role="tab" data-toggle="tab">Thông số kĩ thuật</a></li>
+        </ul>
+        <div class="tab-content">
+            <div role="tabpanel" class="tab-pane active " id="Reply">
+                <h3 class="mb-4">Thông tin sản phẩm</h3>
+                <div class=" content-article">
+                    {!! $product->content !!}
+                </div>
+            </div>
+            <div role="tabpanel" class="tab-pane " id="GH">
+                <div class="parameter">
+                    <h3>Thông số kĩ thuật</h3>
+                    <ul class="parameter-info">
+                        <li class="">
+                            <span class="col-4">Loại</span>
+                            <span>{{$product->menu->name}}</span>
+                        </li>
+                        <li class=" ">
+                            <span class="col-4">Công suất</span>
+                            <span>{{$info->wattage}}</span>
+                        </li>
+                        <li class="" data-index="0" data-prop="0">
+                            <span class="col-4">Điều khiển</span>
+                            <span class="">{{$info->control}}</span>
+                        </li>
+                        <li class="" data-index="0" data-prop="0">
+                            <span class="col-4">Kích thước</span>
+                            <span class="">{{$info->size}}</span>
+                        </li>
+                        
+                        <li class=" ">
+                            <span class="col-4">Tiện ích</span>
+                            <span class="">{{$info->utilities}}</span>
+                        </li>
+                        <li class="" data-index="0" data-prop="0">
+                            <span class="col-4">Thương hiệu của</span>
+                            <span class="">{{$info->trademark}}</span>
+                        </li>
+                        <li class="" data-index="0" data-prop="0">
+                            <span class="col-4">Sản xuất tại</span>
+                            <span class="">{{$info->produce}}</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
         </div>
     </div>
 </div>
@@ -99,8 +144,8 @@
 
 
 @section('main-bottom')
-<hr>
-<div class="main-bottom ">
+<div class="main-bottom col-lg-12">
+    <hr>
     <div class="Commnet mb-4 d-flex flex-column  justify-content-center">
         <form action="" method="POST" id="submit_comment">
             <div class="d-flex  justify-content-between mb-4">
@@ -140,7 +185,7 @@
 
 
 @section('tieuchi')
-<div class="main-product">
+<div class="main-product col-lg-12">
     <div class="">
         <h4>Sản phẩm khác</h4>
     </div>

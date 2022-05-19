@@ -8,6 +8,7 @@ use App\Models\Menu;
 use App\Models\Product;
 use App\Models\Customer;
 use App\Models\Cart;
+use App\Models\Info;
 use App\Models\User;
 use Illuminate\Support\Facades\Session;
 use DB;
@@ -44,9 +45,20 @@ class ProductAdminService
 
         try {
             $request->except('_token');
-            Product::create($request->all());
-
-            Session::flash('success', 'Thêm Sản phẩm thành công');
+            $product = Product::create([
+                'name' => $request->input('name'),
+                'quantity' => $request->input('quantity'),
+                'description' => $request->input('description'),
+                'content' => $request->input('content'),
+                'menu_id' => $request->input('menu_id'),
+                'price ' => $request->input('price'),
+                'price_sale' => $request->input('price_sale'),
+                'active' => $request->input('active'),
+                'thumb' => $request->input('thumb'),
+            ]);
+            if($this->insertinfo($request,$product->id)){
+                Session::flash('success', 'Thêm Sản phẩm thành công');
+            }
         } catch (\Exception $err) {
             Session::flash('error', 'Thêm Sản phẩm lỗi');
             \Log::info($err->getMessage());
@@ -54,6 +66,19 @@ class ProductAdminService
         }
 
         return  true;
+    }
+    protected function insertinfo($request,$product_id)
+    {
+        Info::insert([
+            'wattage' => $request->input('wattage'),
+            'control' => $request->input('control'),
+            'size' => $request->input('size'),
+            'utilities' => $request->input('utilities'),
+            'trademark' => $request->input('trademark'),
+            'produce' => $request->input('produce'),
+            'product_id' => $product_id,
+        ]);
+        return true;
     }
     public function get($request)
     {
@@ -83,14 +108,47 @@ class ProductAdminService
             ->appends(request()->query());
     }
 
+    public function getInfo($product_id)
+    {
+        return Info::where('product_id',$product_id)->get();
+    }
     public function update($request, $product)
     {
         $isValidPrice = $this->isValidPrice($request);
         if ($isValidPrice === false) return false;
-
+        
+        $data[] = [
+            'wattage' => $request->input('wattage'),
+            'control' => $request->input('control'),
+            'size' => $request->input('size'),
+            'utilities' => $request->input('utilities'),
+            'trademark' => $request->input('trademark'),
+            'produce' => $request->input('produce'),
+            'product_id' => $product->id,
+        ];
         try {
-            $product->fill($request->input());
+            $product->fill([
+                'name' => $request->input('name'),
+                'quantity' => $request->input('quantity'),
+                'description' => $request->input('description'),
+                'content' => $request->input('content'),
+                'menu_id' => $request->input('menu_id'),
+                'price ' => $request->input('price'),
+                'price_sale' => $request->input('price_sale'),
+                'active' => $request->input('active'),
+                'thumb' => $request->input('thumb'),
+            ]);
             $product->save();
+            DB::table('infos')
+                ->where('product_id',$product->id)
+                ->update([
+                    'wattage' => $request->input('wattage'),
+                    'control' => $request->input('control'),
+                    'size' => $request->input('size'),
+                    'utilities' => $request->input('utilities'),
+                    'trademark' => $request->input('trademark'),
+                    'produce' => $request->input('produce'),
+                ]);
             Session::flash('success', 'Cập nhật thành công');
         } catch (\Exception $err) {
             Session::flash('error', 'Có lỗi vui lòng thử lại');
