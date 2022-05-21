@@ -91,7 +91,16 @@
                 foreach ($customer->carts as $key => $value) {
                     $price = $value->price * $value->pty;
                     $total += $price;
+                    if ($customer->voucher != NULL) {
+                        if ($customer->vouchers[0]['condition']==1) {
+                            $total -= ($total * $customer->vouchers[0]['number'])/100;
+                        }
+                        elseif ($customer->vouchers[0]['condition']==2) {
+                            $total -= $customer->vouchers[0]['number'];
+                        }
+                    }
                 }
+                
             @endphp
             <tr>
                 <td>{{ $customer->id }}</td>

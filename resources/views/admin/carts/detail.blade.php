@@ -31,6 +31,7 @@
                     <th class="column-4">Số lượng</th>
                     <th class="column-5">Tổng tiền</th>
                 </tr>
+
                 @foreach($carts as $key => $cart)
                     @php
                         $price = $cart->price * $cart->pty;
@@ -52,6 +53,32 @@
                         <td colspan="4" class="text-right"><strong>Tổng Tiền</strong></td>
                         <td>{{ number_format($total, 0, '', '.') }}</td>
                     </tr>
+                    @if ($customer->voucher != null)
+                        <tr>
+                            <td colspan="4" class="text-right"><strong>Giảm giá</strong></td>
+                            <td>
+                                @if ($customer->vouchers[0]['condition']==1) 
+                                    {{number_format( ($total * $customer->vouchers[0]['number']) /100), 0, '.', '.'}}
+                                @elseif ($customer->vouchers[0]['condition']==2) 
+                                    {{number_format($customer->vouchers[0]['number'], 0, '', '.')}}
+                                @endif
+                            </td>
+                        </tr>
+                        <tr>
+                            <td colspan="4" class="text-right"><strong>Tổng tiền đã giảm</strong></td>
+                            <td>{{ number_format($total -= ($total * $customer->vouchers[0]['number'])/100), 0, '', '.'}}</td>
+                        </tr>
+                    @else
+                        <tr>
+                            <td colspan="4" class="text-right"><strong>Giảm giá</strong></td>
+                            <td>0</td>
+                        </tr>
+                        <tr>
+                            <td colspan="4" class="text-right"><strong>Tổng tiền đã giảm</strong></td>
+                        <td>{{ number_format($total, 0, '', '.') }}</td>
+                        </tr>
+                    @endif
+
                 </tbody>
             </table>
         </div>

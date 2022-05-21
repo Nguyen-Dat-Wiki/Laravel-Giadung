@@ -11,6 +11,7 @@ use  App\Http\Controllers\UploadController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\BlogController;
+use App\Http\Controllers\VoucherController;
 /* use App\Http\Controllers\Auth; */
 use Illuminate\Http\Request;
 
@@ -91,7 +92,7 @@ Route::middleware(['auth'])->group(function () {
         Route::prefix('customers')->group(function () {
             Route::get('/', [CartController::class, 'index'])->name('allcustomer');
             Route::get('/search', [CartController::class, 'search'])->name('searchcustomer');
-            Route::get('/actives={actives}', [CartController::class, 'index2'])->name('request');
+            Route::get('/search?actives={actives}', [CartController::class, 'index2'])->name('request');
             Route::get('view/{customer}', [CartController::class, 'show']);
             Route::get('view/{customer}/print',[CartController::class, 'print']);
             Route::post('view/{customer}', [CartController::class, 'active']);
@@ -102,6 +103,14 @@ Route::middleware(['auth'])->group(function () {
             Route::get('/',[UserController::class,'index'])->name('alluser');
             Route::get('view/{id}', [UserController::class, 'show']);
             Route::post('view/{id}', [UserController::class, 'active']);
+        });
+        #Voucher
+        Route::prefix('vouchers')->group(function () {
+            Route::get('add',[VoucherController::class,'index']);
+            Route::post('add',[VoucherController::class,'add']);
+            Route::get('list', [VoucherController::class, 'show']);
+            Route::get('edit/{voucher}', [VoucherController::class, 'store']);
+            Route::post('edit/{voucher}', [VoucherController::class, 'update']);
         });
 
     });
@@ -144,9 +153,12 @@ Route::post('/add-cart', [Client\CartController::class, 'index']);
 Route::get('gio-hang', [Client\CartController::class, 'show']);
 Route::post('gio-hang', [Client\CartController::class, 'addCart']);
 Route::post('gio-hang/vnpay', [Client\CartController::class, 'vnpay']);
+Route::post('gio-hang/momo', [Client\CartController::class, 'momo']);
 Route::post('/update-cart', [Client\CartController::class, 'update']);
+Route::post('/add-voucher', [Client\CartController::class, 'voucher']);
 Route::get('gio-hang/delete/{id}', [Client\CartController::class, 'remove']);
 Route::get('/vnpay_php/return', [Client\CartController::class, 'vnpay_return']);
+Route::get('/momo_php/return', [Client\CartController::class, 'momo_return']);
 
 
 //setting
