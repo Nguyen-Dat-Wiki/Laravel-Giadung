@@ -271,10 +271,20 @@
             @if (isset($carts))
                 @foreach($carts as $key => $customer)
                     @php
-                        $total = 0;
-                        $price = 0;
-                        $price = $customer->carts[0]['price'] * $customer->carts[0]['pty'];
-                        $total += $price;
+                        $total=0;
+                        foreach ($customer->carts as $key => $value) {
+                            $price = $value->price * $value->pty;
+                            $total += $price;
+                            if ($customer->voucher != NULL) {
+                                if ($customer->vouchers[0]['condition']==1) {
+                                    $total_sale = ($total * $customer->vouchers[0]['number'])/100;
+                                    $total -= $total_sale;
+                                }
+                                elseif ($customer->vouchers[0]['condition']==2) {
+                                    $total -= $customer->vouchers[0]['number'];
+                                }
+                            }
+                        }
                     @endphp
                     <tr>
                         <th scope="row" ><a href="/admin/customers/view/{{ $customer->id }}" style="color: black">{{$customer->id}}</a></th>

@@ -24,7 +24,7 @@
                         <hr class="mt-3">
                         <div class="table-responsive-sm table-responsive-lg">
                             <table class="table border">
-                                <thead class="thead-light">
+                                <thead class="thead-light"> 
                                     <tr>
                                         <th scope="col">Hình ảnh</th>
                                         <th scope="col">Tên sản phẩm</th>
@@ -45,7 +45,7 @@
                                             <td>
                                                 <input type="number" class="num_product" name="num_product[{{ $product->id }}]" value="{{$carts[$product->id]}}" min="1" max="{{$product->quantity}}">
                                             </td>
-                                            <td>{{ number_format($priceEnd, 0, '', '.') }}</td>
+                                            <td>{{ number_format($priceEnd, 0, '', '.') }}đ</td>
                                         </tr>
                                         <input type="number" class="num_product_add" hidden value="{{$product->quantity}}">
                                     @endforeach
@@ -54,33 +54,98 @@
                         </div>
                         <div class="mb-4">
                             <button type="submit" id="autoclick" hidden class=" btn-cart btn btn-primary" name="thanhtoan" formaction="/update-cart">Cập nhật</button>
+                            <input type="text" class="border rounded" style="padding:6px 12px" name="voucher"  placeholder="Nhập voucher (nếu có)"> <button class="btn-cart btn btn-primary" formaction="/add-voucher">Nhập voucher</button>
                             @csrf
                         </div>
-                        <div class="borderMoney border d-flex justify-content-between">
-                            <span class="ml-5 font-weight-bold">Tổng tiền:</span>
-                            <span class=" font-weight-bold">{{ number_format($total, 0, '', '.')  }}</span>
+                        <div class="borderMoney border">
+                            <ul class="">
+                                <li>
+                                    <span class="ml-5 font-weight-bold">Tổng tiền:</span>
+                                    <span class=" font-weight-bold">{{ number_format($total, 0, '', '.')  }}đ</span>
+                                </li>
+                                @if (Session::get('voucher'))
+                                    <li>
+                                        @foreach (Session::get('voucher') as $key => $item)
+                                            @if ($item['voucher_condition']==1)
+                                                    <span class="ml-5 font-weight-bold">Mã giảm:</span>
+                                                    <span class="font-weight-bold">{{$item['voucher_number']}}%</span>
+                                                </li>
+                                                <li>
+                                                    @php $total_sale = ($total*$item['voucher_number'])/100 @endphp    
+                                                    <span class="ml-5 font-weight-bold">Tổng giảm:</span>
+                                                    <span class="font-weight-bold">{{number_format($total_sale,0, '', '.')}}đ</span>
+                                                </li>
+                                                <li>
+                                                    <span class="ml-5 font-weight-bold">Tổng đã giảm:</span> 
+                                                    @php $total = ($total - $total_sale) @endphp    
+                                                    <span class="font-weight-bold">{{number_format($total,0, '', '.')}}đ</span>
+                                                </li>
+                                            @elseif ($item['voucher_condition']==2)
+                                                <li>
+                                                    <span class="ml-5 font-weight-bold">Mã giảm:  </span>
+                                                    @php $total_sale = ($item['voucher_number']) @endphp 
+                                                    <span class="font-weight-bold">{{ number_format($total_sale,0, '', '.')}}</span>
+                                                </li>
+                                                <li>
+                                                    <span class="ml-5 font-weight-bold">Tổng đã giảm:</span> 
+                                                    @php $total = ($total - $total_sale) @endphp    
+                                                    <span class="font-weight-bold">{{number_format($total,0, '', '.')}}đ</span>
+                                                </li>
+                                            @endif
+                                        @endforeach
+                                    </li>
+                                @endif
+                            </ul>
                         </div>
                     </form>
                 </div>
+               
                 <div class="right mb-4 col-lg-5">
                     <h3 class="mb-0 mt-4">Hình thức thanh toán</h3>
                     <hr class="mt-3">
                     <div class="FormHinhThuc mb-4">
                         <ul class="ChoseHinhThuc">
+                            @php 
+                                $voucher = Session::get('voucher') ;
+                            @endphp
                             <li>
-                                <input type="radio" id="MV" name="HinhThuc" value="Cash on Delivery">
+                                <input type="radio" id="MV" name="HinhThuc" value="Cash on Delivery" 
+                                @php
+                                    if (Session::get('voucher')!= null) {
+                                        $voucher = Session::get('voucher');
+                                        if($voucher[0]['voucher_payment']=='Cash on Delivery' ){
+                                            echo 'checked';
+                                        }
+                                    }
+                                @endphp>
                                 <label for="MV">
                                     <div class="border ">Thanh toán tại điểm giao hàng</div>
                                 </label>
                             </li>
                             <li>
-                                <input type="radio" id="Vnpay" name="HinhThuc" value="Transfer Payments">
+                                <input type="radio" id="Vnpay" name="HinhThuc" value="Transfer Payments Vnpay"
+                                @php
+                                    if (Session::get('voucher')!= null) {
+                                        $voucher = Session::get('voucher');
+                                        if($voucher[0]['voucher_payment']=='Transfer Payments Vnpay' ){
+                                            echo 'checked';
+                                        }
+                                    }
+                                @endphp>
                                 <label for="Vnpay">
                                     <div class="border ">Thanh toán bằng Vnpay</div>
                                 </label>
                             </li>
                             <li>
-                                <input type="radio" id="Momo" name="HinhThuc" value="Transfer Payments">
+                                <input type="radio" id="Momo" name="HinhThuc" value="Transfer Payments Momo" 
+                                @php
+                                    if (Session::get('voucher')!= null) {
+                                        $voucher = Session::get('voucher');
+                                        if($voucher[0]['voucher_payment']=='Transfer Payments Momo' ){
+                                            echo 'checked';
+                                        }
+                                    }
+                                @endphp>
                                 <label for="Momo">
                                     <div class="border ">Thanh toán bằng Momo</div>
                                 </label>
@@ -136,6 +201,7 @@
             </main>
         @else
             @include('admin.layouts.alert')
+            {{Session::forget('voucher')}}
             <h2 class="text-center">Giỏ hàng trống</h2>
         @endif
 

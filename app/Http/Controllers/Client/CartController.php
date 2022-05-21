@@ -90,4 +90,28 @@ class CartController extends Controller
         Session::forget('carts');
         return redirect()->back();
     }
+    public function momo(Request $request)
+    {
+        $this->validation($request);
+        $jsonResult = $this->cartService->momo($request);
+        return redirect()->to($jsonResult['payUrl']);
+    }
+    public function momo_return()
+    {
+        $carts = Session::get('carts');
+        Session::flash('success', 'Đặt Hàng Thành Công');
+        Session::forget('carts');
+        return redirect()->back();
+    }
+
+    public function voucher(Request $request)
+    {
+        if($this->cartService->voucher($request)=== false){
+            
+            return redirect()->back();
+        }
+        else{
+            return redirect()->back();
+        }
+    }
 }

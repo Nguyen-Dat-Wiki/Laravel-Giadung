@@ -14,7 +14,7 @@
             <div class="form-group d-flex align-items-center">
                 <label class="col-auto">Trạng thái</label>
                 <select class="form-control" name="actives">
-                    <option value="0"  >Chọn trạng thái</option>
+                    <option value="0"{!!  ($_REQUEST['actives'] == 1) ? 'selected' : '' ; !!} >Chọn tất cả</option>
                     <option value="1" {!!  ($_REQUEST['actives'] == 1) ? 'selected' : '' ; !!} >Bị huỷ</option>
                     <option value="2"{!!  ($_REQUEST['actives'] == 2) ? 'selected' : '' ; !!} >Chờ xác nhận</option>
                     <option value="3" {!!  ($_REQUEST['actives'] == 3) ? 'selected' : '' ; !!}>Đang vận chuyển</option>
@@ -90,6 +90,14 @@
                 foreach ($customer->carts as $key => $value) {
                     $price = $value->price * $value->pty;
                     $total += $price;
+                    if ($customer->voucher != NULL) {
+                        if ($customer->vouchers[0]['condition']==1) {
+                            $total -= ($total * $customer->vouchers[0]['number'])/100;
+                        }
+                        elseif ($customer->vouchers[0]['condition']==2) {
+                            $total -= $customer->vouchers[0]['number'];
+                        }
+                    }
                 }
             @endphp
             <tr>

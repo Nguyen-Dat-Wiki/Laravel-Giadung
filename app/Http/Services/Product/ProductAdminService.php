@@ -10,6 +10,7 @@ use App\Models\Customer;
 use App\Models\Cart;
 use App\Models\Info;
 use App\Models\User;
+use App\Models\Voucher;
 use Illuminate\Support\Facades\Session;
 use DB;
 
@@ -180,7 +181,8 @@ class ProductAdminService
     public function search_money_all($request)
     {
         $query = Customer::whereIn('active',[3,4])
-            ->with('carts');
+            ->with('carts')
+            ->with('vouchers');
         if ($request->input('id')) {
             $query->orderBy('id', $request->input('id'));
         }
@@ -206,7 +208,8 @@ class ProductAdminService
     {
         $query = Customer::whereIn('active',[3,4])
         ->whereBetween('created_at',[$request->input('start'),$request->input('end')])
-        ->with('carts');
+        ->with('carts')
+        ->with('vouchers');
         
         if ($request->input('id')) {
             $query->orderBy('id', $request->input('id'));

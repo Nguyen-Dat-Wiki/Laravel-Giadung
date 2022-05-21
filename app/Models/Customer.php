@@ -17,12 +17,17 @@ class Customer extends Model
         'user_id',
         'email',
         'payment',
-        'content'
+        'content',
+        'voucher',
     ];
 
     public function carts()
     {
         return $this->hasMany(Cart::class, 'customer_id', 'id');
+    }
+    public function vouchers()
+    {
+        return $this->hasMany(Voucher::class, 'id', 'voucher');
     }
     public function exportExcel()
     {

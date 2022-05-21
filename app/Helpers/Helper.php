@@ -157,4 +157,26 @@ class Helper{
         }
         return $html;
     }
+    public function SaleVoucher($condition)
+    {
+        return $condition == 1 ? '<span class="btn btn-primary btn-xs">Giảm theo %</span>'
+            : '<span class="btn btn-success btn-xs">Giảm theo tiền</span>';
+    }
+    public function CheckTime($time_start,$time_end)
+    {
+        Carbon\Carbon::setlocale('vi');
+        $start= Carbon\Carbon::create($time_start);
+        $end= Carbon\Carbon::create($time_end);
+        $now = Carbon\Carbon::now();
+        if ($now->month > $end->month) {
+            return '<span class="btn btn-danger btn-xs">Hết hạn</span>';
+        }else if($now->month == $end->month && $now->day > $end->day){
+            return '<span class="btn btn-danger btn-xs">Hết hạn</span>';
+        }
+        else{
+            if ($now->day <= $end->day) {
+                return '<span class="btn btn-success btn-xs">Còn hạn</span>';
+            }
+        }
+    }
 }

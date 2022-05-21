@@ -166,8 +166,28 @@
                                 <p>Danh sách tin tức</p>
                             </a>
                         </li>
-                       
-
+                    </ul>
+                </li>
+                <li class="nav-item">
+                    <a href="#" class="nav-link">
+                        <i class="nav-icon fas fa-newspaper"></i>
+                        <p> Voucher
+                            <i class="right fas fa-angle-left"></i>
+                        </p>
+                    </a>
+                    <ul class="nav nav-treeview">
+                        <li class="nav-item">
+                            <a href="/admin/vouchers/add" class="nav-link">
+                                <i class="far fa-circle nav-icon"></i>
+                                <p>Thêm voucher</p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="/admin/vouchers/list" class="nav-link">
+                                <i class="far fa-circle nav-icon"></i>
+                                <p>Danh sách voucher</p>
+                            </a>
+                        </li>
                     </ul>
                 </li>
             </ul>

@@ -8,6 +8,7 @@ use App\Models\Cart;
 use App\Models\Customer;
 use Illuminate\Support\Arr;
 use App\Models\Product;
+use App\Models\Voucher;
 use Illuminate\Support\Facades\Session;
 use DB;
 use Mail;
@@ -69,7 +70,7 @@ class CartService
 
     public function update($request)
     {   
-        
+       
         Session::put('carts', $request->input('num_product'));
 
         return true;
@@ -91,7 +92,35 @@ class CartService
             DB::beginTransaction();
 
             $carts = Session::get('carts');
+            if (Session::get('voucher')!= null) {
+                $voucher = Session::get('voucher');
+                if ($voucher[0]['voucher_payment'] != $request->HinhThuc) {
+                    Session::flash('error', 'Đặt Hàng Lỗi, Vui lòng thử lại sau');
+                    return false;
+                }
+                $voucher = Session::get('voucher');
+                if (is_null($carts))
+                    return false;
+                $customer = Customer::create([
+                    'name' => $request->input('fullname'),
+                    'phone' => $request->input('phonenumber'),
+                    'address' => $request->input('address').' ' .$request->input('Phường').' ' .$request->input('Quan').' ' .$request->input('TP'),
+                    'email' => $request->input('email'),
+                    'content' => ($request->input('note')==null) ? null : $request->input('note'),
+                    'user_id'=> ($request->input('user_id')==null) ? null : $request->input('user_id'),
+                    'payment'=>$request->input('HinhThuc'),
+                    'voucher'=>$voucher[0]['voucher_id'],
+                ]);
+                if($this->infoProductCart($carts, $customer->id)){
 
+                    $time= $customer->created_at;
+                    
+                    DB::commit();
+                    Session::flash('success', 'Đặt Hàng Thành Công');
+    
+                    Session::forget('carts');
+                }
+            }
             if (is_null($carts))
                 return false;
             $customer = Customer::create([
@@ -101,10 +130,11 @@ class CartService
                 'email' => $request->input('email'),
                 'content' => ($request->input('note')==null) ? null : $request->input('note'),
                 'user_id'=> ($request->input('user_id')==null) ? null : $request->input('user_id'),
-                'payment'=>$request->input('HinhThuc')
+                'payment'=>$request->input('HinhThuc'),
+                'voucher'=>null,
             ]);
             if($this->infoProductCart($carts, $customer->id)){
-                
+
                 $time= $customer->created_at;
                 
                 DB::commit();
@@ -112,7 +142,6 @@ class CartService
 
                 Session::forget('carts');
             }
-           
 
         } catch (\Exception $err) {
             DB::rollBack();
@@ -137,8 +166,6 @@ class CartService
             $message->from('datanhem456@gmail.com');
             $message->subject('Email hoá đơn điện tử');
         });
-
-
 
         return true;
     }
@@ -171,6 +198,15 @@ class CartService
                 return false;
             }
         }
+        //trừ voucher
+        if (Session::get('voucher')!= null) {
+            $voucher = Session::get('voucher');
+            $vouchers = Voucher::where('code',$voucher[0]['voucher_code'])->get();
+            DB::table('vouchers')
+                ->where('code',$voucher[0]['voucher_code'])
+                ->update(['quantity' => $vouchers[0]['quantity'] - $voucher[0]['voucher_quantity']]); 
+        }
+                    
         return Cart::insert($data);
     }
 
@@ -244,8 +280,142 @@ class CartService
         }
         
     }
+    protected function execPostRequest($url, $data)
+    {
+        $ch = curl_init($url);
+        curl_setopt($ch, CURLOPT_CUSTOMREQUEST, "POST");
+        curl_setopt($ch, CURLOPT_POSTFIELDS, $data);
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+        curl_setopt($ch, CURLOPT_HTTPHEADER, array(
+                'Content-Type: application/json',
+                'Content-Length: ' . strlen($data))
+        );
+        curl_setopt($ch, CURLOPT_TIMEOUT, 5);
+        curl_setopt($ch, CURLOPT_CONNECTTIMEOUT, 5);
+        //execute post
+        $result = curl_exec($ch);
+        //close connection
+        curl_close($ch);
+        return $result;
+    }
 
+    public function momo($request)
+    {
+        $endpoint = "https://test-payment.momo.vn/v2/gateway/api/create";
+        $codeID = rand(00,9999);
+        $this->addcart($request,$codeID);
+        $partnerCode = 'MOMOBKUN20180529';
+        $accessKey = 'klm05TvNBzhg7h7j';
+        $secretKey = 'at67qH6mk8w5Y1nAyMoYKMWACiEi2bsa';
+        $orderInfo = "Thanh toán qua ATM MoMo";
+        $amount = $request->total;
+        $orderId = time() ."";
+        $redirectUrl = "http://localhost:8000/momo_php/return";
+        $ipnUrl = "http://localhost:8000/gio-hang";
+        $extraData = "";
 
+        $requestId = time() . "";
+        $requestType = "payWithATM";
+        //before sign HMAC SHA256 signature
+        $rawHash = "accessKey=" . $accessKey . "&amount=" . $amount . "&extraData=" . $extraData . "&ipnUrl=" . $ipnUrl . "&orderId=" . $orderId . "&orderInfo=" . $orderInfo . "&partnerCode=" . $partnerCode . "&redirectUrl=" . $redirectUrl . "&requestId=" . $requestId . "&requestType=" . $requestType;
+        $signature = hash_hmac("sha256", $rawHash, $secretKey);
+        $data = array('partnerCode' => $partnerCode,
+            'partnerName' => "Test",
+            "storeId" => "MomoTestStore",
+            'requestId' => $requestId,
+            'amount' => $amount,
+            'orderId' => $orderId,
+            'orderInfo' => $orderInfo,
+            'redirectUrl' => $redirectUrl,
+            'ipnUrl' => $ipnUrl,
+            'lang' => 'vi',
+            'extraData' => $extraData,
+            'requestType' => $requestType,
+            'signature' => $signature);
+        $result = $this->execPostRequest($endpoint, json_encode($data));
+        $jsonResult = json_decode($result, true);  // decode json
+        return $jsonResult;
+        
+        //Just a example, please check more in there
+
+    }
+    protected function isValid($request)
+    {
+        if ($request->input('HinhThuc')=== null) {
+            Session::flash('error', 'Vui lòng chọn hình thức thanh toán');
+            return false;
+        }
+        else {
+            return true;
+        }
+    }
+    public function voucher($request)
+    {
+        $isValid = $this->isValid($request);
+        if ($isValid === false) return false;
+        if($request->HinhThuc === 'Transfer Payments Momo' || $request->HinhThuc === 'Transfer Payments Vnpay'){
+            $HinhThuc = 2;
+        }else{
+            $HinhThuc = 1;
+        }
+        $voucher = Voucher::where('code',$request->voucher)
+        ->where('Payment',$HinhThuc)->first();
+        
+        if($voucher){
+            $count_voucher = $voucher->count();
+            if($count_voucher>0){
+                Carbon::setlocale('vi');
+                $end= Carbon::create($voucher->time_end);
+                $now = Carbon::now();
+                if ($now->month > $end->month) {
+                    Session::forget('voucher');
+                    Session::flash('error', 'Mã áp dụng đã hết hạn');
+                    return false;
+                }else if($now->month == $end->month && $now->day > $end->day){
+                    Session::forget('voucher');
+                    Session::flash('error', 'Mã áp dụng đã hết hạn');
+                    return false;
+                }
+                else{
+                    if ($now->day <= $end->day) {
+                        $voucher_session = Session::get('voucher');
+                        if($voucher_session== true){
+                            $is_ava = 0;
+                            if($is_ava ==0){
+                                $vou[]=array(
+                                    'voucher_code'=>$voucher->code,
+                                    'voucher_condition'=>$voucher->condition,
+                                    'voucher_number'=>$voucher->number,
+                                    'voucher_quantity'=>1,
+                                    'voucher_payment'=>$request->HinhThuc,
+                                    'voucher_id'=>$voucher->id,
+                                );
+                                Session::put('voucher',$vou);
+                            }
+                        }else{
+                            $vou[]=array(
+                                'voucher_code'=>$voucher->code,
+                                'voucher_condition'=>$voucher->condition,
+                                'voucher_number'=>$voucher->number,
+                                'voucher_quantity'=>1,
+                                'voucher_payment'=>$request->HinhThuc,
+                                'voucher_id'=>$voucher->id,
+
+                            );
+                            Session::put('voucher',$vou);
+                        }
+                        Session::save();
+                        Session::flash('success', 'Mã áp dụng thành công');
+                        return true;
+                    }
+                }
+            }
+        }else{
+            Session::forget('voucher');
+            Session::flash('error', 'Mã áp dụng không tồn tại');
+            return false;
+        }
+    }
 
     //admin
     public function getCustomer($request)
@@ -349,6 +519,7 @@ class CartService
 
     public function searchCustomer($request)
     {
+        
         if($request->search){
             return Customer::where('phone', 'like', '%' . $request->search . '%')
             ->with('carts')
@@ -356,19 +527,19 @@ class CartService
             ->withQueryString()
             ->appends(request()->query());
         }
-        else if($request->actives !== 0){
-            return Customer::where('active',$request->actives )
-            ->with('carts')
-            ->paginate(15)
-            ->withQueryString()
-            ->appends(request()->query());
+        else if($request->actives != 0){
+                return Customer::where('active',$request->actives )
+                ->with('carts')
+                ->paginate(15)
+                ->withQueryString()
+                ->appends(request()->query());
         }
         else{
-            return Customer::whereBetween('created_at',[$request->start,$request->end])
-            ->with('carts')
-            ->paginate(15)
-            ->withQueryString()
-            ->appends(request()->query());
+            return Customer::with('carts')
+                ->orderbyDesc('created_at')
+                ->paginate(15)
+                ->withQueryString()
+                ->appends(request()->query());
         }
     }
 }

@@ -215,7 +215,7 @@
 
 /* setting */
 
-.container .left ul li {
+.container .left .navbar-nav li {
     display: flex;
     align-items: center;
     margin: 5px;
@@ -223,13 +223,13 @@
     border-bottom-right-radius: 25px;
 }
 
-.container .left ul li a.active {
+.container .left .navbar-nav li a.active {
     background-color: #e8f0ff;
     border-top-right-radius: 25px;
     border-bottom-right-radius: 25px;
 }
 
-.container .left ul li a {
+.container .left .navbar-nav li a {
     padding: 15px;
     font-size: 14px;
 }
