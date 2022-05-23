@@ -246,3 +246,74 @@
 .profile {
     padding: 15px;
 }
+
+
+/* seen */
+
+.owl-item {
+    width: 220px!important;
+}
+
+.card-seen {
+    display: flex;
+    flex-direction: column;
+}
+
+.card-seen {
+    border-radius: 5px;
+    overflow: hidden;
+    box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+    margin-left: var(--spacing);
+    margin-bottom: var(--spacing);
+}
+
+.card-seen .img-product {
+    padding: 10px;
+    width: 100%!important;
+    object-fit: cover;
+}
+
+.card-seen:hover {
+    transition: 0.4s;
+    transform: scale(1.03);
+}
+
+.card-seen button {
+    color: white;
+    align-items: center;
+    text-align: center;
+    padding: 7px 30px;
+    margin: 5px;
+    border-radius: 10px;
+    border: 1px solid;
+    font-size: 17px;
+}
+
+.card-seen button:hover {
+    transition: 0.5s;
+    color: rgb(223, 89, 0);
+}
+
+.title-main {
+    border-radius: 15px;
+    font-size: 25px;
+    padding: 6px 0;
+    text-transform: uppercase;
+    color: #004f9e;
+    font-weight: 600;
+}
+
+.title-main a:hover {
+    transition: 0.4s;
+    background-color: rgb(255, 35, 35);
+}
+
+.title-main a {
+    color: #fff;
+    background-color: #004f9e;
+    font-size: 15px;
+    line-height: 1;
+    padding: 9px;
+    border-radius: 15px;
+    text-decoration: none;
+}

@@ -85,7 +85,7 @@ class UserService{
                     'time'=>$value->created_at,
                     'customer_id'=>$value->id,
                     'customer_voucher'=>$value->voucher,
-                    'customer_vouchers'=>$value->vouchers,
+                    'customer_vouchers'=>$value->vouchers,  
                 ];
             }
         }

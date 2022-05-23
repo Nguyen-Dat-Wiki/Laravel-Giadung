@@ -63,7 +63,7 @@
             @if (count($products)>0)
                 @foreach ($products as $product)
                     <div class="card">
-                        <form action="/add-cart" method="post" onclick = "Seen({{$product->id}})">
+                        <form action="/add-cart" method="post" {{-- onclick = "Seen({{$product->id}})" --}}>
                             <div class="card-body">
                                 <div class="card-img">
                                     <a href="/san-pham/{{ $product->id }}-{{ Str::slug($product->name, '-') }}.html"><img class="img-product" src="{{$product->thumb}}" alt="..."></a>
@@ -84,13 +84,13 @@
                                 @endif
                                 <div class="button-submit d-flex justify-content-center"><button class="bg-white border-primary text-dark" type="submit">Mua ngay&nbsp; <i class="fa-solid fa-basket-shopping-simple"></i></button></div>
                             </div>
-                            <input type="text" name="url" hidden id="url{{$product->id}}" value="/san-pham/{{ $product->id }}-{{ Str::slug($product->name, '-') }}.html">
+                            {{-- <input type="text" name="url" hidden id="url{{$product->id}}" value="/san-pham/{{ $product->id }}-{{ Str::slug($product->name, '-') }}.html">
                             <input type="text" name="sale" hidden id="sale{{$product->id}}" value="{{  (int)( ( ($product->price - $product->price_sale) * 100) / $product->price ) }}">
                             <input type="text" name="thumb" hidden id="thumb{{$product->id}}" value="{{$product->thumb}}">
                             <input type="text" name="price_old" hidden id="price{{$product->id}}" value="{{number_format($product->price)}}">
                             <input type="text" name="price" hidden id="price_old{{$product->id}}" value="{{number_format($product->price_sale)}}">
                             <input type="text" name="name" id="name{{$product->id}}" hidden value="{{$product->name}}">
-                            <input type="text" name="name" id="token{{$product->id}}" hidden value="{{csrf_token()}}">
+                            <input type="text" name="name" id="token{{$product->id}}" hidden value="{{csrf_token()}}"> --}}
                             <input type="number" name="num_product" hidden value="1">
                             <input type="hidden" name="product_id" value="{{ $product->id }}">
                             @csrf

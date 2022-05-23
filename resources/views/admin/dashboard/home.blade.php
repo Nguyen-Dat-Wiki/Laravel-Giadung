@@ -204,10 +204,23 @@
                 
                 @if (isset($carts))
                     @foreach($carts as $key => $customer)
-                        @php
-                        $price = $customer->carts[0]['price'] * $customer->carts[0]['pty'];
-                        $total += $price;
-                        @endphp
+                        @foreach ($customer->carts as $item)
+                            @php
+                            $total2=0;
+                            $price = $item->price * $item->pty;
+                            $total2+= $price;
+                            if ($customer->voucher != NULL) {
+                                if ($customer->vouchers[0]['condition']==1) {
+                                    $total_sale = ($total2 * $customer->vouchers[0]['number'])/100;
+                                    $total2 -= $total_sale;
+                                }
+                                elseif ($customer->vouchers[0]['condition']==2) {
+                                    $total2 -= $customer->vouchers[0]['number'];
+                                }
+                            }
+                            $total+=$total2;
+                            @endphp
+                        @endforeach
                     @endforeach
                 @endif
                 
@@ -275,14 +288,14 @@
                         foreach ($customer->carts as $key => $value) {
                             $price = $value->price * $value->pty;
                             $total += $price;
-                            if ($customer->voucher != NULL) {
-                                if ($customer->vouchers[0]['condition']==1) {
-                                    $total_sale = ($total * $customer->vouchers[0]['number'])/100;
-                                    $total -= $total_sale;
-                                }
-                                elseif ($customer->vouchers[0]['condition']==2) {
-                                    $total -= $customer->vouchers[0]['number'];
-                                }
+                        }
+                        if ($customer->voucher != NULL) {
+                            if ($customer->vouchers[0]['condition']==1) {
+                                $total_sale = ($total * $customer->vouchers[0]['number'])/100;
+                                $total -= $total_sale;
+                            }
+                            elseif ($customer->vouchers[0]['condition']==2) {
+                                $total -= $customer->vouchers[0]['number'];
                             }
                         }
                     @endphp

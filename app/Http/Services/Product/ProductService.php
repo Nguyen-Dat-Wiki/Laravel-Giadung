@@ -9,6 +9,7 @@ use App\Models\Info;
 use App\Models\Comment;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Http\Request;
+use Illuminate\Support\Arr;
 use DB;
 
 class ProductService
@@ -96,6 +97,29 @@ class ProductService
         ->orderby('created_at','desc')
         ->paginate(7);
     }
-    
+    public function seen($id)
+    {
+        $seen = Session::get('seen');
+        if (is_null($seen)) {
+            Session::put('seen',[
+                $id=>1
+            ]);
+            return true;
+        }
+        $arr = Arr::add($seen,$id,1);
+        Session::put('seen', $arr);
+        return true;
+    }
+    public function getProduct()
+    {
+        $carts = Session::get('seen');
+        if (is_null($carts)) return [];
+        $productId = array_keys($carts);
+        $productId = array_reverse($productId);
+        return Product::select('id','quantity', 'name', 'price', 'price_sale', 'thumb')
+            ->where('active', 1)
+            ->whereIn('id', $productId)
+            ->get();
+    }
 }
     

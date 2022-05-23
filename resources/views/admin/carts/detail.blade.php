@@ -66,7 +66,13 @@
                         </tr>
                         <tr>
                             <td colspan="4" class="text-right"><strong>Tổng tiền đã giảm</strong></td>
-                            <td>{{ number_format($total -= ($total * $customer->vouchers[0]['number'])/100), 0, '', '.'}}</td>
+                            <td>
+                                @if ($customer->vouchers[0]['condition']==1) 
+                                    {{number_format( $total -= ($total * $customer->vouchers[0]['number']) /100), 0, '.', '.'}}
+                                @elseif ($customer->vouchers[0]['condition']==2) 
+                                    {{number_format($total -= $customer->vouchers[0]['number'], 0, '', '.')}}
+                                @endif
+                            </td>
                         </tr>
                     @else
                         <tr>
@@ -75,7 +81,7 @@
                         </tr>
                         <tr>
                             <td colspan="4" class="text-right"><strong>Tổng tiền đã giảm</strong></td>
-                        <td>{{ number_format($total, 0, '', '.') }}</td>
+                            <td>{{ number_format($total, 0, '', '.') }}</td>
                         </tr>
                     @endif
 
