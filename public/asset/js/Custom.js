@@ -121,7 +121,7 @@ $(document).ready(function() {
     })
 });
 
-function Seen(product_id) {
+/* function Seen(product_id) {
 
     var id = product_id;
     var name = $('#name' + product_id).val();
@@ -202,4 +202,4 @@ $(document).ready(function() {
         }
     })
 
-});
+}); */

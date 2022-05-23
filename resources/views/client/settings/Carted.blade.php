@@ -37,14 +37,17 @@
                                         @php
                                         $total = 0;
                                         $price = $item['price'] * $item['quantity'];
-                                        $total += $price;
                                         if ($item['customer_voucher'] != NULL) {
                                             if ($item['customer_vouchers'][0]['condition'] == 1 ) {
-                                                $total_sale = ($total * $item['customer_vouchers'][0]['number'])/100;
-                                                $total -= $total_sale; 
+                                                $total_sale = ($price * $item['customer_vouchers'][0]['number'])/100;
+                                                $price -= $total_sale; 
+                                                $test= $item['customer_id'];
                                             }
                                             elseif ($item['customer_vouchers'][0]['condition']==2) {
-                                                 $total -= $item['customer_vouchers'][0]['number']; 
+                                                if($test != $item['customer_id']){
+                                                    $price -= $item['customer_vouchers'][0]['number'];
+                                                    $test= $item['customer_id'];
+                                                }
                                             }
                                         }
                                         @endphp
@@ -59,7 +62,7 @@
                                             </td>
                                             <td class="column-2" style="white-space:nowrap"><a href="/san-pham/{{ $item['id'] }}-{{ Str::slug($item['name'], '-') }}.html" style="color:black;">{{ $item['name'] }}</a></td>
                                             <td class="column-4" style="white-space:nowrap">{{ $item['quantity'] }}</td>
-                                            <td class="column-3"style="white-space:nowrap">{{ number_format($total, 0, '', '.') }}</td>
+                                            <td class="column-3"style="white-space:nowrap">{{ number_format($price, 0, '', '.') }}</td>
                                             <td class="column-5"style="white-space:nowrap">{{$item['time']}}</td>
                                             <td class="column-6" style="white-space:nowrap">
                                                 <a class="btn btn-danger btn-sm" href="/setting/delete/{{$item['customer_id']}}">
@@ -88,19 +91,21 @@
                                 </tr>
                         
                                 @foreach ($carts as $key => $item)
-                        
+                                
                                     @if ($item['active'] == 3)
                                         @php
                                         $total = 0;
                                         $price = $item['price'] * $item['quantity'];
-                                        $total += $price;
                                         if ($item['customer_voucher'] != NULL) {
                                             if ($item['customer_vouchers'][0]['condition'] == 1 ) {
-                                                $total_sale = ($total * $item['customer_vouchers'][0]['number'])/100;
-                                                $total -= $total_sale; 
+                                                $total_sale = ($price * $item['customer_vouchers'][0]['number'])/100;
+                                                $price -= $total_sale; 
                                             }
                                             elseif ($item['customer_vouchers'][0]['condition']==2) {
-                                                $total -= $item['customer_vouchers'][0]['number']; 
+                                                if($test != $item['customer_id']){
+                                                    $price -= $item['customer_vouchers'][0]['number'];
+                                                    $test= $item['customer_id'];
+                                                }
                                             }
                                         }
                                         @endphp
@@ -115,8 +120,13 @@
                                             </td>
                                             <td class="column-2" style="white-space:nowrap"><a href="/san-pham/{{ $item['id'] }}-{{ Str::slug($item['name'], '-') }}.html" style="color:black;">{{ $item['name'] }}</a></td>
                                             <td class="column-4" style="white-space:nowrap">{{ $item['quantity'] }}</td>
-                                            <td class="column-3"style="white-space:nowrap">{{ number_format($total, 0, '', '.') }}</td>
+                                            <td class="column-3"style="white-space:nowrap">{{ number_format($price, 0, '', '.') }}</td>
                                             <td class="column-5"style="white-space:nowrap">{{$item['time']}}</td>
+                                            <td class="column-6" style="white-space:nowrap">
+                                                <a class="btn btn-danger btn-sm" href="/setting/delete/{{$item['customer_id']}}">
+                                                    <i class="fas fa-trash"></i>
+                                                </a>
+                                            </td>
                                         </tr>
                                     @endif
                                 @endforeach
@@ -139,19 +149,21 @@
                                 </tr>
                         
                                 @foreach ($carts as $key => $item)
-                        
+                                
                                     @if ($item['active'] == 4)
                                         @php
                                         $total = 0;
                                         $price = $item['price'] * $item['quantity'];
-                                        $total += $price;
                                         if ($item['customer_voucher'] != NULL) {
                                             if ($item['customer_vouchers'][0]['condition'] == 1 ) {
-                                                $total_sale = ($total * $item['customer_vouchers'][0]['number'])/100;
-                                                $total -= $total_sale; 
+                                                $total_sale = ($price * $item['customer_vouchers'][0]['number'])/100;
+                                                $price -= $total_sale; 
                                             }
                                             elseif ($item['customer_vouchers'][0]['condition']==2) {
-                                                $total -= $item['customer_vouchers'][0]['number']; 
+                                                if($test != $item['customer_id']){
+                                                    $price -= $item['customer_vouchers'][0]['number'];
+                                                    $test= $item['customer_id'];
+                                                }
                                             }
                                         }
                                         @endphp
@@ -168,6 +180,11 @@
                                             <td class="column-4" style="white-space:nowrap">{{ $item['quantity'] }}</td>
                                             <td class="column-3"style="white-space:nowrap">{{ number_format($price, 0, '', '.') }}</td>
                                             <td class="column-5"style="white-space:nowrap">{{$item['time']}}</td>
+                                            <td class="column-6" style="white-space:nowrap">
+                                                <a class="btn btn-danger btn-sm" href="/setting/delete/{{$item['customer_id']}}">
+                                                    <i class="fas fa-trash"></i>
+                                                </a>
+                                            </td>
                                         </tr>
                                     @endif
                                 @endforeach
@@ -190,38 +207,45 @@
                                 </tr>
                         
                                 @foreach ($carts as $key => $item)
-                        
-                                    @if ($item['active'] == 1)
-                                        @php
-                                        $total = 0;
-                                        $price = $item['price'] * $item['quantity'];
-                                        $total += $price;
-                                        if ($item['customer_voucher'] != NULL) {
-                                            if ($item['customer_vouchers'][0]['condition'] == 1 ) {
-                                                $total_sale = ($total * $item['customer_vouchers'][0]['number'])/100;
-                                                $total -= $total_sale; 
-                                            }
-                                            elseif ($item['customer_vouchers'][0]['condition']==2) {
-                                                $total -= $item['customer_vouchers'][0]['number']; 
+                                
+                                @if ($item['active'] == 1)
+                                    @php
+                                    $total = 0;
+                                    $price = $item['price'] * $item['quantity'];
+                                    if ($item['customer_voucher'] != NULL) {
+                                        if ($item['customer_vouchers'][0]['condition'] == 1 ) {
+                                            $total_sale = ($price * $item['customer_vouchers'][0]['number'])/100;
+                                            $price -= $total_sale; 
+                                        }
+                                        elseif ($item['customer_vouchers'][0]['condition']==2) {
+                                            if($test != $item['customer_id']){
+                                                $price -= $item['customer_vouchers'][0]['number'];
+                                                $test= $item['customer_id'];
                                             }
                                         }
-                                        @endphp
-                                        <tr>
-                                            <td>
-                                                {{ $item['customer_id'] }}
-                                            </td>
-                                            <td class="column-1">
-                                                <div class="how-itemcart1">
-                                                    <a href="/san-pham/{{ $item['id'] }}-{{ Str::slug($item['name'], '-') }}.html"><img src="{{ $item['thumb'] }}" alt="IMG" style="width: 100px"></a>
-                                                </div>
-                                            </td>
-                                            <td class="column-2" style="white-space:nowrap"><a href="/san-pham/{{ $item['id'] }}-{{ Str::slug($item['name'], '-') }}.html" style="color:black;">{{ $item['name'] }}</a></td>
-                                            <td class="column-4" style="white-space:nowrap">{{ $item['quantity'] }}</td>
-                                            <td class="column-3"style="white-space:nowrap">{{ number_format($price, 0, '', '.') }}</td>
-                                            <td class="column-5"style="white-space:nowrap">{{$item['time']}}</td>
-                                        </tr>
-                                    @endif
-                                @endforeach
+                                    }
+                                    @endphp
+                                    <tr>
+                                        <td>
+                                            {{ $item['customer_id'] }}
+                                        </td>
+                                        <td class="column-1">
+                                            <div class="how-itemcart1">
+                                                <a href="/san-pham/{{ $item['id'] }}-{{ Str::slug($item['name'], '-') }}.html"><img src="{{ $item['thumb'] }}" alt="IMG" style="width: 100px"></a>
+                                            </div>
+                                        </td>
+                                        <td class="column-2" style="white-space:nowrap"><a href="/san-pham/{{ $item['id'] }}-{{ Str::slug($item['name'], '-') }}.html" style="color:black;">{{ $item['name'] }}</a></td>
+                                        <td class="column-4" style="white-space:nowrap">{{ $item['quantity'] }}</td>
+                                        <td class="column-3"style="white-space:nowrap">{{ number_format($price, 0, '', '.') }}</td>
+                                        <td class="column-5"style="white-space:nowrap">{{$item['time']}}</td>
+                                        <td class="column-6" style="white-space:nowrap">
+                                            <a class="btn btn-danger btn-sm" href="/setting/delete/{{$item['customer_id']}}">
+                                                <i class="fas fa-trash"></i>
+                                            </a>
+                                        </td>
+                                    </tr>
+                                @endif
+                            @endforeach
                         
                             </tbody>
                         </table>

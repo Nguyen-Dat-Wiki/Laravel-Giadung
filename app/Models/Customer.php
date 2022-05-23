@@ -31,14 +31,23 @@ class Customer extends Model
     }
     public function exportExcel()
     {
-        $total=0;
         $arr= array();
-        $carts=Customer::whereIn('active',[2,3])
+        $carts=Customer::whereIn('active',[3,4])
             ->with('carts')
             ->get();
         foreach($carts as $key => $customer){
+            $total=0;
             $price = $customer->carts[0]['price'] * $customer->carts[0]['pty'];
             $total += $price;
+            if ($customer->voucher != NULL) {
+                if ($customer->vouchers[0]['condition']==1) {
+                    $total_sale = ($total * $customer->vouchers[0]['number'])/100;
+                    $total -= $total_sale;
+                }
+                elseif ($customer->vouchers[0]['condition']==2) {
+                    $total -= $customer->vouchers[0]['number'];
+                }
+            }
             $data[] =[
                 'STT'=> $customer->id,
                 'Ten'=>$customer->name,
