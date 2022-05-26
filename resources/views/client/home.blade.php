@@ -75,7 +75,7 @@
                             <div class="card-body">
                                 <div class="card-img">
                                     <a href="/san-pham/{{ $product->id }}-{{ Str::slug($product->name, '-') }}.html"><img class="img-product" src="{{$product->thumb}}" alt="..."></a>
-                                    <span class="sale">-{{  (int)( ( ($product->price - $product->price_sale) * 100) / $product->price ) }}%</span>
+                                    <span class="sale">-{{  (int)( ( ($product->price - $product->price_sale) * 100) / $product->price) }}%</span>
                                 </div>
                                 <div class="card-top">
                                     <h3 class="card-title" style="text-align: center;"><a href="/san-pham/{{ $product->id }}-{{ Str::slug($product->name, '-') }}.html" style="color: black;">{{$product->name}}</a></h3>
