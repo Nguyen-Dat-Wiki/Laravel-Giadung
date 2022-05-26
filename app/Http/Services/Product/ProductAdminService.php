@@ -21,7 +21,7 @@ class ProductAdminService
     {
         return Menu::where('active', 1)->get();
     }
-
+    // check giá
     protected function isValidPrice($request)
     {
         if ($request->input('price') != 0 && $request->input('price_sale') != 0
@@ -38,7 +38,7 @@ class ProductAdminService
 
         return  true;
     }
-
+    // add product
     public function insert($request)
     {
         $isValidPrice = $this->isValidPrice($request);
@@ -68,6 +68,7 @@ class ProductAdminService
 
         return  true;
     }
+    // add info product
     protected function insertinfo($request,$product_id)
     {
         Info::insert([
@@ -81,6 +82,7 @@ class ProductAdminService
         ]);
         return true;
     }
+    // get list product
     public function get($request)
     {
         $query =  Product::with('menu');
@@ -108,11 +110,12 @@ class ProductAdminService
             ->withQueryString()
             ->appends(request()->query());
     }
-
+    // get info product
     public function getInfo($product_id)
     {
         return Info::where('product_id',$product_id)->get();
     }
+    // update product and info
     public function update($request, $product)
     {
         $isValidPrice = $this->isValidPrice($request);
@@ -158,12 +161,14 @@ class ProductAdminService
         }
         return true;
     }
-
+    // delete product and info
     public function delete($request)
     {
         $product = Product::where('id', $request->input('id'))->first();
+        $info = Info::where('product_id', $request->input('id'))->first();
         if ($product) {
             $product->delete();
+            $info->delete();
             return true;
         }
 

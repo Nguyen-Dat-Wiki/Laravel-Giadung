@@ -15,6 +15,7 @@
     </div>
 </div>
 <div class="main-cart">
+    @include('client.layouts.alert')
     <form action="/gio-hang" method="post">
         @if (count($products) != 0)
             <main class="cart border mb-4 d-flex justify-content-between flex-wrap">
@@ -55,6 +56,7 @@
                         <div class="mb-4">
                             <button type="submit" id="autoclick" hidden class=" btn-cart btn btn-primary" name="thanhtoan" formaction="/update-cart">Cập nhật</button>
                             <input type="text" class="border rounded" style="padding:6px 12px" name="voucher"  placeholder="Nhập voucher (nếu có)"> <button class="btn-cart btn btn-primary" formaction="/add-voucher">Nhập voucher</button>
+                            <input type="hidden" name="checkauth" value="{{ (Auth::user() !=  null ) ? Auth::user()->id : '0' ; }}">
                             @csrf
                         </div>
                         <div class="borderMoney border">
@@ -154,7 +156,6 @@
                     </div>
                     <h3 class="mb-0 mt-5">Thông tin giao hàng</h3>
                     <hr class="mt-3">
-                    @include('client.layouts.alert')
                     <div class="FormThongTin">
                         <div class="row">
                             <div class="form-group col-6">
@@ -200,7 +201,6 @@
                 </div>
             </main>
         @else
-            @include('admin.layouts.alert')
             {{Session::forget('voucher')}}
             <h2 class="text-center">Giỏ hàng trống</h2>
         @endif

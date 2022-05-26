@@ -3,16 +3,22 @@
 <form action="" method="POST">
     <div class="card-body">
         <div class="row">
-            <div class="col-md-6">
+            <div class="col-md-4">
                 <div class="form-group">
                     <label for="menu">Tên voucher</label>
                     <input type="text" name="name" value="{{$Vouchers->name}}" class="form-control">
                 </div>
             </div>
-            <div class="col-md-6">
+            <div class="col-md-4">
                 <div class="form-group">
                     <label for="menu">Mã voucher</label>
                     <input type="text" name="code" value="{{$Vouchers->code}}" class="form-control">
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="form-group">
+                    <label for="menu">Giá tiền từ</label>
+                    <input type="number" name="limitprice" value="{{$Vouchers->limitprice}}" class="form-control" min="100000">
                 </div>
             </div>
         </div>
@@ -67,15 +73,36 @@
         </div>
 
 
-        <div class="form-group">
-            <label>Kích Hoạt</label>
-            <div class="custom-control custom-radio">
-                <input class="custom-control-input" value="1" type="radio" id="active" name="active" {{ $Vouchers->active == 1 ? ' checked=""' : '' }}>
-                <label for="active" class="custom-control-label">Có</label>
+        <div class="row">
+            <div class="col-lg-6">
+                <div class="form-group">
+                    <label>Kích Hoạt</label>
+                    <div class="custom-control custom-radio">
+                        <input class="custom-control-input" value="1" type="radio" id="active" name="active" checked="">
+                        <label for="active" class="custom-control-label">Có</label>
+                    </div>
+                    <div class="custom-control custom-radio">
+                        <input class="custom-control-input" value="0" type="radio" id="no_active" name="active" >
+                        <label for="no_active" class="custom-control-label">Không</label>
+                    </div>
+                </div>
             </div>
-            <div class="custom-control custom-radio">
-                <input class="custom-control-input" value="0" type="radio" id="no_active" name="active"  {{ $Vouchers->active == 0 ? ' checked=""' : '' }} >
-                <label for="no_active" class="custom-control-label">Không</label>
+            <div class="col-lg-6">
+                <div class="form-group">
+                    <label>Kích Hoạt</label>
+                    <div class="custom-control custom-radio">
+                        <input class="custom-control-input" value="1" type="radio" id="number_active" name="number_active" 
+                            {{ $Vouchers->number_active == 1 ? ' checked=""' : '' }}>
+                        >
+                        <label for="number_active" class="custom-control-label">Sử dụng 1 lần</label>
+                    </div>
+                    <div class="custom-control custom-radio">
+                        <input class="custom-control-input" value="0" type="radio" id="no_number_active" name="number_active" 
+                        {{ $Vouchers->number_active == 0 ? ' checked=""' : '' }}>
+                        >
+                        <label for="no_number_active" class="custom-control-label">Sử dụng nhiều lần</label>
+                    </div>
+                </div>
             </div>
         </div>
 

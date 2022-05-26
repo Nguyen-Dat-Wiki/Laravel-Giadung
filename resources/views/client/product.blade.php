@@ -27,6 +27,10 @@
                 <div class="text-center lien_he">
                     <a class="h3" href="/san-pham/{{ $product->id }}-{{ Str::slug($product->name, '-') }}">Liên hệ</a>
                 </div>
+            @elseif ($product->active == 0)
+                <div class="text-center lien_he">
+                    <a class="h3" href="/san-pham/{{ $product->id }}-{{ Str::slug($product->name, '-') }}">Liên hệ</a>
+                </div>
             @else
                 <div class="product_info_left">
                     <div class="product_info_price_value-final text-center mb-3"><span class="nk-price-final h3 font-weight-bold">{{number_format($product->price_sale)}}đ</span></div>
@@ -57,21 +61,21 @@
                     <div class="control-group ">
                         <p class="product_option_item ">
                             <span class="num-ord rounded-circle">&nbsp;1&nbsp;</span>
-                            <span class="promo_text"> Nhập mã giảm <strong>NEWBER</strong> dành cho người mới để giảm thêm đến 50.000đ khi mua online.
+                            <span class="promo_text"> Nhập mã giảm <strong>NEWBER</strong> dành cho người mới để giảm thêm đến 50.000đ khi thanh toán bằng thẻ tín dụng với hoá đơn từ 500.000đ .
                             </span>
                         </p>
                     </div>
                     <div class="control-group">
                         <p class="product_option_item ">
                             <span class="num-ord rounded-circle">&nbsp;2&nbsp;</span>
-                            <span class="promo_text"> Nhập mã giảm <strong>THIEUNHI</strong> để giảm 5%&nbsp;khi thanh toán bằng thẻ tín dụng&nbsp;
+                            <span class="promo_text"> Nhập mã giảm <strong>THIEUNHI</strong> để giảm 5%&nbsp;khi thanh toán bằng thẻ tín dụng với hoá đơn từ 500.000đ&nbsp;
                             </span>
                         </p>
                     </div>
                     <div class="control-group ">
                         <p class="product_option_item">
                             <span class="num-ord rounded-circle">&nbsp;3&nbsp;</span>
-                            <span class="promo_text">Nhập mã giảm <strong>SHIPCOD</strong> để giảm 3%&nbsp;khi thanh toán bằng tiền mặt&nbsp;
+                            <span class="promo_text">Nhập mã giảm <strong>SHIPCOD</strong> để giảm 3%&nbsp;khi thanh toán bằng tiền mặt với hoá đơn từ 300.000đ&nbsp;
                             </span>
                         </p>
                     </div>
@@ -201,9 +205,9 @@
                                     <div class="card-top">
                                         <h3 class="card-title" style="text-align: center;"><a href="/san-pham/{{ $product->id }}-{{ Str::slug($product->name, '-') }}" style="color: black;">{{$product->name}}</a></h3>
                                     </div>
-                                    @if ($product->quantity == 0)
+                                    @if ($product->active == 0)
                                         <div class="text-center lien_he">
-                                            <a class="h3" href="/san-pham/{{ $product->id }}-{{ Str::slug($product->name, '-') }}">Liên hệ</a>
+                                            <a class="h3" href="/san-pham/{{ $product->id }}-{{ Str::slug($product->name, '-') }}.html">Liên hệ</a>
                                         </div>
                                     @else
                                         <p class="card-user">
@@ -213,13 +217,6 @@
                                     @endif
                                     <div class="button-submit d-flex justify-content-center"><button class="bg-white border-primary text-dark" type="submit">Mua ngay&nbsp; <i class="fa-solid fa-basket-shopping-simple"></i></button></div>
                                 </div>
-                               {{--  <input type="text" name="url" hidden id="url{{$product->id}}" value="/san-pham/{{ $product->id }}-{{ Str::slug($product->name, '-') }}.html">
-                                <input type="text" name="sale" hidden id="sale{{$product->id}}" value="{{  (int)( ( ($product->price - $product->price_sale) * 100) / $product->price ) }}">
-                                <input type="text" name="thumb" hidden id="thumb{{$product->id}}" value="{{$product->thumb}}">
-                                <input type="text" name="price_old" hidden id="price{{$product->id}}" value="{{number_format($product->price)}}">
-                                <input type="text" name="price" hidden id="price_old{{$product->id}}" value="{{number_format($product->price_sale)}}">
-                                <input type="text" name="name" id="name{{$product->id}}" hidden value="{{$product->name}}">
-                                <input type="text" name="name" id="token{{$product->id}}" hidden value="{{csrf_token()}}"> --}}
                                 <input type="number" name="num_product" hidden value="1">
                                 <input type="hidden" name="product_id" value="{{ $product->id }}">
                                 @csrf
@@ -250,7 +247,11 @@
                             </div>
                             @if ($product->quantity == 0)
                                 <div class="text-center lien_he">
-                                    <a class="h3" href="/san-pham/{{ $product->id }}-{{ Str::slug($product->name, '-') }}">Liên hệ</a>
+                                    <a class="h3" href="/san-pham/{{ $product->id }}-{{ Str::slug($product->name, '-') }}.html">Liên hệ</a>
+                                </div>
+                            @elseif ($product->active == 0 )
+                                <div class="text-center lien_he">
+                                    <a class="h3" href="/san-pham/{{ $product->id }}-{{ Str::slug($product->name, '-') }}.html">Liên hệ</a>
                                 </div>
                             @else
                                 <p class="card-user">
@@ -260,13 +261,6 @@
                             @endif
                             <div class="button-submit d-flex justify-content-center"><button class="bg-white border-primary text-dark" type="submit">Mua ngay&nbsp; <i class="fa-solid fa-basket-shopping-simple"></i></button></div>
                         </div>
-                       {{--  <input type="text" name="url" hidden id="url{{$product->id}}" value="/san-pham/{{ $product->id }}-{{ Str::slug($product->name, '-') }}.html">
-                        <input type="text" name="sale" hidden id="sale{{$product->id}}" value="{{  (int)( ( ($product->price - $product->price_sale) * 100) / $product->price ) }}">
-                        <input type="text" name="thumb" hidden id="thumb{{$product->id}}" value="{{$product->thumb}}">
-                        <input type="text" name="price_old" hidden id="price{{$product->id}}" value="{{number_format($product->price)}}">
-                        <input type="text" name="price" hidden id="price_old{{$product->id}}" value="{{number_format($product->price_sale)}}">
-                        <input type="text" name="name" id="name{{$product->id}}" hidden value="{{$product->name}}">
-                        <input type="text" name="name" id="token{{$product->id}}" hidden value="{{csrf_token()}}"> --}}
                         <input type="number" name="num_product" hidden value="1">
                         <input type="hidden" name="product_id" value="{{ $product->id }}">
                         @csrf

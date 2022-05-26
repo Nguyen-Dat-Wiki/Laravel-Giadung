@@ -18,5 +18,7 @@ class Voucher extends Model
         'active',
         'Payment',
         'number',
+        'number_active',
+        'limitprice',
     ];
 }

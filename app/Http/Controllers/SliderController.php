@@ -20,7 +20,7 @@ class SliderController extends Controller
     public function create()
     {
         return view('admin.slider.add', [
-           'title' => 'Thêm Slider mới'
+           'title' => 'Thêm Quảng cáo mới'
         ]);
     }
 
@@ -40,7 +40,7 @@ class SliderController extends Controller
     public function index()
     {
         return view('admin.slider.list', [
-            'title' => 'Danh Sách Slider Mới Nhất',
+            'title' => 'Danh Sách Quảng Cáo Mới Nhất',
             'sliders' => $this->slider->get()
         ]);
     }
@@ -75,7 +75,7 @@ class SliderController extends Controller
         if ($result) {
             return response()->json([
                 'error' => false,
-                'message' => 'Xóa thành công Slider'
+                'message' => 'Xóa thành công quảng cáo'
             ]);
         }
 

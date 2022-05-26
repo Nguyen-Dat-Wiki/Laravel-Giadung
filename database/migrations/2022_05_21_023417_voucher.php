@@ -16,7 +16,7 @@ class Voucher extends Migration
         Schema::create('vouchers', function (Blueprint $table) {
             $table->id();
             $table->string('name'); 
-            $table->string('code'); 
+            $table->string('code')->unique();
             $table->unsignedBigInteger('quantity'); 
             $table->unsignedBigInteger('condition'); 
             $table->string('time_start'); 

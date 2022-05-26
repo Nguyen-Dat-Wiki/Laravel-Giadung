@@ -14,6 +14,7 @@ use DB;
 
 class ProductService
 {
+    // get random product limit 5
     public function getNew()
     {
         $limit  = 5;
@@ -23,6 +24,7 @@ class ProductService
             ->limit($limit)
             ->get();
     }
+    // get product theo menu (bao gồm menu con)
     public function getAll($id)
     {
         $child_menu= Menu::where('parent_id',$id)->where('active',1)->get(); //Lay danh muc con
@@ -32,21 +34,23 @@ class ProductService
         }
         array_push($arr,$id);
         return Product::whereIn('menu_id',$arr)
+        ->where('active',1)
         ->limit(5)
         ->get();
     }
+    // get info product
     public function getInfo($id)
     {
         return Info::where('product_id',$id)->firstOrFail();
     }
+    // show product
     public function show($id)
     {
         return Product::where('id', $id)
-            ->where('active', 1)
             ->with('menu')
             ->firstOrFail();
     }
-
+    // show product more
     public function more($id)
     {
         return Product::where('active', 1)
@@ -55,32 +59,7 @@ class ProductService
             ->limit(5)
             ->get();
     }
-
-    public function comment($request)
-    {
-        Comment::create([
-            'name'=>$request->input('name'),
-            'user_id' =>  ($request->input('user_id') == null ) ? null : $request->input('user_id') ,
-            'post_id' => 0,
-            'product_id'=>$request->input('product_id'),
-            'content'=>$request->input('content')
-        ]);
-        return true;
-    }
-    public function get($id)
-    {
-        return DB::table('Comments')->where('product_id',$id)->orderby('created_at', 'desc')->paginate(5);
-    }
-    public function deleteComment($post_id)
-    {
-        $id = (int)$post_id;
-        $Comment = Comment::where('id', $id)->first();
-        if ($Comment) {
-            Comment::where('id', $id)->delete();
-            return true;
-        }
-        return false;
-    }
+    // add comment
     public function add_comment($request)
     {
         Comment::create([
@@ -91,12 +70,14 @@ class ProductService
         ]);
         return true;
     }
+    // show comment
     public function showComment ($id)
     {
         return Comment::where('product_id',$id)
         ->orderby('created_at','desc')
         ->paginate(7);
     }
+    // click vào detail 1 product bất kỳ sẽ lưu lại đã xem
     public function seen($id)
     {
         $seen = Session::get('seen');
@@ -110,16 +91,13 @@ class ProductService
         Session::put('seen', $arr);
         return true;
     }
+    // show product seen ở trang detail 
     public function getProduct()
     {
-        $carts = Session::get('seen');
-        if (is_null($carts)) return [];
-        $productId = array_keys($carts);
-        $productId = array_reverse($productId);
-        return Product::select('id','quantity', 'name', 'price', 'price_sale', 'thumb')
-            ->where('active', 1)
-            ->whereIn('id', $productId)
-            ->get();
+        $seen = Session::get('seen');
+        if (is_null($seen)) return [];
+        $productId = array_keys($seen);
+        return Product::whereIn('id', $productId)->get();
     }
 }
     

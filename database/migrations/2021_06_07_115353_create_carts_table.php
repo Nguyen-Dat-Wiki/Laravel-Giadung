@@ -27,7 +27,7 @@ class CreateCartsTable extends Migration
             $table->foreign('product_id')
                 ->references('id')
                 ->on('products')
-                ->onDelete('cascade');
+                ->onDelete('restrict');
         });
     }
 
