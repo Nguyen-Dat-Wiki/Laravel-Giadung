@@ -7,14 +7,17 @@ namespace App\Http\Services;
 use App\Models\Menu;
 use App\Models\Product;
 use Illuminate\Support\Facades\Session;
+use DB;
 
 class MenuService
 {
+    // lấy menu lớn
     public function getParent()
     {
         return Menu::where('parent_id', 0)->get();
     }
 
+    // show menu lớn
     public function show()
     {
         return Menu::select('name', 'id')
@@ -22,7 +25,7 @@ class MenuService
             ->orderbyDesc('id')
             ->get();
     }
-
+    // get tất cả menu lớn
     public function getAllParent()
     {
         return Menu::where('parent_id', 0)
@@ -88,7 +91,7 @@ class MenuService
     {
         return Menu::where('id', $id)->where('active', 1)->firstOrFail();
     }
-
+    // lấy tất cả sản phẩm thuộc danh mục (cả lớn và nhỏ)
     public function getProduct($id, $request)
     {
         $child_menu= Menu::where('parent_id',$id)->where('active',1)->get(); //Lay danh muc con
@@ -96,10 +99,9 @@ class MenuService
         foreach ($child_menu as $key => $value) {
             $arr[] = $value->id;
         }
-        array_push($arr,$id); //mảng chứa ID cha và ID con
+        array_push($arr,$id); //mảng chứa ID cha hoặc ID con hoặc cả 2
 
-        $tinhtrang_new = ($request->input('tinhtrang')!=null) ? (int)$request->input('tinhtrang') : 1 ;
-        $query = Product::whereIn('menu_id',$arr)->where('active',$tinhtrang_new);   //whereIn dùng để lấy id trong mảng
+        $query = Product::whereIn('menu_id',$arr);   //whereIn dùng để lấy id trong mảng
 
         if ($request->input('price')) {
             $query->orderBy('price_sale', $request->input('price'));
@@ -109,6 +111,9 @@ class MenuService
         }
         else if ($request->input('name')) {
             $query->orderBy('name', $request->input('name'));
+        }
+        else if($request->input('tinhtrang')){
+            $query->where('active',$request->input('tinhtrang'));
         }
         else if ($request->input('start')) {
             $query->where('price_sale', '>', $start)
@@ -123,11 +128,11 @@ class MenuService
             ->withQueryString()
             ->appends(request()->query());
     } 
+    // lấy tất cả sản phẩm được kích hoạt (được bán)
     public function getProductAll($request)
     {   
-        $tinhtrang_new = ($request->input('tinhtrang')!=null) ? (int)$request->input('tinhtrang') : 1 ;
 
-        $query = Product::where('active',$tinhtrang_new);
+        $query = DB::table('products');
         
         if ($request->input('price')) {
             $query->orderBy('price_sale', $request->input('price'));
@@ -137,6 +142,9 @@ class MenuService
         }
         else if ($request->input('name')) {
             $query->orderBy('name', $request->input('name'));
+        }
+        else if($request->input('tinhtrang')){
+            $query->where('active',$request->input('tinhtrang'));
         }
         else if ($request->input('start') !=null) {
             $query->where('price_sale', '>', $request->input('start'))

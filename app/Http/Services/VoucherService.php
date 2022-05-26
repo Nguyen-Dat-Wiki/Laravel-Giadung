@@ -56,6 +56,9 @@ class VoucherService{
         else if ($request->input('quantity')) {
             $query->orderBy('quantity',  $request->input('quantity'));
         }
+        else if ($request->input('Payment')) {
+            $query->orderBy('Payment',  $request->input('Payment'));
+        }
         else if ($request->input('condition')) {
             $query->orderBy('condition',  $request->input('condition'));
         }

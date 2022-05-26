@@ -88,7 +88,7 @@
                 <li class="nav-item">
                     <a href="#" class="nav-link">
                         <i class="nav-icon fas fa-images"></i>
-                        <p> Slider
+                        <p> Quảng cáo
                             <i class="right fas fa-angle-left"></i>
                         </p>
                     </a>
@@ -96,13 +96,13 @@
                         <li class="nav-item">
                             <a href="/admin/sliders/add" class="nav-link">
                                 <i class="far fa-circle nav-icon"></i>
-                                <p>Thêm Slider</p>
+                                <p>Thêm quảng cáo</p>
                             </a>
                         </li>
                         <li class="nav-item">
                             <a href="/admin/sliders/list" class="nav-link">
                                 <i class="far fa-circle nav-icon"></i>
-                                <p>Danh Sách Slider</p>
+                                <p>Danh Sách quảng cáo</p>
                             </a>
                         </li>
 
@@ -170,8 +170,8 @@
                 </li>
                 <li class="nav-item">
                     <a href="#" class="nav-link">
-                        <i class="nav-icon fas fa-newspaper"></i>
-                        <p> Voucher
+                        <i class="nav-icon fas fa-ticket"></i>
+                        <p> Mã giảm giá
                             <i class="right fas fa-angle-left"></i>
                         </p>
                     </a>
@@ -179,13 +179,13 @@
                         <li class="nav-item">
                             <a href="/admin/vouchers/add" class="nav-link">
                                 <i class="far fa-circle nav-icon"></i>
-                                <p>Thêm voucher</p>
+                                <p>Thêm mã giảm</p>
                             </a>
                         </li>
                         <li class="nav-item">
                             <a href="/admin/vouchers/list" class="nav-link">
                                 <i class="far fa-circle nav-icon"></i>
-                                <p>Danh sách voucher</p>
+                                <p>Danh sách mã giảm</p>
                             </a>
                         </li>
                     </ul>

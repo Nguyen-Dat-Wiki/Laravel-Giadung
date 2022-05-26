@@ -160,7 +160,7 @@ class Helper{
     public function SaleVoucher($condition)
     {
         return $condition == 1 ? '<span class="btn btn-primary btn-xs">Giảm theo %</span>'
-            : '<span class="btn btn-success btn-xs">Giảm theo tiền</span>';
+            : '<span class="btn btn-warning btn-xs">Giảm theo tiền</span>';
     }
     public function CheckTime($time_start,$time_end)
     {
@@ -178,5 +178,10 @@ class Helper{
                 return '<span class="btn btn-success btn-xs">Còn hạn</span>';
             }
         }
+    }
+    public function Payment($Payment)
+    {
+        return $Payment == 2 ? '<span class="btn btn-warning btn-xs">Online</span>'
+            : '<span class="btn btn-primary btn-xs">ShipCod</span>';
     }
 }

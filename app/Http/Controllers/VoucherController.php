@@ -20,7 +20,7 @@ class VoucherController extends Controller
     public function index()
     {
         return view('admin.vouchers.add', [
-            'title' => 'Thêm voucher'
+            'title' => 'Thêm mã giảm'
         ]);
     }
     public function add(Request $request)
@@ -38,7 +38,7 @@ class VoucherController extends Controller
     public function store(Voucher $voucher)
     {
         return view('admin.vouchers.edit', [
-            'title'=> 'Chỉnh sửa voucher',
+            'title'=> 'Chỉnh sửa mã giảm',
             'Vouchers'=> $voucher,
         ]);
     }

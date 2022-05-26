@@ -62,8 +62,7 @@ class CartService
         if (is_null($carts)) return [];
 
         $productId = array_keys($carts);
-        return Product::select('id','quantity', 'name', 'price', 'price_sale', 'thumb')
-            ->where('active', 1)
+        return Product::where('active', 1)
             ->whereIn('id', $productId)
             ->get();
     }
@@ -95,6 +94,7 @@ class CartService
             if (Session::get('voucher')!= null) {
                 $voucher = Session::get('voucher');
                 if ($voucher[0]['voucher_payment'] != $request->HinhThuc) {
+                    Session::forget('voucher');
                     Session::flash('error', 'Đặt Hàng Lỗi, Vui lòng thử lại sau');
                     return false;
                 }
@@ -190,9 +190,21 @@ class CartService
                     'created_at' => $time
                 ];
                 //trừ hàng
-                DB::table('products')
-                ->where('id',$product->id)
-                ->update(['quantity' => $product->quantity - $carts[$product->id]]);
+                if( $product->quantity - $carts[$product->id] == 0){
+                    DB::table('products')
+                    ->where('id',$product->id)
+                    ->update([
+                        'quantity' => $product->quantity - $carts[$product->id],
+                        'active' => 0
+                    ]);
+                }
+                else {
+                    DB::table('products')
+                    ->where('id',$product->id)
+                    ->update([
+                        'quantity' => $product->quantity - $carts[$product->id]
+                    ]);
+                }
             }
             else{
                 return false;
@@ -341,18 +353,14 @@ class CartService
     }
     protected function isValid($request)
     {
-        if ($request->input('HinhThuc')=== null) {
+        if($request->voucher == null){
+            Session::flash('error', 'Vui lòng điền mã voucher');
+            return false;
+        }
+        if ($request->HinhThuc == null) {
             Session::flash('error', 'Vui lòng chọn hình thức thanh toán');
             return false;
         }
-        else {
-            return true;
-        }
-    }
-    public function voucher($request)
-    {
-        $isValid = $this->isValid($request);
-        if ($isValid === false) return false;
         if($request->HinhThuc === 'Transfer Payments Momo' || $request->HinhThuc === 'Transfer Payments Vnpay'){
             $HinhThuc = 2;
         }else{
@@ -360,60 +368,97 @@ class CartService
         }
         $voucher = Voucher::where('code',$request->voucher)
         ->where('Payment',$HinhThuc)->first();
-        
+
         if($voucher){
-            $count_voucher = $voucher->count();
-            if($count_voucher>0){
-                Carbon::setlocale('vi');
-                $end= Carbon::create($voucher->time_end);
-                $now = Carbon::now();
-                if ($now->month > $end->month) {
+            // check user và voucher sài 1 lần cho tài khoản mới tạo
+            if ($request->checkauth == 0) {
+                if ($voucher->number_active == 1) {
                     Session::forget('voucher');
-                    Session::flash('error', 'Mã áp dụng đã hết hạn');
+                    Session::flash('error', 'Vui lòng đăng nhập hoặc tạo tài khoản để sử dụng voucher này');
                     return false;
-                }else if($now->month == $end->month && $now->day > $end->day){
+                }   
+                elseif($request->total < $voucher->limitprice ){
                     Session::forget('voucher');
-                    Session::flash('error', 'Mã áp dụng đã hết hạn');
+                    Session::flash('error', 'Giá trị hoá đơn không đạt yêu cầu');
                     return false;
                 }
-                else{
-                    if ($now->day <= $end->day) {
-                        $voucher_session = Session::get('voucher');
-                        if($voucher_session== true){
-                            $is_ava = 0;
-                            if($is_ava ==0){
-                                $vou[]=array(
-                                    'voucher_code'=>$voucher->code,
-                                    'voucher_condition'=>$voucher->condition,
-                                    'voucher_number'=>$voucher->number,
-                                    'voucher_quantity'=>1,
-                                    'voucher_payment'=>$request->HinhThuc,
-                                    'voucher_id'=>$voucher->id,
-                                );
-                                Session::put('voucher',$vou);
-                            }
-                        }else{
-                            $vou[]=array(
-                                'voucher_code'=>$voucher->code,
-                                'voucher_condition'=>$voucher->condition,
-                                'voucher_number'=>$voucher->number,
-                                'voucher_quantity'=>1,
-                                'voucher_payment'=>$request->HinhThuc,
-                                'voucher_id'=>$voucher->id,
-
-                            );
-                            Session::put('voucher',$vou);
-                        }
-                        Session::save();
-                        Session::flash('success', 'Mã áp dụng thành công');
-                        return true;
+            }
+            else{
+                if ($voucher->number_active == 1) {
+                    $customer = Customer::where('user_id',$request->checkauth)
+                        ->where('voucher',$voucher->id)->first();
+                    if($customer){
+                        Session::forget('voucher');
+                        Session::flash('error', 'Code này đã được sử dụng');
+                        return false;
                     }
                 }
             }
-        }else{
+            // check time sử dụng voucher
+            Carbon::setlocale('vi');
+            $end= Carbon::create($voucher->time_end);
+            $now = Carbon::now();
+            if ($now->month > $end->month) {
+                Session::forget('voucher');
+                Session::flash('error', 'Mã áp dụng đã hết hạn');
+                return false;
+            }else if($now->month == $end->month && $now->day > $end->day){
+                Session::forget('voucher');
+                Session::flash('error', 'Mã áp dụng đã hết hạn');
+                return false;
+            }
+        }
+        else{
             Session::forget('voucher');
-            Session::flash('error', 'Mã áp dụng không tồn tại');
+            Session::flash('error', 'Không tồn tại voucher này hoặc sai hình thức thanh toán');
             return false;
+        }
+        return true;
+    }
+    public function voucher($request)
+    {
+        $isValid = $this->isValid($request);
+        if ($isValid === false) return false;
+
+        if($request->HinhThuc === 'Transfer Payments Momo' || $request->HinhThuc === 'Transfer Payments Vnpay'){
+            $HinhThuc = 2;
+        }else{
+            $HinhThuc = 1;
+        }
+        $voucher = Voucher::where('code',$request->voucher)
+        ->where('Payment',$HinhThuc)->first();
+        if($voucher){
+            $count_voucher = $voucher->count();
+            if($count_voucher>0){
+                $voucher_session = Session::get('voucher');
+                if($voucher_session== true){
+                    $is_ava = 0;
+                    if($is_ava ==0){
+                        $vou[]=array(
+                            'voucher_code'=>$voucher->code,
+                            'voucher_condition'=>$voucher->condition,
+                            'voucher_number'=>$voucher->number,
+                            'voucher_quantity'=>1,
+                            'voucher_payment'=>$request->HinhThuc,
+                            'voucher_id'=>$voucher->id,
+                        );
+                        Session::put('voucher',$vou);
+                    }
+                }else{
+                    $vou[]=array(
+                        'voucher_code'=>$voucher->code,
+                        'voucher_condition'=>$voucher->condition,
+                        'voucher_number'=>$voucher->number,
+                        'voucher_quantity'=>1,
+                        'voucher_payment'=>$request->HinhThuc,
+                        'voucher_id'=>$voucher->id,
+                    );
+                    Session::put('voucher',$vou);
+                }
+                Session::save();
+                Session::flash('success', 'Mã áp dụng thành công');
+                return true;
+            }
         }
     }
 

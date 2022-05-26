@@ -43,6 +43,16 @@
                     <a href="{{request()->url()}}?quantity=asc"> <i class="fas fa-sort"></i></a>
                 @endif
             </th>
+            <th>Hình thức
+
+                @if(request()->getQueryString() == 'Payment=desc')
+                    <a href="{{request()->url()}}?Payment=asc"> <i class="fas fa-sort-up"></i></a>
+                @elseif(request()->getQueryString() == 'Payment=asc')
+                    <a href="{{request()->url()}}?Payment=desc"> <i class="fas fa-sort-down"></i></a>
+                @else
+                    <a href="{{request()->url()}}?Payment=asc"> <i class="fas fa-sort"></i></a>
+                @endif
+            </th>
             <th>Giảm theo 
                 @if(request()->getQueryString() == 'condition=desc')
                     <a href="{{request()->url()}}?condition=asc"> <i class="fas fa-sort-up"></i></a>
@@ -83,7 +93,7 @@
                 <td>{{ $Voucher->name }}</td>
                 <td>{{ $Voucher->code }}</td>
                 <td>{{ $Voucher->quantity }}</td>
-                <td>{{ $Voucher->Payment }}</td>
+                <td>{!! \App\Helpers\Helper::Payment($Voucher->Payment) !!}</td>
                 <td>{!! \App\Helpers\Helper::SaleVoucher($Voucher->condition) !!}</td>
                 <td>{{ date('d-m-Y', strtotime($Voucher->time_start)) }}</td>
                 <td>{{date('d-m-Y', strtotime($Voucher->time_end)) }}</td>
@@ -99,8 +109,7 @@
     </table>
 </div>
 
-{{-- <div class="card-footer clearfix">
-    {{$Voucher->appends(request()->query())->onEachSide(1)->links()}}
-
-</div> --}}
+<div class="card-footer clearfix">
+    {{$Vouchers->appends(request()->query())->onEachSide(1)->links()}}
+</div>
 @endsection
