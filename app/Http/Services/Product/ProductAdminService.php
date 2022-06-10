@@ -164,11 +164,11 @@ class ProductAdminService
     // delete product and info
     public function delete($request)
     {
-        $product = Product::where('id', $request->input('id'))->first();
         $info = Info::where('product_id', $request->input('id'))->first();
+        $product = Product::where('id', $request->input('id'))->first();
         if ($product) {
-            $product->delete();
             $info->delete();
+            $product->delete();
             return true;
         }
 

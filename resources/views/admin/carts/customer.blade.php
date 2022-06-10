@@ -39,6 +39,8 @@
                 @else
                     <a href="{{request()->url()}}?id=asc"> <i class="fas fa-sort"></i></a>
                 @endif
+                <i class="fa fa-eye-slash hide-column"></i> 
+
             </th>
             <th>Tên Khách Hàng
                 @if(request()->getQueryString() == 'name=desc')
@@ -48,6 +50,8 @@
                 @else
                     <a href="{{request()->url()}}?name=asc"> <i class="fas fa-sort"></i></a>
                 @endif
+                <i class="fa fa-eye-slash hide-column"></i> 
+
             </th>
             <th>Số Điện Thoại
                 @if(request()->getQueryString() == 'phone=desc')
@@ -57,6 +61,8 @@
                 @else
                     <a href="{{request()->url()}}?phone=asc"> <i class="fas fa-sort"></i></a>
                 @endif
+                <i class="fa fa-eye-slash hide-column"></i> 
+
 
             </th>
             <th>Trạng thái
@@ -67,6 +73,8 @@
                 @else
                     <a href="{{request()->url()}}?active=asc"> <i class="fas fa-sort"></i></a>
                 @endif
+                <i class="fa fa-eye-slash hide-column"></i> 
+
 
             </th>
             <th>Ngày Đặt hàng
@@ -77,9 +85,14 @@
                 @else
                     <a href="{{request()->url()}}?created_at=asc"> <i class="fas fa-sort"></i></a>
                 @endif
+                <i class="fa fa-eye-slash hide-column"></i> 
+
 
             </th>
-            <th>Tổng tiền</th>
+            <th>Tổng tiền
+                <i class="fa fa-eye-slash hide-column"></i> 
+
+            </th>
             <th style="width: 100px">&nbsp;</th>
         </tr>
         </thead>
@@ -120,6 +133,11 @@
             </tr>
         @endforeach
         </tbody>
+        <tfoot class="show-column-footer">
+            <tr>
+              <th colspan="4" style="cursor: pointer">Hiện tất cả</th>
+            </tr>
+          </tfoot>
     </table>
 </div>
 

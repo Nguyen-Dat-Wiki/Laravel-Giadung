@@ -1,7 +1,12 @@
 <meta charset="UTF-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="icon" href="/asset/img/Logo.png">
+<meta name="keywords" content="Điện dụng hago">
+<meta name="description" content="Hago - Điện gia dụng tốt nhất - Chính hãng">
+<meta property="og:title" content="Hago - Điện gia dụng chính hãng">
 <title>{{ $title }}</title>
+
 
 <link rel="stylesheet" href="https://site-assets.fontawesome.com/releases/v6.1.1/css/all.css">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">

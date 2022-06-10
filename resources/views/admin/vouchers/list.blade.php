@@ -13,6 +13,7 @@
                 @else
                     <a href="{{request()->url()}}?id=asc"> <i class="fas fa-sort"></i></a>
                 @endif
+                <i class="fa fa-eye-slash hide-column"></i> 
             </th>
             <th>Tên voucher
                 @if(request()->getQueryString() == 'name=desc')
@@ -22,6 +23,7 @@
                 @else
                     <a href="{{request()->url()}}?name=asc"> <i class="fas fa-sort"></i></a>
                 @endif
+                <i class="fa fa-eye-slash hide-column"></i> 
 
             </th>
             <th>Mã voucher
@@ -32,6 +34,7 @@
                 @else
                     <a href="{{request()->url()}}?code=asc"> <i class="fas fa-sort"></i></a>
                 @endif
+                <i class="fa fa-eye-slash hide-column"></i> 
             </th>
             <th>Số lượng
 
@@ -42,6 +45,7 @@
                 @else
                     <a href="{{request()->url()}}?quantity=asc"> <i class="fas fa-sort"></i></a>
                 @endif
+                <i class="fa fa-eye-slash hide-column"></i> 
             </th>
             <th>Hình thức
 
@@ -52,6 +56,7 @@
                 @else
                     <a href="{{request()->url()}}?Payment=asc"> <i class="fas fa-sort"></i></a>
                 @endif
+                <i class="fa fa-eye-slash hide-column"></i> 
             </th>
             <th>Giảm theo 
                 @if(request()->getQueryString() == 'condition=desc')
@@ -61,6 +66,7 @@
                 @else
                     <a href="{{request()->url()}}?condition=asc"> <i class="fas fa-sort"></i></a>
                 @endif
+                <i class="fa fa-eye-slash hide-column"></i> 
 
             </th>
             <th>Ngày bắt đầu
@@ -71,6 +77,7 @@
                 @else
                     <a href="{{request()->url()}}?time_start=asc"> <i class="fas fa-sort"></i></a>
                 @endif
+                <i class="fa fa-eye-slash hide-column"></i> 
 
             </th>
             <th>Ngày kết thúc
@@ -81,6 +88,7 @@
                 @else
                     <a href="{{request()->url()}}?time_end=asc"> <i class="fas fa-sort"></i></a>
                 @endif
+                <i class="fa fa-eye-slash hide-column"></i> 
 
             </th>
             <th style="width: 100px">&nbsp;</th>
@@ -106,6 +114,11 @@
             </tr>
         @endforeach
         </tbody>
+        <tfoot class="show-column-footer">
+            <tr>
+              <th colspan="4" style="cursor: pointer">Hiện tất cả</th>
+            </tr>
+        </tfoot>
     </table>
 </div>
 

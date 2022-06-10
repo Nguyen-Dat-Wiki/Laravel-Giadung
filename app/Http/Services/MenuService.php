@@ -44,9 +44,6 @@ class MenuService
             Menu::create([
                 'name' => (string)$request->input('name'),
                 'parent_id' => (int)$request->input('parent_id'),
-                'description' => (string)$request->input('description'),
-                'content' => (string)$request->input('content'),
-                'user_id'=> (int)$request->input('user_id'),
                 'active' => (string)$request->input('active')
             ]);
 
@@ -77,10 +74,7 @@ class MenuService
         }
 
         $menu->name = (string)$request->input('name');
-        $menu->description = (string)$request->input('description');
-        $menu->content = (string)$request->input('content');
         $menu->active = (string)$request->input('active');
-        $menu->user_id = (string)$request->input('user_id');
         $menu->save();
 
         Session::flash('success', 'Cập nhật thành công Danh mục');

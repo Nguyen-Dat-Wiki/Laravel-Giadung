@@ -23,6 +23,8 @@
                         @else
                             <a href="{{request()->url()}}?id=asc"> <i class="fas fa-sort"></i></a>
                         @endif
+                        <i class="fa fa-eye-slash hide-column"></i> 
+
                     </th>
                     <th>Người đăng
                         @if(request()->getQueryString() == 'name=desc')
@@ -32,6 +34,8 @@
                         @else
                             <a href="{{request()->url()}}?name=asc"> <i class="fas fa-sort"></i></a>
                         @endif
+                        <i class="fa fa-eye-slash hide-column"></i> 
+
                     </th>
                     <th>Tiêu đề
                         @if(request()->getQueryString() == 'title=desc')
@@ -41,8 +45,13 @@
                         @else
                             <a href="{{request()->url()}}?title=asc"> <i class="fas fa-sort"></i></a>
                         @endif
+                        <i class="fa fa-eye-slash hide-column"></i> 
+
                     </th>
-                    <th>Active</th>
+                    <th>Active
+                        <i class="fa fa-eye-slash hide-column"></i> 
+
+                    </th>
                     <th>Create
                         @if(request()->getQueryString() == 'created_at=desc')
                             <a href="{{request()->url()}}?created_at=asc"> <i class="fas fa-sort-up"></i></a>
@@ -51,6 +60,8 @@
                         @else
                             <a href="{{request()->url()}}?created_at=asc"> <i class="fas fa-sort"></i></a>
                         @endif
+                        <i class="fa fa-eye-slash hide-column"></i> 
+
                     </th>
                     <th style="width: 100px">&nbsp;</th>
                 </tr>
@@ -75,6 +86,11 @@
                 </tr>
                 @endforeach
             </tbody>
+            <tfoot class="show-column-footer">
+                <tr>
+                  <th colspan="4" style="cursor: pointer">Hiện tất cả</th>
+                </tr>
+              </tfoot>
         </table>
     </div>
 

@@ -8,4 +8,7 @@
 <script src="/asset/js/Owl.js"></script>
 
 
+
+
+
 @yield('js')
