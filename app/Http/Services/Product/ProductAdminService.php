@@ -164,11 +164,11 @@ class ProductAdminService
     // delete product and info
     public function delete($request)
     {
-        $product = Product::where('id', $request->input('id'))->first();
         $info = Info::where('product_id', $request->input('id'))->first();
+        $product = Product::where('id', $request->input('id'))->first();
         if ($product) {
-            $product->delete();
             $info->delete();
+            $product->delete();
             return true;
         }
 
@@ -185,7 +185,7 @@ class ProductAdminService
 
     public function search_money_all($request)
     {
-        $query = Customer::whereIn('active',[3,4])
+        $query = Customer::where('active',4)
             ->with('carts')
             ->with('vouchers');
         if ($request->input('id')) {
@@ -211,7 +211,7 @@ class ProductAdminService
 
     public function searchMoney($request)
     {
-        $query = Customer::whereIn('active',[3,4])
+        $query = Customer::where('active',4)
         ->whereBetween('created_at',[$request->input('start'),$request->input('end')])
         ->with('carts')
         ->with('vouchers');

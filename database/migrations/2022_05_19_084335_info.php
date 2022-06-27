@@ -16,7 +16,7 @@ class Info extends Migration
         Schema::create('infos', function (Blueprint $table) {
             $table->id();
             $table->string('wattage'); //công suất
-            $table->string('control'); //công suất
+            $table->string('control'); //điều khiển
             $table->string('size'); //kích thước
             $table->string('utilities'); //tiện ích
             $table->string('trademark'); //nhãn hiệu

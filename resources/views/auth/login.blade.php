@@ -9,7 +9,6 @@
         @csrf
         <h1 class="h3 mb-3 font-weight-normal" style="text-align: center">Đăng nhập</h1>
         <div class="social-login">
-            {{-- <button class="btn facebook-btn social-btn" type="button"><span class="h6"><i class="fab fa-facebook-f"></i> Sign in with Facebook</span> </button> --}}
             <a href="{{ url('/auth/redirect/facebook') }}" style="padding: 6px 12px" class="d-inline-block btn facebook-btn social-btn"><span class="h6"><i class="fab fa-facebook-f"></i>Sign in with Facebook</span></a>
             <a href="{{ url('/auth/redirect/google') }}" style="padding: 6px 12px" class="d-inline-block btn google-btn social-btn"><span class="h6"><i class="fab fa-google-plus-g"></i> Sign in with Google+</span></a>
         </div>

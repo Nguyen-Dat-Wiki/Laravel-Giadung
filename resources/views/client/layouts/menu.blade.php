@@ -2,6 +2,9 @@
 @section('head')
 @endsection
 
+<!-- Messenger Plugin chat Code -->
+
+
     <div class="header">
         <div class="header-bottom container">
             <div class="wrap-content d-flex align-items-center justify-content-between flex-wrap">
@@ -54,12 +57,40 @@
             </div>
         </div>
     </div>
-    <div class="zalo">
-        <div class="zalo-chat-widget" data-oaid="579745863508352884" data-welcome-message="Rất vui khi được hỗ trợ bạn!" data-autopopup="2" data-width="" data-height=""></div>
+    {{-- <div class="zalo-chat-widget" data-oaid="579745863508352884" data-welcome-message="Rất vui khi được hỗ trợ bạn!" data-autopopup="0" data-width="70" data-height="70"></div>
+
+    <script src="https://sp.zalo.me/plugins/sdk.js"></script> --}}
+
+    <div id="fb-root"></div>
+
+<!-- Your Plugin chat code -->
+    <div id="fb-customer-chat" class="fb-customerchat" style="transition: 0s">
     </div>
 
-    <script src="https://sp.zalo.me/plugins/sdk.js"></script>
+    <script>
+    var chatbox = document.getElementById('fb-customer-chat');
+    chatbox.setAttribute("page_id", "101091305965628");
+    chatbox.setAttribute("attribution", "biz_inbox");
+    </script>
 
+    <!-- Your SDK code -->
+    <script>
+    window.fbAsyncInit = function() {
+        FB.init({
+        xfbml            : true,
+        version          : 'v14.0'
+        });
+    };
+
+    (function(d, s, id) {
+        var js, fjs = d.getElementsByTagName(s)[0];
+        if (d.getElementById(id)) return;
+        js = d.createElement(s); js.id = id;
+        js.src = 'https://connect.facebook.net/vi_VN/sdk/xfbml.customerchat.js';
+        fjs.parentNode.insertBefore(js, fjs);
+    }(document, 'script', 'facebook-jssdk'));
+    </script>
+    
     <!-- backtop -->
     <div class="icon_back_top">
         <a href="" id="scroll" title="Scroll to Top" style="display: none;">Top<span></span></a>

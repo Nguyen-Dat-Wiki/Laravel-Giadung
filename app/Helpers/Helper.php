@@ -184,4 +184,43 @@ class Helper{
         return $Payment == 2 ? '<span class="btn btn-warning btn-xs">Online</span>'
             : '<span class="btn btn-primary btn-xs">ShipCod</span>';
     }
+    public function showCartSetting($customers,$active)
+    {
+        $html = '';
+        foreach($customers as $key => $customer){
+            if($customer->active == $active){
+                $total=0;
+                foreach ($customer->carts as $key => $value) {
+                    $price = $value->price * $value->pty;
+                    $total += $price;
+                }
+                if ($customer->voucher != NULL) {
+                    if ($customer->vouchers[0]['condition']==1) {
+                        $total -= ($total * $customer->vouchers[0]['number'])/100;
+                    }
+                    elseif ($customer->vouchers[0]['condition']==2) {
+                        $total -= $customer->vouchers[0]['number'];
+                    }
+                }
+                $html .='
+                    <tr>
+                    <td>' .$customer->id. '</td>
+                    <td>' .$customer->name.'</td>
+                    <td>' .$customer->phone.'</td>
+                    <td>'. number_format($total, 0, '', '.'). '</td>
+                    <td>
+                        <a class="btn btn-primary btn-sm" href="/setting/cart/'.$customer->id.'">
+                            <i class="fas fa-eye"></i>
+                        </a>
+                        <a class="btn btn-danger btn-sm" href="/setting/delete/'.$customer->id.'">
+                            <i class="fas fa-trash"></i>
+                        </a>
+                    </td>
+                </tr>
+                ';
+                return $html;
+            }
+        }
+                /*  */
+    }
 }

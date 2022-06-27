@@ -8,7 +8,7 @@ use App\Models\Customer;
 use App\Models\User;
 use App\Http\Services\UserService;
 use Illuminate\Support\Facades\Session;
-
+use DB;
 
 class SettingController extends Controller
 {
@@ -29,14 +29,22 @@ class SettingController extends Controller
         $this->user->update($request);
         return redirect()->back();
     }
-    public function show(Customer $customer, $id)
+    public function show($id)
     {
         $customer = $this->user->getCustomer($id);
-        $arr =$this->user->getProductForCart($customer);
         return view('client.settings.Carted',[
             'title'=>'Danh sách đơn hàng',
-            'actives'=>$customer,
-            'carts'=>$arr,
+            'customers'=>$customer,
+        ]);
+    }
+    public function showcart($id)
+    {
+        $customer= Customer::where('id',$id)->first();
+        $carts = $this->user->getProductForCart($customer);
+        return view('client.settings.cartinfo', [
+            'title' => 'Chi Tiết Đơn Hàng: ' . $customer->name,
+            'customer' => $customer,
+            'carts' => $carts,
         ]);
     }
 

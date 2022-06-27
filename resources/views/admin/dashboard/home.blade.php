@@ -183,18 +183,21 @@
 </div>
     
     <hr>
+    <div class="card-header">
+        <h3 class="card-title">Thống kê doanh thu theo ngày tháng năm</h3>
+    </div>
     <div class="">
         <form action="" method="post">
             <div class="row mx-3 my-3 ">
                 <div class="mr-4">
-                    <input type="datetime-local" value="{!! isset($start)? $start : date('Y-m-d').'T00:00' !!}" name="start" id="">
+                    <span><strong>Từ ngày:</strong> </span><input class="btn border"  type="datetime-local" value="{!! isset($start)? $start : date('Y-m-d').'T00:00' !!}" name="start" id="">
                 </div>
                 <div class="">
-                    <input type="datetime-local" value="{!! isset($end)? $end : date('Y-m-d').'T12:00' !!}" name="end" id="">
+                    <span><strong>Đến ngày:</strong> </span><input class="btn border" type="datetime-local" value="{!! isset($end)? $end : date('Y-m-d').'T12:00' !!}" name="end" id="">
                     
                 </div>
                 <div class="ml-4">
-                    <button type="submit">Lọc</button>
+                    <button class="btn btn-primary" type="submit">Lọc</button>
                     @csrf
                 </div>
                 <div class="ml-auto">
@@ -230,30 +233,34 @@
             </div>
         </form>
     </div>
-    <div class="card-header">
-        <h3 class="card-title">Danh sách đơn hàng đã đang hoàn thành</h3>
-    </div>
+    
     <div class="content table-responsive table-responsive-lg">
         <table class="table table-bordered " >
             <thead>
                 <tr class="table_head">
-                    <th class="column-1">STT 
-                        @if(request()->getQueryString() == 'id=desc')
-                            <a href="{{request()->url()}}?id=asc"> <i class="fas fa-sort-up"></i></a>
-                        @elseif(request()->getQueryString() == 'id=asc')
-                            <a href="{{request()->url()}}?id=desc"> <i class="fas fa-sort-down"></i></a>
-                        @else
-                            <a href="{{request()->url()}}?id=asc"> <i class="fas fa-sort"></i></a>
-                        @endif 
+                    <th class="column-1">
+                            STT
+                            @if(request()->getQueryString() == 'id=desc')
+                                <a href="{{request()->url()}}?id=asc"> <i class="fas fa-sort-up"></i></a>
+                            @elseif(request()->getQueryString() == 'id=asc')
+                                <a href="{{request()->url()}}?id=desc"> <i class="fas fa-sort-down"></i></a>
+                            @else
+                                <a href="{{request()->url()}}?id=asc"> <i class="fas fa-sort"></i></a>
+                            @endif
+                        <i class="fa fa-eye-slash hide-column"></i>  
+
                     </th>
-                    <th class="column-2">Tên 
-                        @if(request()->getQueryString() == 'name=desc')
-                            <a href="{{request()->url()}}?name=asc"> <i class="fas fa-sort-up"></i></a>
-                        @elseif(request()->getQueryString() == 'name=asc')
-                            <a href="{{request()->url()}}?name=desc"> <i class="fas fa-sort-down"></i></a>
-                        @else
-                            <a href="{{request()->url()}}?name=asc"> <i class="fas fa-sort"></i></a>
-                        @endif 
+                    <th class="column-2" >
+                            Tên 
+                            @if(request()->getQueryString() == 'name=desc')
+                                <a href="{{request()->url()}}?name=asc"> <i class="fas fa-sort-up"></i></a>
+                            @elseif(request()->getQueryString() == 'name=asc')
+                                <a href="{{request()->url()}}?name=desc"> <i class="fas fa-sort-down"></i></a>
+                            @else
+                                <a href="{{request()->url()}}?name=asc"> <i class="fas fa-sort"></i></a>
+                            @endif
+                        <i class="fa fa-eye-slash hide-column"></i> 
+
                     <th class="column-3">Địa chỉ 
                         @if(request()->getQueryString() == 'address=desc')
                             <a href="{{request()->url()}}?address=asc"> <i class="fas fa-sort-up"></i></a>
@@ -262,6 +269,7 @@
                         @else
                             <a href="{{request()->url()}}?address=asc"> <i class="fas fa-sort"></i></a>
                         @endif 
+                        <i class="fa fa-eye-slash hide-column"></i> 
                     <th class="column-4">Trạng thái 
                         @if(request()->getQueryString() == 'active=desc')
                             <a href="{{request()->url()}}?active=asc"> <i class="fas fa-sort-up"></i></a>
@@ -270,6 +278,7 @@
                         @else
                             <a href="{{request()->url()}}?active=asc"> <i class="fas fa-sort"></i></a>
                         @endif 
+                        <i class="fa fa-eye-slash hide-column"></i> 
                     <th class="column-5">Ngày 
                         @if(request()->getQueryString() == 'created_at=desc')
                             <a href="{{request()->url()}}?created_at=asc"> <i class="fas fa-sort-up"></i></a>
@@ -278,39 +287,50 @@
                         @else
                             <a href="{{request()->url()}}?created_at=asc"> <i class="fas fa-sort"></i></a>
                         @endif 
-                    <th class="column-6">Tổng tiền</th>
+                        <i class="fa fa-eye-slash hide-column"></i> 
+                    <th class="column-6">Tổng tiền
+                        <i class="fa fa-eye-slash hide-column"></i> 
+                    </th>
                 </tr>
             </thead>
-            @if (isset($carts))
-                @foreach($carts as $key => $customer)
-                    @php
-                        $total=0;
-                        foreach ($customer->carts as $key => $value) {
-                            $price = $value->price * $value->pty;
-                            $total += $price;
-                        }
-                        if ($customer->voucher != NULL) {
-                            if ($customer->vouchers[0]['condition']==1) {
-                                $total_sale = ($total * $customer->vouchers[0]['number'])/100;
-                                $total -= $total_sale;
+            <tbody>
+                @if (isset($carts))
+                    @foreach($carts as $key => $customer)
+                        @php
+                            $total=0;
+                            foreach ($customer->carts as $key => $value) {
+                                $price = $value->price * $value->pty;
+                                $total += $price;
                             }
-                            elseif ($customer->vouchers[0]['condition']==2) {
-                                $total -= $customer->vouchers[0]['number'];
+                            if ($customer->voucher != NULL) {
+                                if ($customer->vouchers[0]['condition']==1) {
+                                    $total_sale = ($total * $customer->vouchers[0]['number'])/100;
+                                    $total -= $total_sale;
+                                }
+                                elseif ($customer->vouchers[0]['condition']==2) {
+                                    $total -= $customer->vouchers[0]['number'];
+                                }
                             }
-                        }
-                    @endphp
-                    <tr>
-                        <th scope="row" ><a href="/admin/customers/view/{{ $customer->id }}" style="color: black">{{$customer->id}}</a></th>
-                        <td style="white-space:nowrap">{{ $customer->name }}</td>
-                        <td style="white-space:nowrap">{{ $customer->address }}</td>
-                        <td style="white-space:nowrap">{!! \App\Helpers\Helper::activeCustomer($customer->active) !!}</td>
-                        <td style="white-space:nowrap">{{ date_format($customer->created_at,"d-m-Y") }}</td>
-                        <td style="white-space:nowrap">{{ number_format($total, 0, '', '.') }}</td>
-                    </tr>
-                @endforeach
-            {{$carts->appends(request()->query())->onEachSide(1)->links()}}
+                        @endphp
+                        <tr>
+                            <th scope="row"><a href="/admin/customers/view/{{ $customer->id }}" style="color: black">{{$customer->id}}</a></th>
+                            <td style="white-space:nowrap">{{ $customer->name }}</td>
+                            <td style="white-space:nowrap">{{ $customer->address }}</td>
+                            <td style="white-space:nowrap">{!! \App\Helpers\Helper::activeCustomer($customer->active) !!}</td>
+                            <td style="white-space:nowrap">{{ date_format($customer->created_at,"d-m-Y") }}</td>
+                            <td style="white-space:nowrap">{{ number_format($total, 0, '', '.') }}</td>
+                        </tr>
+                    @endforeach
+                {{$carts->appends(request()->query())->onEachSide(1)->links()}}
+    
+                @endif
 
-            @endif
+            </tbody>
+            <tfoot class="show-column-footer">
+                <tr>
+                  <th colspan="4" style="cursor: pointer">Hiện tất cả</th>
+                </tr>
+              </tfoot>
         </table>
     </div>
 

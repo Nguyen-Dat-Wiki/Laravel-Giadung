@@ -27,17 +27,6 @@
             </div>
 
             <div class="form-group">
-                <label>Mô Tả </label>
-                <textarea name="description" class="form-control">{{ $menu->description }}</textarea>
-            </div>
-
-            <div class="form-group">
-                <label>Mô Tả Chi Tiết</label>
-                <textarea name="content" id="content" class="form-control">{{ $menu->content }}</textarea>
-            </div>
-
-
-            <div class="form-group">
                 <label>Kích Hoạt</label>
                 <div class="custom-control custom-radio">
                     <input class="custom-control-input" value="1" type="radio" id="active"

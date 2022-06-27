@@ -26,6 +26,7 @@
                         @else
                             <a href="{{request()->url()}}?id=asc"> <i class="fas fa-sort"></i></a>
                         @endif
+                        <i class="fa fa-eye-slash hide-column"></i> 
                     </th>
                     <th>Tên Sản Phẩm
                         @if(request()->getQueryString() == 'name=desc')
@@ -35,6 +36,10 @@
                         @else
                             <a href="{{request()->url()}}?name=asc"> <i class="fas fa-sort"></i></a>
                         @endif
+                        <i class="fa fa-eye-slash hide-column"></i> 
+                    </th>
+                    <th>Hình ảnh
+                        <i class="fa fa-eye-slash hide-column"></i> 
                     </th>
                     <th>Số lượng
                         @if(request()->getQueryString() == 'quantity=desc')
@@ -44,8 +49,8 @@
                         @else
                             <a href="{{request()->url()}}?quantity=asc"> <i class="fas fa-sort"></i></a>
                         @endif
+                        <i class="fa fa-eye-slash hide-column"></i> 
                     </th>
-                    <th>Danh Mục</th>
                     <th>Giá Gốc
                         @if(request()->getQueryString() == 'price=desc')
                             <a href="{{request()->url()}}?price=asc"> <i class="fas fa-sort-up"></i></a>
@@ -54,7 +59,8 @@
                         @else
                             <a href="{{request()->url()}}?price=asc"> <i class="fas fa-sort"></i></a>
                         @endif
-        
+                        <i class="fa fa-eye-slash hide-column"></i> 
+                    </th>
                     </th>
                     <th>Giá sale
                         @if(request()->getQueryString() == 'price_sale=desc')
@@ -64,8 +70,11 @@
                         @else
                             <a href="{{request()->url()}}?price_sale=asc"> <i class="fas fa-sort"></i></a>
                         @endif
+                        <i class="fa fa-eye-slash hide-column"></i> 
                     </th>
-                    <th>Active</th>
+                    <th>Active
+                        <i class="fa fa-eye-slash hide-column"></i> 
+                    </th>
                     <th>Create
                         @if(request()->getQueryString() == 'created_at=desc')
                             <a href="{{request()->url()}}?created_at=asc"> <i class="fas fa-sort-up"></i></a>
@@ -74,6 +83,7 @@
                         @else
                             <a href="{{request()->url()}}?created_at=asc"> <i class="fas fa-sort"></i></a>
                         @endif
+                        <i class="fa fa-eye-slash hide-column"></i> 
                     </th>
                     <th style="width: 100px">&nbsp;</th>
                 </tr>
@@ -83,8 +93,8 @@
                 <tr>
                     <td>{{ $product->id }}</td>
                     <td>{{ $product->name }}</td>
+                    <td><img width="70px" src="{{$product->thumb}}" alt=""></td>
                     <td>{{ $product->quantity }}</td>
-                    <td>{{ $product->menu->name }}</td>
                     <td>{{ number_format($product->price,0,'', '.') }}</td>
                     <td>{{ number_format($product->price_sale,0,'', '.') }}</td>
                     <td>{!! \App\Helpers\Helper::active($product->active) !!}</td>
@@ -101,6 +111,11 @@
                 </tr>
                 @endforeach
             </tbody>
+            <tfoot class="show-column-footer">
+                <tr>
+                  <th colspan="4" style="cursor: pointer">Hiện tất cả</th>
+                </tr>
+              </tfoot>
         </table>
     </div>
 

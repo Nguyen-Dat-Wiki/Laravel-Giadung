@@ -365,6 +365,9 @@ header .navbar {
     left: 100%;
 }
 
+
+/* menu */
+
 .menu {
     background-color: #fff;
     -moz-box-shadow: 0 5px 7px -4px #909695;
@@ -382,6 +385,7 @@ header .navbar {
     position: relative;
     z-index: 100;
     background: #F5AC00;
+    /* đổi màu menu */
 }
 
 .cot1-menu h3 {

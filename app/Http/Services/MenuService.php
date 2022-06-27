@@ -44,9 +44,6 @@ class MenuService
             Menu::create([
                 'name' => (string)$request->input('name'),
                 'parent_id' => (int)$request->input('parent_id'),
-                'description' => (string)$request->input('description'),
-                'content' => (string)$request->input('content'),
-                'user_id'=> (int)$request->input('user_id'),
                 'active' => (string)$request->input('active')
             ]);
 
@@ -77,10 +74,7 @@ class MenuService
         }
 
         $menu->name = (string)$request->input('name');
-        $menu->description = (string)$request->input('description');
-        $menu->content = (string)$request->input('content');
         $menu->active = (string)$request->input('active');
-        $menu->user_id = (string)$request->input('user_id');
         $menu->save();
 
         Session::flash('success', 'Cập nhật thành công Danh mục');
@@ -131,8 +125,11 @@ class MenuService
     // lấy tất cả sản phẩm được kích hoạt (được bán)
     public function getProductAll($request)
     {   
-
-        $query = DB::table('products');
+        if($request->input('tinhtrang') == '0'){
+            $query = DB::table('products')->where('active',0);
+        }else{
+            $query = DB::table('products')->where('active',1);
+        }
         
         if ($request->input('price')) {
             $query->orderBy('price_sale', $request->input('price'));
@@ -142,9 +139,6 @@ class MenuService
         }
         else if ($request->input('name')) {
             $query->orderBy('name', $request->input('name'));
-        }
-        else if($request->input('tinhtrang')){
-            $query->where('active',$request->input('tinhtrang'));
         }
         else if ($request->input('start') !=null) {
             $query->where('price_sale', '>', $request->input('start'))

@@ -145,8 +145,8 @@
         </div>
 
         <div class="body-section">
-            <p>&copy; Copyright 2021 - Hago. All rights reserved. 
-                <a href="https://www.hago.com/" class="float-right">www.hago.com</a>
+            <p>&copy; Copyright 2022 - Hago. All rights reserved. 
+                <a href="http://dientu.webhop.me" class="float-right">www.dientu.webhop.me</a>
             </p>
         </div>      
     </div>      
