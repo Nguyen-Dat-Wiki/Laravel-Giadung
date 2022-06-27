@@ -190,11 +190,11 @@ thead tr th {
     text-align: center;
 }
 
-tbody tr td:nth-child(2) {
+.card-td tr td:nth-child(2) {
     width: 40%;
 }
 
-tbody tr td:nth-child(3) input {
+.card-td tr td:nth-child(3) input {
     width: 80px;
 }
 

@@ -183,18 +183,21 @@
 </div>
     
     <hr>
+    <div class="card-header">
+        <h3 class="card-title">Thống kê doanh thu theo ngày tháng năm</h3>
+    </div>
     <div class="">
         <form action="" method="post">
             <div class="row mx-3 my-3 ">
                 <div class="mr-4">
-                    <input type="datetime-local" value="{!! isset($start)? $start : date('Y-m-d').'T00:00' !!}" name="start" id="">
+                    <span><strong>Từ ngày:</strong> </span><input class="btn border"  type="datetime-local" value="{!! isset($start)? $start : date('Y-m-d').'T00:00' !!}" name="start" id="">
                 </div>
                 <div class="">
-                    <input type="datetime-local" value="{!! isset($end)? $end : date('Y-m-d').'T12:00' !!}" name="end" id="">
+                    <span><strong>Đến ngày:</strong> </span><input class="btn border" type="datetime-local" value="{!! isset($end)? $end : date('Y-m-d').'T12:00' !!}" name="end" id="">
                     
                 </div>
                 <div class="ml-4">
-                    <button type="submit">Lọc</button>
+                    <button class="btn btn-primary" type="submit">Lọc</button>
                     @csrf
                 </div>
                 <div class="ml-auto">
@@ -231,9 +234,6 @@
         </form>
     </div>
     
-    <div class="card-header">
-        <h3 class="card-title">Danh sách đơn hàng đã đang hoàn thành</h3>
-    </div>
     <div class="content table-responsive table-responsive-lg">
         <table class="table table-bordered " >
             <thead>

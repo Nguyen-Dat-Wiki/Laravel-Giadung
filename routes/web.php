@@ -169,6 +169,7 @@ Route::get('setting/pass',[Client\SettingController::class,'pass'])->name('pass'
 Route::post('setting/pass',[Client\SettingController::class,'update']);
 Route::post('setting/passnew',[Client\SettingController::class,'create_pass']);
 Route::get('setting/{id}',[Client\SettingController::class,'show'])->name('show');
+Route::get('setting/cart/{id}',[Client\SettingController::class,'showcart']);
 Route::get('setting/delete/{cus_id}',[Client\SettingController::class,'delete']);
 
 //Check quyền admin/ user

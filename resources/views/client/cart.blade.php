@@ -33,7 +33,7 @@
                                         <th scope="col">Thành tiền</th>
                                     </tr>
                                 </thead>
-                                <tbody>
+                                <tbody class="card-td">
                                     @foreach ($products as $product )
                                         @php
                                             $price = $product->price_sale != 0 ? $product->price_sale : $product->price;
@@ -100,6 +100,7 @@
                             </ul>
                         </div>
                     </form>
+                    <button class="btn btn-primary m-4"><a style="color: white" href="/danh-muc">Tiếp tục mua hàng</a></button>
                 </div>
                
                 <div class="right mb-4 col-lg-5">

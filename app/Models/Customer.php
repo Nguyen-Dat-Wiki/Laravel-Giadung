@@ -32,7 +32,7 @@ class Customer extends Model
     public function exportExcel()
     {
         $arr= array();
-        $carts=Customer::whereIn('active',[3,4])
+        $carts=Customer::where('active',4)
             ->with('carts')
             ->get();
         foreach($carts as $key => $customer){

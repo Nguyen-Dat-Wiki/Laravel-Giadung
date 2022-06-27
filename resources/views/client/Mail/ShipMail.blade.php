@@ -61,11 +61,11 @@
                         </tr>
                     </tbody>
                 </table>
-                <p>Quý khách tải hóa đơn bằng file đính kèm hoặc truy cập vào Website <span class="m_-3452303451081584177mauxanh"><a href="Hago.vn" target="_blank" data-saferedirecturl="">https://<span class="il">hago</span>.vn/</a>
+                <p>Quý khách tải hóa đơn bằng file đính kèm hoặc truy cập vào Website <span class="m_-3452303451081584177mauxanh"><a href="http://dientu.webhop.me" target="_blank" data-saferedirecturl="">http://<span class="il">dientu.webhop</span>.me/</a>
                     </span>
                     để tra cứu hóa đơn theo Mã bảo mật: <strong class="m_-3452303451081584177mauxanh">{{$id}}</strong></p>
                 <p>Mã số thuế bên bán: <span class="m_-3452303451081584177mauxanh">@SELLER_TAXCODE@</span></p>
-                <p>Cảm ơn quý khách đã tin tưởng và lựa chọn mua hàng tại hệ thống cửa hàng <span class="m_-3452303451081584177mauxanh"><span class="il">Phong</span> Vũ</span>
+                <p>Cảm ơn quý khách đã tin tưởng và lựa chọn mua hàng tại hệ thống cửa hàng <span class="m_-3452303451081584177mauxanh"><span class="il">Ha</span>go</span>
                 </p>
                 <p class="m_-3452303451081584177mauxanh m_-3452303451081584177innghieng">Đây là Email tự động, Quý khách vui lòng không trả lời Email này.</p>
                 <p class="m_-3452303451081584177mauxanh m_-3452303451081584177innghieng">Trân trọng./</p>

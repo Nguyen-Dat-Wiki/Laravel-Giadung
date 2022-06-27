@@ -65,33 +65,22 @@ class UserService{
     }
 
 
+    // cart
+
     public function getCustomer($id)
     {
-        return Customer::where('user_id',$id)->get();
+        return Customer::with('carts')->where('user_id',$id)->get();
     }
     public function getProductForCart($customer)
     {   
-        $data = array();
-        foreach ($customer as $key => $value) {
-            $cart = Cart::with('product')->where('customer_id',$value->id)->get();
-            foreach ($cart as $key => $item) {
-                $data[]= [
-                    'id'=>$item->product->id,
-                    'name'=>$item->product->name,
-                    'thumb'=>$item->product->thumb,
-                    'quantity'=>$item->pty,
-                    'price'=>$item->price,
-                    'active'=>$value->active,
-                    'time'=>$value->created_at,
-                    'customer_id'=>$value->id,
-                    'customer_voucher'=>$value->voucher,
-                    'customer_vouchers'=>$value->vouchers,  
-                ];
-            }
-        }
-        return $data;
+        return $customer->carts()->with(['product' => function ($query) {
+            $query->select('id', 'name', 'thumb');
+        }])->get();
     }
 
+
+
+    // pass
     public function passnew($request)
     {
         $user = User::find(Auth::id()); 

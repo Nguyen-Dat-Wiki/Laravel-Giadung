@@ -20,11 +20,28 @@
     <div class="TitleBox headerBox">
         <form action="#" method="get" id="Kho">
             <div class="Kho">
-                <select class="tinhtrang" name="tinhtrang" id="TonKho">
-                    <option selected="selected ">--Tình trạng--</option>
-                    <option value="1">Còn hàng</option>
-                    <option value="0">Sắp ra mắt</option>
-                </select>
+                @if (isset($_GET['tinhtrang']))
+                    @if ($_GET['tinhtrang'] == 2)
+                        <select class="tinhtrang" name="tinhtrang" id="TonKho">
+                            <option value="2" selected>--Tình trạng--</option>
+                            <option value="1">Còn hàng</option>
+                            <option value="0">Sắp ra mắt</option>
+                        </select>
+                    @else
+                        <select class="tinhtrang" name="tinhtrang" id="TonKho">
+                            <option value="2">--Tình trạng--</option>
+                            <option value="1" {!! ($_GET['tinhtrang'] == 1) ? 'selected' : '' ;  !!} >Còn hàng</option>
+                            <option value="0" {!! ($_GET['tinhtrang'] == 0) ? 'selected' : '' ;  !!}>Sắp ra mắt</option>
+                        </select>
+                    @endif
+                @else
+                    <select class="tinhtrang" name="tinhtrang" id="TonKho">
+                        <option value="2" selected >--Tình trạng--</option>
+                        <option value="1" >Còn hàng</option>
+                        <option value="0">Sắp ra mắt</option>
+                    </select>
+                    
+                @endif
             </div>
         </form>
         <form action="#" method="get">
