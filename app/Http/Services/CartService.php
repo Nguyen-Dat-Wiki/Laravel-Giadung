@@ -91,6 +91,7 @@ class CartService
             DB::beginTransaction();
 
             $carts = Session::get('carts');
+            $voucher=null;
             if (Session::get('voucher')!= null) {
                 $voucher = Session::get('voucher');
                 if ($voucher[0]['voucher_payment'] != $request->HinhThuc) {
@@ -99,48 +100,17 @@ class CartService
                     return false;
                 }
                 $voucher = Session::get('voucher');
-                if (is_null($carts))
-                    return false;
-                $customer = Customer::create([
-                    'name' => $request->input('fullname'),
-                    'phone' => $request->input('phonenumber'),
-                    'address' => $request->input('address').' ' .$request->input('Phường').' ' .$request->input('Quan').' ' .$request->input('TP'),
-                    'email' => $request->input('email'),
-                    'content' => ($request->input('note')==null) ? null : $request->input('note'),
-                    'user_id'=> ($request->input('user_id')==null) ? null : $request->input('user_id'),
-                    'payment'=>$request->input('HinhThuc'),
-                    'voucher'=>$voucher[0]['voucher_id'],
-                ]);
-                if($this->infoProductCart($carts, $customer->id)){
-
-                    $time= $customer->created_at;
-                    
-                    DB::commit();
-                    Session::flash('success', 'Đặt Hàng Thành Công');
-    
-                    Session::forget('carts');
-                }
             }
-            if (is_null($carts))
-                return false;
-            $customer = Customer::create([
-                'name' => $request->input('fullname'),
-                'phone' => $request->input('phonenumber'),
-                'address' => $request->input('address').' ' .$request->input('Phường').' ' .$request->input('Quan').' ' .$request->input('TP'),
-                'email' => $request->input('email'),
-                'content' => ($request->input('note')==null) ? null : $request->input('note'),
-                'user_id'=> ($request->input('user_id')==null) ? null : $request->input('user_id'),
-                'payment'=>$request->input('HinhThuc'),
-                'voucher'=>null,
-            ]);
+            $customer = $this->create_cart($carts,$request,$voucher);
             if($this->infoProductCart($carts, $customer->id)){
 
                 $time= $customer->created_at;
                 
                 DB::commit();
                 Session::flash('success', 'Đặt Hàng Thành Công');
-
+    
                 Session::forget('carts');
+                return true;
             }
 
         } catch (\Exception $err) {
@@ -169,7 +139,22 @@ class CartService
 
         return true;
     }
-
+    protected function create_cart($carts, $request, $voucher=null)
+    {
+        if (is_null($carts))
+            return false;
+        $customer = Customer::create([
+            'name' => $request->input('fullname'),
+            'phone' => $request->input('phonenumber'),
+            'address' => $request->input('address').' ' .$request->input('Phường').' ' .$request->input('Quan').' ' .$request->input('TP'),
+            'email' => $request->input('email'),
+            'content' => ($request->input('note')==null) ? null : $request->input('note'),
+            'user_id'=> ($request->input('user_id')==null) ? null : $request->input('user_id'),
+            'payment'=>$request->input('HinhThuc'),
+            'voucher'=>($voucher==null) ? null : $voucher[0]['voucher_id'],
+        ]);
+        return $customer;
+    }
     protected function infoProductCart($carts, $customer_id)
     {
         $productId = array_keys($carts);

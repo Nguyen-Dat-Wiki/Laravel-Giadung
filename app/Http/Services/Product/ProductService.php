@@ -7,6 +7,7 @@ use App\Models\Menu;
 use App\Models\Product;
 use App\Models\Info;
 use App\Models\Comment;
+use App\Models\Voucher;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Http\Request;
 use Illuminate\Support\Arr;
@@ -114,6 +115,11 @@ class ProductService
         if (is_null($seen)) return [];
         $productId = array_keys($seen);
         return Product::whereIn('id', $productId)->get();
+    }
+    // get voucher info
+    public function getVoucher()
+    {
+        return Voucher::where('active',1)->get();
     }
 }
     

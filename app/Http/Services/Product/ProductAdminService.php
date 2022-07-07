@@ -120,16 +120,6 @@ class ProductAdminService
     {
         $isValidPrice = $this->isValidPrice($request);
         if ($isValidPrice === false) return false;
-        
-        $data[] = [
-            'wattage' => $request->input('wattage'),
-            'control' => $request->input('control'),
-            'size' => $request->input('size'),
-            'utilities' => $request->input('utilities'),
-            'trademark' => $request->input('trademark'),
-            'produce' => $request->input('produce'),
-            'product_id' => $product->id,
-        ];
         try {
             $product->fill([
                 'name' => $request->input('name'),

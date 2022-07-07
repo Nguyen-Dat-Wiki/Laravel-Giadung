@@ -58,27 +58,7 @@
             <div class="text-center mb-4">Gọi đặt mua <a href="tel:0938103176">0938.103.176</a> (08h - 21h)</div>
             <div class="detail_sale mb-4">
                 <div class="product-options ">
-                    <div class="control-group ">
-                        <p class="product_option_item ">
-                            <span class="num-ord rounded-circle">&nbsp;1&nbsp;</span>
-                            <span class="promo_text"> Nhập mã giảm <strong>NEWBER</strong> dành cho người mới để giảm thêm đến 50.000đ khi thanh toán bằng thẻ tín dụng với hoá đơn từ 500.000đ .
-                            </span>
-                        </p>
-                    </div>
-                    <div class="control-group">
-                        <p class="product_option_item ">
-                            <span class="num-ord rounded-circle">&nbsp;2&nbsp;</span>
-                            <span class="promo_text"> Nhập mã giảm <strong>THIEUNHI</strong> để giảm 5%&nbsp;khi thanh toán bằng thẻ tín dụng với hoá đơn từ 500.000đ&nbsp;
-                            </span>
-                        </p>
-                    </div>
-                    <div class="control-group ">
-                        <p class="product_option_item">
-                            <span class="num-ord rounded-circle">&nbsp;3&nbsp;</span>
-                            <span class="promo_text">Nhập mã giảm <strong>SHIPCOD</strong> để giảm 3%&nbsp;khi thanh toán bằng tiền mặt với hoá đơn từ 300.000đ&nbsp;
-                            </span>
-                        </p>
-                    </div>
+                    {!! \App\Helpers\Helper::voucher($voucher) !!}
                 </div>
             </div>
         </div>
