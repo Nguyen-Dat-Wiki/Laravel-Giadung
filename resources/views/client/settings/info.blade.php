@@ -1,4 +1,4 @@
-@extends('client.index')
+@extends('client.layouts.index')
 
 @section('content_new')
     @include('client.layouts.sidebar')

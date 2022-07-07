@@ -1,4 +1,4 @@
-@extends('client.index')
+@extends('client.layouts.index')
 
 @section('main-header')
 <div class="main-header">

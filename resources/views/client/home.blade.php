@@ -1,4 +1,4 @@
-@extends('client.index')
+@extends('client.layouts.index')
 
 
 
@@ -77,75 +77,25 @@
     </div>
 @endsection
 @section('category_1')
-    <div class="category-1 mb-5">
-        <div class="title-main mb-2 pl-5 border-primary border">
-            <span> Bàn ủi </span>
-            <a class=" float-right mr-5 border-primary border" href="/danh-muc/6-ban-ui.html">Xem tất cả >></a>
-        </div>
-        <div class="row">
-            <div class="cards col-xs-auto col-sm-12 col-md-12 col-lg-12">
-                {!! \App\Helpers\Helper::show($category_1) !!}
-            </div>
-        </div>
-    </div>
-@endsection
-@section('category_2')
-        <div class="category-1 mb-5">
+    @foreach ($arr_name as $key_name => $name)
+        <div class="category mb-5">
             <div class="title-main mb-2 pl-5 border-primary border">
-                <span> Hút bụi </span>
-                <a class=" float-right mr-5 border-primary border" href="/danh-muc/7-hut-bui.html">Xem tất cả >></a>
+                <span> {{$name->name}} </span>
+                <a class=" float-right mr-5 border-primary border" href="/danh-muc/{{$name->id}}-{{ Str::slug($name->name, '-')}}.html">Xem tất cả >></a>
             </div>
             <div class="row">
                 <div class="cards col-xs-auto col-sm-12 col-md-12 col-lg-12">
-                {!! \App\Helpers\Helper::show($category_2) !!}
+                    @foreach ($category as $key => $item)
+                        @if ($key_name == $key)
+                            {!! \App\Helpers\Helper::show($item) !!}
+                        @endif
+                    @endforeach
                 </div>
             </div>
         </div>
         
+    @endforeach
 @endsection
-@section('category_3')
-        <div class="category-1 mb-5">
-            <div class="title-main mb-2 pl-5 border-primary border">
-                <span> Lò vi sóng </span>
-                <a class=" float-right mr-5 border-primary border" href="/danh-muc/8-lo-vi-song.html">Xem tất cả >></a>
-            </div>
-            <div class="row">
-                <div class="cards col-xs-auto col-sm-12 col-md-12 col-lg-12">
-                {!! \App\Helpers\Helper::show($category_3) !!}
-                </div>
-            </div>
-        </div>
-        
-@endsection
-@section('category_4')
-        <div class="category-1 mb-5">
-            <div class="title-main mb-2 pl-5 border-primary border">
-                <span>Máy lọc </span>
-                <a class=" float-right mr-5 border-primary border" href="/danh-muc/9-loc-khong-khi.html">Xem tất cả >></a>
-            </div>
-            <div class="row">
-                <div class="cards col-xs-auto col-sm-12 col-md-12 col-lg-12">
-                {!! \App\Helpers\Helper::show($category_4) !!}
-                </div>
-            </div>
-        </div>
-        
-@endsection
-@section('category_5')
-        <div class="category-1 mb-5">
-            <div class="title-main mb-2 pl-5 border-primary border">
-                <span> Máy ép </span>
-                <a class=" float-right mr-5 border-primary border" href="/danh-muc/10-may-ep.html">Xem tất cả >></a>
-            </div>
-            <div class="row">
-                <div class="cards col-xs-auto col-sm-12 col-md-12 col-lg-12">
-                {!! \App\Helpers\Helper::show($category_5) !!}
-                </div>
-            </div>
-        </div>
-        
-@endsection
-
 
 @section('tieuchi')
     <div class="col-md-12 wrap-tieuchi-mobi">

@@ -189,12 +189,12 @@ class Helper{
         }
         return $html;
     }
-    public function SaleVoucher($condition)
+    public static function SaleVoucher($condition)
     {
         return $condition == 1 ? '<span class="btn btn-primary btn-xs">Giảm theo %</span>'
             : '<span class="btn btn-warning btn-xs">Giảm theo tiền</span>';
     }
-    public function CheckTime($time_start,$time_end)
+    public static function CheckTime($time_start,$time_end)
     {
         Carbon\Carbon::setlocale('vi');
         $start= Carbon\Carbon::create($time_start);
@@ -211,12 +211,12 @@ class Helper{
             }
         }
     }
-    public function Payment($Payment)
+    public static function Payment($Payment)
     {
         return $Payment == 2 ? '<span class="btn btn-warning btn-xs">Online</span>'
             : '<span class="btn btn-primary btn-xs">ShipCod</span>';
     }
-    public function showCartSetting($customers,$active)
+    public static function showCartSetting($customers,$active)
     {
         $html = '';
         foreach($customers as $key => $customer){
@@ -255,7 +255,7 @@ class Helper{
         }
                 /*  */
     }
-    public function tooltip($id)
+    public static function tooltip($id)
     {
         $results = Info::where('product_id',$id)->firstOrFail();
         $product = Product::where('id', $id)
@@ -301,7 +301,7 @@ class Helper{
 
         return $html; 
     }
-    public function show($products)
+    public static function show($products)
     {
         $html ='';
         foreach ($products as $key => $product) {

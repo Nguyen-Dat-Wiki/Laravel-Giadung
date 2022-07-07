@@ -31,7 +31,7 @@
                         <a class=" dropdown-item" href="{{ route('logout') }}"
                             onclick="event.preventDefault();
                                         document.getElementById('logout-form').submit();">
-                            {{ __('Logout') }}</a>
+                            {{ __('Đăng xuất') }}</a>
                         
                         <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
                             @csrf
@@ -71,7 +71,7 @@
             <div class="float-right d-none d-sm-block">
                 <b>Version</b> 3.1.0
             </div>
-            <strong>Copyright &copy; 2014-2021 <a href="Localhost:8000">Thanh Dat</a>.</strong> All rights reserved.
+            <strong>Copyright &copy; 2014-2022 <a href="http://dientu.webhop.me/">dientu.webhop.me</a>.</strong> All rights reserved.
         </footer>
     </div>
 <!-- ./wrapper -->

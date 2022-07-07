@@ -1,4 +1,4 @@
-@extends('client.index')
+@extends('client.layouts.index')
 
 @section('head')
     <link rel="stylesheet" href="/asset/css/blog.css">
