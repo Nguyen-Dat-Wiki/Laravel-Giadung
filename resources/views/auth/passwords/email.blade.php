@@ -3,7 +3,7 @@
 @section('content')
 <div id="logreg-forms" class="container px-0">
     <div class="card mb-0">
-        <div class="card-header">{{ __('Reset Password') }}</div>
+        <div class="card-header">{{ __('Quên mật khẩu') }}</div>
 
         <div class="card-body">
             @if (session('status'))
@@ -32,7 +32,7 @@
                 <div class="row mb-0">
                     <div class="col-md-6 offset-md-4">
                         <button type="submit" class="btn btn-primary">
-                            {{ __('Send Password Reset Link') }}
+                            {{ __('Gửi Email') }}
                         </button>
                     </div>
                 </div>

@@ -12,6 +12,7 @@ use App\Http\Controllers\HomeController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\BlogController;
 use App\Http\Controllers\VoucherController;
+use App\Http\Controllers\CommentController;
 /* use App\Http\Controllers\Auth; */
 use Illuminate\Http\Request;
 
@@ -112,7 +113,11 @@ Route::middleware(['auth'])->group(function () {
             Route::get('edit/{voucher}', [VoucherController::class, 'store']);
             Route::post('edit/{voucher}', [VoucherController::class, 'update']);
         });
-
+        Route::prefix('comments')->group(function () {
+            Route::get('list', [CommentController::class, 'show']);
+            Route::get('view/{comment}', [CommentController::class, 'store']);
+            Route::post('view/{comment}', [CommentController::class, 'update']);
+        });
     });
 });
 
