@@ -4,6 +4,8 @@ namespace App\Helpers;
 
 use Illuminate\Support\Str;
 use App\Models\Comment;
+use App\Models\Info;
+use App\Models\Product;
 use Carbon;
 
 
@@ -35,6 +37,36 @@ class Helper{
                 unset($menus[$key]);
 
                 $html .= self::menu($menus, $menu->id, $char . '|--');
+            }
+        }
+
+        return $html;
+    }
+    public static function comment($comments, $parent_id = 0, $char = '')
+    {
+        $html = '';
+
+        foreach ($comments as $key => $comment) {
+            if ($comment->parent_id == $parent_id) {
+                $html .= '
+                    <tr>
+                        <td>' . $comment->id . '</td>
+                        <td>' . $char . $comment->product->name . '</td>
+                        <td>' . $comment->name . '</td>
+                        <td>' . $comment->content . '</td>
+                        <td>' . $comment->updated_at . '</td>
+                        <td>
+                            <a href="#" class="btn btn-danger btn-sm"
+                                onclick="removeRow(' . $comment->id . ', \'/admin/comment/destroy\')">
+                                <i class="fas fa-trash"></i>
+                            </a>
+                        </td>
+                    </tr>
+                ';
+
+                unset($comments[$key]);
+
+                $html .= self::comment($comments, $comment->id, $char . '|--');
             }
         }
 
@@ -223,4 +255,81 @@ class Helper{
         }
                 /*  */
     }
+    public function tooltip($id)
+    {
+        $results = Info::where('product_id',$id)->firstOrFail();
+        $product = Product::where('id', $id)
+                ->with('menu')
+                ->firstOrFail();
+        $html = '';
+        $html .= '
+        <div class="parameter tooltip_head">
+            <h4>Thông số kĩ thuật</h4>
+            <ul class="parameter-info tooltip_body">
+                <li class="">
+                    <span class="col-4">Loại</span>
+                    <span class="col-7">' .$product->menu->name.'</span>
+                </li>
+                <li class=" ">
+                    <span class="col-6">Công suất</span>
+                    <span class="col-6">' .$results->wattage.'</span>
+                </li>
+                <li class="" data-index="0" data-prop="0">
+                    <span class="col-2">Điều khiển</span>
+                    <span class="col-10">' .$results->control.'</span>
+                </li>
+                <li class="" data-index="0" data-prop="0">
+                    <span class="col-4">Kích thước</span>
+                    <span class="">' .$results->size.'</span>
+                </li>
+
+                <li class=" ">
+                    <span class="col-4">Tiện ích</span>
+                    <span class="">' .$results->utilities.'</span>
+                </li>
+                <li class="" data-index="0" data-prop="0">
+                    <span class="col-5">Thương hiệu </span>
+                    <span class="">' .$results->trademark.'</span>
+                </li>
+                <li class="" data-index="0" data-prop="0">
+                    <span class="col-4">Sản xuất </span>
+                    <span class="">' .$results->produce.'</span>
+                </li>
+            </ul>
+        </div>
+        ';
+
+        return $html; 
+    }
+    public function show($products)
+    {
+        $html ='';
+        foreach ($products as $key => $product) {
+            $html .='
+            <div class="card ">
+                <form action="/add-cart" method="post"  >
+                    <div class="card-body">
+                        <div class="card-im0g">
+                            <a href="/san-pham/'. $product->id .'-'. Str::slug($product->name, '-') .'.html" ><img class="img-product" src="'.$product->thumb.'" alt="..."></a>
+                            <span class="sale">-'.  (int)( ( ($product->price - $product->price_sale) * 100) / $product->price ) .'%</span>
+                        </div>
+                        <div class="card-top">
+                            <h3 class="card-title" style="text-align: center;"><a href="/san-pham/'. $product->id .'-'. Str::slug($product->name, '-') .'.html"  style="color: black;">'.$product->name.'</a></h3>
+                        </div>
+                        <p class="card-user">
+                            <span class="moneyold">'.number_format($product->price).'đ</span>&nbsp;&nbsp;
+                            <span class="moneysale">'.number_format($product->price_sale).'đ</span>
+                        </p>
+                        <div class="button-submit d-flex justify-content-center"><button class="bg-white border-primary text-dark" type="submit">Mua ngay&nbsp; <i class="fa-solid fa-basket-shopping-simple"></i></button></div>
+                    </div>
+                    <input type="number" name="num_product" hidden value="1">
+                    <input type="hidden" name="product_id" value="'. $product->id .'">
+                    <input type="hidden" name="_token" value="'.csrf_token().'">
+                </form>
+            </div>
+            ';
+        }
+        return $html;
+    }
 }
+

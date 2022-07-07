@@ -15,5 +15,7 @@ class Info extends Model
         'utilities',
         'trademark',
         'produce',
+        'product_id',
     ];
+    
 }

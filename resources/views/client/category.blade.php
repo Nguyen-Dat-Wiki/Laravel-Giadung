@@ -79,11 +79,11 @@
         <div class="cards col-xs-auto col-sm-12 col-md-12 col-lg-12">
             @if (count($products)>0)
                 @foreach ($products as $product)
-                    <div class="card">
-                        <form action="/add-cart" method="post" {{-- onclick = "Seen({{$product->id}})" --}}>
+                    <div class="card tooltip{{$product->id}}">
+                        <form action="/add-cart" method="post" >
                             <div class="card-body">
                                 <div class="card-img">
-                                    <a href="/san-pham/{{ $product->id }}-{{ Str::slug($product->name, '-') }}.html"><img class="img-product" src="{{$product->thumb}}" alt="..."></a>
+                                    <a href="/san-pham/{{ $product->id }}-{{ Str::slug($product->name, '-') }}.html" ><img class="img-product" src="{{$product->thumb}}" alt="..."></a>
                                     <span class="sale">-{{  (int)( ( ($product->price - $product->price_sale) * 100) / $product->price ) }}%</span>
                                 </div>
                                 <div class="card-top">

@@ -1,7 +1,9 @@
 @extends('client.index')
 
 
+
 @section('slibar')
+
     <div class="slide">
         <div class="container SlideBanner" style="padding: 0;">
 
@@ -69,68 +71,23 @@
         </div>
         <div class="row">
             <div class="cards col-xs-auto col-sm-12 col-md-12 col-lg-12">
-                @foreach ($products as $product)
-                    <div class="card">
-                        <form action="/add-cart" method="post">
-                            <div class="card-body">
-                                <div class="card-img">
-                                    <a href="/san-pham/{{ $product->id }}-{{ Str::slug($product->name, '-') }}.html"><img class="img-product" src="{{$product->thumb}}" alt="..."></a>
-                                    <span class="sale">-{{  (int)( ( ($product->price - $product->price_sale) * 100) / $product->price) }}%</span>
-                                </div>
-                                <div class="card-top">
-                                    <h3 class="card-title" style="text-align: center;"><a href="/san-pham/{{ $product->id }}-{{ Str::slug($product->name, '-') }}.html" style="color: black;">{{$product->name}}</a></h3>
-                                </div>
-                                <p class="card-user">
-                                    <span class="moneyold">{{number_format($product->price)}}đ</span>&nbsp;&nbsp;
-                                    <span class="moneysale">{{number_format($product->price_sale)}}đ</span>
-                                </p>
-                                <div class="button-submit d-flex justify-content-center"><button class="bg-white border-primary text-dark" type="submit">Mua ngay&nbsp; <i class="fa-solid fa-basket-shopping-simple"></i></button></div>
-                            </div>
-                            <input type="number" name="num_product" hidden value="1">
-                            <input type="hidden" name="product_id" value="{{ $product->id }}">
-                            @csrf
-                        </form>
-                    </div>
-                @endforeach
+                {!! \App\Helpers\Helper::show($products) !!}
             </div>
         </div>
     </div>
 @endsection
 @section('category_1')
-        <div class="category-1 mb-5">
-            <div class="title-main mb-2 pl-5 border-primary border">
-                <span> Bàn ủi </span>
-                <a class=" float-right mr-5 border-primary border" href="/danh-muc/6-ban-ui.html">Xem tất cả >></a>
-            </div>
-            <div class="row">
-                <div class="cards col-xs-auto col-sm-12 col-md-12 col-lg-12">
-                    @foreach ($category_1 as $product)
-                        <div class="card">
-                            <form action="/add-cart" method="post" >
-                                <div class="card-body">
-                                    <div class="card-img">
-                                        <a href="/san-pham/{{ $product->id }}-{{ Str::slug($product->name, '-') }}.html"><img class="img-product" src="{{$product->thumb}}" alt="..."></a>
-                                        <span class="sale">-{{  (int)( ( ($product->price - $product->price_sale) * 100) / $product->price ) }}%</span>
-                                    </div>
-                                    <div class="card-top">
-                                        <h3 class="card-title" style="text-align: center;"><a href="/san-pham/{{ $product->id }}-{{ Str::slug($product->name, '-') }}.html"  style="color: black;">{{$product->name}}</a></h3>
-                                    </div>
-                                    <p class="card-user">
-                                        <span class="moneyold">{{number_format($product->price)}}đ</span>&nbsp;&nbsp;
-                                        <span class="moneysale">{{number_format($product->price_sale)}}đ</span>
-                                    </p>
-                                    <div class="button-submit d-flex justify-content-center"><button class="bg-white border-primary text-dark" type="submit">Mua ngay&nbsp; <i class="fa-solid fa-basket-shopping-simple"></i></button></div>
-                                </div>
-                                <input type="number" name="num_product" hidden value="1">
-                                <input type="hidden" name="product_id" value="{{ $product->id }}">
-                                @csrf
-                            </form>
-                        </div>
-                    @endforeach
-                </div>
+    <div class="category-1 mb-5">
+        <div class="title-main mb-2 pl-5 border-primary border">
+            <span> Bàn ủi </span>
+            <a class=" float-right mr-5 border-primary border" href="/danh-muc/6-ban-ui.html">Xem tất cả >></a>
+        </div>
+        <div class="row">
+            <div class="cards col-xs-auto col-sm-12 col-md-12 col-lg-12">
+                {!! \App\Helpers\Helper::show($category_1) !!}
             </div>
         </div>
-        
+    </div>
 @endsection
 @section('category_2')
         <div class="category-1 mb-5">
@@ -140,30 +97,7 @@
             </div>
             <div class="row">
                 <div class="cards col-xs-auto col-sm-12 col-md-12 col-lg-12">
-                    @foreach ($category_2 as $product)
-                    <div class="card">
-                        <form action="/add-cart" method="post" {{-- onclick = "Seen({{$product->id}})" --}}>
-                            <div class="card-body">
-                                <div class="card-img">
-                                    <a href="/san-pham/{{ $product->id }}-{{ Str::slug($product->name, '-') }}.html"><img class="img-product" src="{{$product->thumb}}" alt="..."></a>
-                                    <span class="sale">-{{  (int)( ( ($product->price - $product->price_sale) * 100) / $product->price ) }}%</span>
-                                </div>
-                                <div class="card-top">
-                                    <h3 class="card-title" style="text-align: center;"><a href="/san-pham/{{ $product->id }}-{{ Str::slug($product->name, '-') }}.html" style="color: black;">{{$product->name}}</a></h3>
-                                </div>
-                               
-                                <p class="card-user">
-                                    <span class="moneyold">{{number_format($product->price)}}đ</span>&nbsp;&nbsp;
-                                    <span class="moneysale">{{number_format($product->price_sale)}}đ</span>
-                                </p>
-                                <div class="button-submit d-flex justify-content-center"><button class="bg-white border-primary text-dark" type="submit">Mua ngay&nbsp; <i class="fa-solid fa-basket-shopping-simple"></i></button></div>
-                            </div>
-                            <input type="number" name="num_product" hidden value="1">
-                            <input type="hidden" name="product_id" value="{{ $product->id }}">
-                            @csrf
-                        </form>
-                    </div>
-                @endforeach
+                {!! \App\Helpers\Helper::show($category_2) !!}
                 </div>
             </div>
         </div>
@@ -177,30 +111,7 @@
             </div>
             <div class="row">
                 <div class="cards col-xs-auto col-sm-12 col-md-12 col-lg-12">
-                    @foreach ($category_3 as $product)
-                        <div class="card">
-                            <form action="/add-cart" method="post">
-                                <div class="card-body">
-                                    <div class="card-img">
-                                        <a href="/san-pham/{{ $product->id }}-{{ Str::slug($product->name, '-') }}.html"><img class="img-product" src="{{$product->thumb}}" alt="..."></a>
-                                        <span class="sale">-{{  (int)( ( ($product->price - $product->price_sale) * 100) / $product->price ) }}%</span>
-                                    </div>
-                                    <div class="card-top">
-                                        <h3 class="card-title" style="text-align: center;"><a href="/san-pham/{{ $product->id }}-{{ Str::slug($product->name, '-') }}.html" style="color: black;">{{$product->name}}</a></h3>
-                                    </div>
-                                   
-                                    <p class="card-user">
-                                        <span class="moneyold">{{number_format($product->price)}}đ</span>&nbsp;&nbsp;
-                                        <span class="moneysale">{{number_format($product->price_sale)}}đ</span>
-                                    </p>
-                                    <div class="button-submit d-flex justify-content-center"><button class="bg-white border-primary text-dark" type="submit">Mua ngay&nbsp; <i class="fa-solid fa-basket-shopping-simple"></i></button></div>
-                                </div>
-                                <input type="number" name="num_product" hidden value="1">
-                                <input type="hidden" name="product_id" value="{{ $product->id }}">
-                                @csrf
-                            </form>
-                        </div>
-                    @endforeach
+                {!! \App\Helpers\Helper::show($category_3) !!}
                 </div>
             </div>
         </div>
@@ -214,30 +125,7 @@
             </div>
             <div class="row">
                 <div class="cards col-xs-auto col-sm-12 col-md-12 col-lg-12">
-                    @foreach ($category_4 as $product)
-                        <div class="card">
-                            <form action="/add-cart" method="post" >
-                                <div class="card-body">
-                                    <div class="card-img">
-                                        <a href="/san-pham/{{ $product->id }}-{{ Str::slug($product->name, '-') }}.html"><img class="img-product" src="{{$product->thumb}}" alt="..."></a>
-                                        <span class="sale">-{{  (int)( ( ($product->price - $product->price_sale) * 100) / $product->price ) }}%</span>
-                                    </div>
-                                    <div class="card-top">
-                                        <h3 class="card-title" style="text-align: center;"><a href="/san-pham/{{ $product->id }}-{{ Str::slug($product->name, '-') }}.html" style="color: black;">{{$product->name}}</a></h3>
-                                    </div>
-                                    <p class="card-user">
-                                        <span class="moneyold">{{number_format($product->price)}}đ</span>&nbsp;&nbsp;
-                                        <span class="moneysale">{{number_format($product->price_sale)}}đ</span>
-                                    </p>
-                                    <div class="button-submit d-flex justify-content-center"><button class="bg-white border-primary text-dark" type="submit">Mua ngay&nbsp; <i class="fa-solid fa-basket-shopping-simple"></i></button></div>
-                                </div>
-                                
-                                <input type="number" name="num_product" hidden value="1">
-                                <input type="hidden" name="product_id" value="{{ $product->id }}">
-                                @csrf
-                            </form>
-                        </div>
-                    @endforeach
+                {!! \App\Helpers\Helper::show($category_4) !!}
                 </div>
             </div>
         </div>
@@ -251,29 +139,7 @@
             </div>
             <div class="row">
                 <div class="cards col-xs-auto col-sm-12 col-md-12 col-lg-12">
-                    @foreach ($category_5 as $product)
-                    <div class="card">
-                        <form action="/add-cart" method="post" {{-- onclick = "Seen({{$product->id}})" --}} >
-                            <div class="card-body">
-                                <div class="card-img">
-                                    <a href="/san-pham/{{ $product->id }}-{{ Str::slug($product->name, '-') }}.html"><img class="img-product" src="{{$product->thumb}}" alt="..."></a>
-                                    <span class="sale">-{{  (int)( ( ($product->price - $product->price_sale) * 100) / $product->price ) }}%</span>
-                                </div>
-                                <div class="card-top">
-                                    <h3 class="card-title" style="text-align: center;"><a href="/san-pham/{{ $product->id }}-{{ Str::slug($product->name, '-') }}.html" style="color: black;">{{$product->name}}</a></h3>
-                                </div>
-                                <p class="card-user">
-                                    <span class="moneyold">{{number_format($product->price)}}đ</span>&nbsp;&nbsp;
-                                    <span class="moneysale">{{number_format($product->price_sale)}}đ</span>
-                                </p>
-                                <div class="button-submit d-flex justify-content-center"><button class="bg-white border-primary text-dark" type="submit">Mua ngay&nbsp; <i class="fa-solid fa-basket-shopping-simple"></i></button></div>
-                            </div>
-                            <input type="number" name="num_product" hidden value="1">
-                            <input type="hidden" name="product_id" value="{{ $product->id }}">
-                            @csrf
-                        </form>
-                    </div>
-                @endforeach
+                {!! \App\Helpers\Helper::show($category_5) !!}
                 </div>
             </div>
         </div>
@@ -357,4 +223,5 @@
             </div>
         </div>
     </div>
+    
 @endsection

@@ -135,7 +135,7 @@ class MenuService
             $query->orderBy('price_sale', $request->input('price'));
         }
         else if ($request->input('create_at')) {
-            $query->orderBy('price_sale', $request->input('create_at'));
+            $query->orderBy('create_at', $request->input('create_at'));
         }
         else if ($request->input('name')) {
             $query->orderBy('name', $request->input('name'));
