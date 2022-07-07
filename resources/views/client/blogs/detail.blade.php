@@ -34,9 +34,9 @@
                 <div class="main-blog">
                     <div class="rounded">
                         <ul>
-                            @foreach ($news_time as $new)
+                            @foreach ($news_time as $news)
                                 <li>
-                                    <a class="" style="color: black" href="/tin-tuc/{{ $new->id }}-{{ Str::slug($new->title, '-') }}.html">{{$new->title}}</a>
+                                    <a class="" style="color: black" href="/tin-tuc/{{ $news->id }}-{{ Str::slug($news->title, '-') }}.html">{{$news->title}}</a>
                                 </li>
                                 <hr>
                             @endforeach
