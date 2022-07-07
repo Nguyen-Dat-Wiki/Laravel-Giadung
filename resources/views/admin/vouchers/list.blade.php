@@ -105,7 +105,7 @@
                 <td>{!! \App\Helpers\Helper::SaleVoucher($Voucher->condition) !!}</td>
                 <td>{{ date('d-m-Y', strtotime($Voucher->time_start)) }}</td>
                 <td>{{date('d-m-Y', strtotime($Voucher->time_end)) }}</td>
-                <td>{!! \App\Helpers\Helper::CheckTime($Voucher->time_start,$Voucher->time_end) !!}</td>
+                <td>{!! \App\Helpers\Helper::CheckTime($Voucher->time_start,$Voucher->time_end,$Voucher->id,$Voucher->active) !!}</td>
                 <td>
                     <a class="btn btn-primary btn-sm" href="/admin/vouchers/edit/{{ $Voucher->id }}">
                         <i class="fas fa-eye"></i>

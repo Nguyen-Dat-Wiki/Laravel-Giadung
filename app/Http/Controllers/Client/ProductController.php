@@ -24,7 +24,8 @@ class ProductController extends Controller
             'info' => $this->productService->getInfo($id),
             'products' => $this->productService->more($id),
             'comment'=>$this->productService->showComment($id),
-            'seen'=> $this->productService->getProduct()
+            'seen'=> $this->productService->getProduct(),
+            'voucher'=>$this->productService->getVoucher(),
         ]);
     }
 

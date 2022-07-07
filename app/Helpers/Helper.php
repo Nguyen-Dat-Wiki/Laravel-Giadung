@@ -7,6 +7,7 @@ use App\Models\Comment;
 use App\Models\Info;
 use App\Models\Product;
 use Carbon;
+use DB;
 
 
 class Helper{
@@ -194,21 +195,24 @@ class Helper{
         return $condition == 1 ? '<span class="btn btn-primary btn-xs">Giảm theo %</span>'
             : '<span class="btn btn-warning btn-xs">Giảm theo tiền</span>';
     }
-    public static function CheckTime($time_start,$time_end)
+    public static function CheckTime($time_start,$time_end,$id,$active)
     {
         Carbon\Carbon::setlocale('vi');
         $start= Carbon\Carbon::create($time_start);
         $end= Carbon\Carbon::create($time_end);
         $now = Carbon\Carbon::now();
-        if ($now->month > $end->month) {
+        if ($active == 0) {
             return '<span class="btn btn-danger btn-xs">Hết hạn</span>';
-        }else if($now->month == $end->month && $now->day > $end->day){
-            return '<span class="btn btn-danger btn-xs">Hết hạn</span>';
-        }
-        else{
-            if ($now->day <= $end->day) {
-                return '<span class="btn btn-success btn-xs">Còn hạn</span>';
+        }else{
+            // auto cập nhật date
+            if ($now->month > $end->month) {
+                DB::table('vouchers')->where('id',$id)->update(['active' => 0]);
+                return '<span class="btn btn-danger btn-xs">Hết hạn</span>';
+            }else if($now->month == $end->month && $now->day > $end->day){
+                DB::table('vouchers')->where('id',$id)->update(['active' => 0]);
+                return '<span class="btn btn-danger btn-xs">Hết hạn</span>';
             }
+            return '<span class="btn btn-success btn-xs">Còn hạn</span>';
         }
     }
     public static function Payment($Payment)
@@ -244,16 +248,20 @@ class Helper{
                         <a class="btn btn-primary btn-sm" href="/setting/cart/'.$customer->id.'">
                             <i class="fas fa-eye"></i>
                         </a>
+                    ';
+                if ($active == 2) {
+                    $html .='
                         <a class="btn btn-danger btn-sm" href="/setting/delete/'.$customer->id.'">
-                            <i class="fas fa-trash"></i>
+                                <i class="fas fa-trash"></i>
                         </a>
-                    </td>
-                </tr>
-                ';
-                return $html;
+                        </td>
+                    </tr
+                    ';
+                }
             }
         }
-                /*  */
+        return $html;
+        /* > */
     }
     public static function tooltip($id)
     {
@@ -328,6 +336,28 @@ class Helper{
                 </form>
             </div>
             ';
+        }
+        return $html;
+    }
+    public static function voucher($voucher)
+    {
+        $html ='';
+        $name_payment ='';
+        foreach ($voucher as $key => $voucher) {
+            if($voucher->active == 1){
+                $name_payment = ($voucher->Payment == 2) ? 'thẻ tín dụng': 'tiền mặt' ;
+                $price_sale = ($voucher->number <100) ?  number_format($voucher->number).'%' : number_format($voucher->number).'đ';
+                $content = ($voucher->code !='NEWBER') ? 'để giảm đến' : 'dành cho người mới để giảm đến' ;
+                $html .='
+                <div class="control-group ">
+                    <p class="product_option_item ">
+                        <span class="num-ord rounded-circle">&nbsp;'.++$key.'&nbsp;</span>
+                        <span class="promo_text"> Nhập mã giảm <strong>'.$voucher->code.'</strong> '.$content.' '. $price_sale .' khi thanh toán bằng '.$name_payment.' với hoá đơn từ '.number_format($voucher->limitprice).'đ .
+                        </span>
+                    </p>
+                </div>
+                ';
+            }
         }
         return $html;
     }
