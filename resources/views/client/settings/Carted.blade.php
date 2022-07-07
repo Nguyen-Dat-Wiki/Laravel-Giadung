@@ -1,4 +1,4 @@
-@extends('client.index')
+@extends('client.layouts.index')
 
 @section('head')
     <script src="/asset/js/tab.js"></script>

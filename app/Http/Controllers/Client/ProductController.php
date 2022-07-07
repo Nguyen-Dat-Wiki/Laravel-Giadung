@@ -18,19 +18,13 @@ class ProductController extends Controller
 
     public function index($id='', $slug = '')
     {
-        $product = $this->productService->show($id);
-        $info = $this->productService->getInfo($id);
-        $productsMore = $this->productService->more($id);
-        $comment = $this->productService->showComment($id); 
-        $this->productService->seen($id); 
-        $products = $this->productService->getProduct();
-        return view('client.product', [
-            'title' => $product->name,
-            'product' => $product,
-            'info' => $info,
-            'products' => $productsMore,
-            'comment'=>$comment,
-            'seen'=>$products
+        return view('client.products.product', [
+            'title' => $this->productService->show($id)->name,
+            'product' => $this->productService->show($id),
+            'info' => $this->productService->getInfo($id),
+            'products' => $this->productService->more($id),
+            'comment'=>$this->productService->showComment($id),
+            'seen'=> $this->productService->getProduct()
         ]);
     }
 

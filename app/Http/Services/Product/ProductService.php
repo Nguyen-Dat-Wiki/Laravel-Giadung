@@ -14,6 +14,14 @@ use DB;
 
 class ProductService
 {
+    // get menu name
+    public function Menuname()
+    {
+        return Menu::select('name', 'id')
+            ->where('parent_id', 0)
+            ->limit(5)
+            ->get();
+    }
     // get random product limit 5
     public function getNew()
     {
@@ -25,18 +33,26 @@ class ProductService
             ->get();
     }
     // get product theo menu (bao gồm menu con)
-    public function getAll($id)
+    public function getAll($arr_name)
     {
-        $child_menu= Menu::where('parent_id',$id)->where('active',1)->get(); //Lay danh muc con
-        $arr = array();
-        foreach ($child_menu as $key => $value) {
-            $arr[] = $value->id;
+        $arr_menu_id = array(); //arr menu id
+        foreach ($arr_name as $key => $value) {
+            $arr_menu_id[] = $value->id;
         }
-        array_push($arr,$id);
-        return Product::whereIn('menu_id',$arr)
-        ->where('active',1)
-        ->limit(5)
-        ->get();
+        $arr_return = array();
+        foreach ($arr_menu_id as $key => $id) {
+            $child_menu= Menu::where('parent_id',$id)->where('active',1)->get(); //Lay danh muc con
+            $arr_id = array();
+            foreach ($child_menu as $key => $value) {
+                $arr_id[] = $value->id;
+            }
+            array_push($arr_id,$id);
+            $arr_return[] = Product::whereIn('menu_id',$arr_id)
+            ->where('active',1)
+            ->limit(5)
+            ->get();
+        }
+        return $arr_return;
     }
     // get info product
     public function getInfo($id)

@@ -21,7 +21,7 @@ class MenuController extends Controller
         $menu = $this->menuService->getId($id);
         $products = $this->menuService->getProduct($id, $request);
 
-        return view('client.category', [
+        return view('client.products.category', [
             'title' => 'Sản phẩm',
             'title2' => $menu->name,
             'products' => $products,
@@ -32,7 +32,7 @@ class MenuController extends Controller
     {
         $products = $this->menuService->getProductAll($request);
 
-        return view('client.category', [
+        return view('client.products.category', [
             'title' => 'Sản phẩm',
             'products' => $products,
         ]);
@@ -41,7 +41,7 @@ class MenuController extends Controller
     {
         $products = $this->menuService->getSearch($request);
 
-        return view('client.category', [
+        return view('client.products.category', [
             'title' => 'Tìm kiếm',
             'products' => $products,
         ]);

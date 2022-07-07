@@ -28,7 +28,7 @@
 
                         <p>Email: datanhem456@gmail.com</p>
 
-                        <p>Website: <a href="Localhost:8000"><span style="color:#ffffff;">Hago.com</span></a></p>
+                        <p>Website: <a href="http://dientu.webhop.me/"><span style="color:#ffffff;">dientu.webhop.me</span></a></p>
                     </div>
 
                 </div>
@@ -46,13 +46,13 @@
                     <h2 class="title-footer">Hình thức thanh toán</h2>
                     <ul class="social social-thanhtoan d-flex">
                         <li>
-                            <a href="http://vinahello.vn/thanh-toan" target="_blank"><img src="/asset/img/pttt-45-45060.png" alt=""></a>
+                            <a href="http://dientu.webhop.me/thanh-toan" target="_blank"><img src="/asset/img/pttt-45-45060.png" alt=""></a>
                         </li>
                         <li>
-                            <a href="http://vinahello.vn/thanh-toan" target="_blank"><img src="/asset/img/pttt-4583.png" alt=""></a>
+                            <a href="http://dientu.webhop.me/thanh-toan" target="_blank"><img src="/asset/img/pttt-4583.png" alt=""></a>
                         </li>
                         <li>
-                            <a href="http://vinahello.com.vn/thanh-toan" target="_blank"><img src="/asset/img/techcombanklogo-10540-8402.png" alt=""></a>
+                            <a href="http://dientu.webhop.me/thanh-toan" target="_blank"><img src="/asset/img/techcombanklogo-10540-8402.png" alt=""></a>
                         </li>
                     </ul>
                     <h2 class="title-footer mt-10">Liên kết với chúng tôi</h2>
