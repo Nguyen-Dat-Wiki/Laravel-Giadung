@@ -9,8 +9,8 @@
         @csrf
         <h1 class="h3 mb-3 font-weight-normal" style="text-align: center">Đăng nhập</h1>
         <div class="social-login">
-            <a href="{{ url('/auth/redirect/facebook') }}" style="padding: 6px 12px" class="d-inline-block btn facebook-btn social-btn"><span class="h6"><i class="fab fa-facebook-f"></i>Sign in with Facebook</span></a>
-            <a href="{{ url('/auth/redirect/google') }}" style="padding: 6px 12px" class="d-inline-block btn google-btn social-btn"><span class="h6"><i class="fab fa-google-plus-g"></i> Sign in with Google+</span></a>
+            <a href="{{ url('/auth/redirect/facebook') }}" style="padding: 6px 12px" class="d-inline-block btn facebook-btn social-btn"><span class="h6"><i class="fa-brands fa-facebook-f"></i> Sign in with Facebook</span></a>
+            <a href="{{ url('/auth/redirect/google') }}" style="padding: 6px 12px" class="d-inline-block btn google-btn social-btn"><span class="h6"><i class="fa-brands fa-google"></i> Sign in with Google+</span></a>
         </div>
         <p style="text-align:center"> OR  </p>
         <input id="email" type="email" class="form-control mb-3 @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}" required  placeholder="Email" autocomplete="email" autofocus>

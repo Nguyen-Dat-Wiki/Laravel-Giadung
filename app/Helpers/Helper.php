@@ -43,7 +43,7 @@ class Helper{
 
         return $html;
     }
-    public static function comment($comments, $parent_id = 0, $char = '')
+ /*    public static function comment($comments, $parent_id = 0, $char = '')
     {
         $html = '';
 
@@ -72,7 +72,7 @@ class Helper{
         }
 
         return $html;
-    }
+    } */
 
     public static function active($active = 0): string
     {
@@ -315,7 +315,7 @@ class Helper{
         foreach ($products as $key => $product) {
             $html .='
             <div class="card ">
-                <form action="/add-cart" method="post"  >
+                <form class="form_addcart" action="/add-cart" method="post"  >
                     <div class="card-body">
                         <div class="card-im0g">
                             <a href="/san-pham/'. $product->id .'-'. Str::slug($product->name, '-') .'.html" ><img class="img-product" src="'.$product->thumb.'" alt="..."></a>
@@ -328,7 +328,7 @@ class Helper{
                             <span class="moneyold">'.number_format($product->price).'đ</span>&nbsp;&nbsp;
                             <span class="moneysale">'.number_format($product->price_sale).'đ</span>
                         </p>
-                        <div class="button-submit d-flex justify-content-center"><button class="bg-white border-primary text-dark" type="submit">Mua ngay&nbsp; <i class="fa-solid fa-basket-shopping-simple"></i></button></div>
+                        <div class="button-submit d-flex justify-content-center"><button class="bg-white border-primary text-dark" type="submit" >Mua ngay&nbsp; <i class="fa-solid fa-basket-shopping-simple"></i></button></div>
                     </div>
                     <input type="number" name="num_product" hidden value="1">
                     <input type="hidden" name="product_id" value="'. $product->id .'">

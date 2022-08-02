@@ -56,11 +56,11 @@
     </div>
     <div class="listGroupProduct ">
         <ul>
-            <li><a href="{{request()->url()}}?created_at=asc"">Hàng mới</a></li>
-            <li><a href="# ">Xem Nhiều</a></li>
-            <li><a href="{{request()->url()}} ">Giá Khuyến mãi</a></li>
-            <li><a href="{{request()->url()}}?price=asc"">Giá Tăng dần</a></li>
-            <li><a href="{{request()->url()}}?price=desc""">Giá Giảm dần</a></li>
+            <li><a class="btn" href="{{request()->url()}}?created_at=asc"">Hàng mới</a></li>
+            <li><a class="btn" href="# ">Xem Nhiều</a></li>
+            <li><a class="btn" href="{{request()->url()}} ">Giá Khuyến mãi</a></li>
+            <li><a class="btn" href="{{request()->url()}}?price=asc"">Giá Tăng dần</a></li>
+            <li><a class="btn" href="{{request()->url()}}?price=desc""">Giá Giảm dần</a></li>
         </ul>
         <form action="" method="GET" id="Loc">
             <div class=" ">
@@ -79,7 +79,7 @@
             @if (count($products)>0)
                 @foreach ($products as $product)
                     <div class="card tooltip{{$product->id}}">
-                        <form action="/add-cart" method="post" >
+                        <form class="form_addcart" action="/add-cart" method="post" >
                             <div class="card-body">
                                 <div class="card-img">
                                     <a href="/san-pham/{{ $product->id }}-{{ Str::slug($product->name, '-') }}.html" ><img class="img-product" src="{{$product->thumb}}" alt="..."></a>

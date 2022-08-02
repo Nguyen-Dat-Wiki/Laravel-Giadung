@@ -45,15 +45,18 @@
                 <div class="footer-news col-md-3 ">
                     <h2 class="title-footer">Hình thức thanh toán</h2>
                     <ul class="social social-thanhtoan d-flex">
-                        <li>
-                            <a href="http://dientu.webhop.me/thanh-toan" target="_blank"><img src="/asset/img/pttt-45-45060.png" alt=""></a>
-                        </li>
-                        <li>
-                            <a href="http://dientu.webhop.me/thanh-toan" target="_blank"><img src="/asset/img/pttt-4583.png" alt=""></a>
-                        </li>
-                        <li>
-                            <a href="http://dientu.webhop.me/thanh-toan" target="_blank"><img src="/asset/img/techcombanklogo-10540-8402.png" alt=""></a>
-                        </li>
+                        @php
+                            $images = [];
+                            foreach (File::glob(public_path() . '/asset/img/*logo.png') as $filename ) {
+                                $images[] = '/asset/img/' . basename($filename);
+                            }
+                        @endphp
+                        @foreach ($images as $img)
+                            <li>
+                                <a href="http://dientu.webhop.me/thanh-toan" target="_blank"><img src="{{$img}}" alt=""></a>
+                            </li>
+                        @endforeach
+                        
                     </ul>
                     <h2 class="title-footer mt-10">Liên kết với chúng tôi</h2>
                     <ul class="social social-footer d-flex">

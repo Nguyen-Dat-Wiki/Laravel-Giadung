@@ -7,10 +7,10 @@
 @section('content')
 <div id="logreg-forms">
 
-    <h3 class="text-center ">Thông tin tài khoản</h3>
     <form  class="form-signup" method="POST" action="{{ route('register') }}">
+        <h3 class="h3 mb-3 font-weight-normal" style="text-align: center">Tạo tài khoản</h3>
         <div class="social-login">
-            <a href="{{ url('/auth/redirect/facebook') }}" style="padding: 6px 12px" class="d-inline-block btn facebook-btn social-btn"><span class="h6"><i class="fab fa-facebook-f"></i>Sign up with Facebook</span></a>
+            <a href="{{ url('/auth/redirect/facebook') }}" style="padding: 6px 12px" class="d-inline-block btn facebook-btn social-btn"><span class="h6"><i class="fab fa-facebook-f"></i> Sign up with Facebook</span></a>
         </div>
         <div class="social-login">
             <a href="{{ url('/auth/redirect/google') }}" style="padding: 6px 12px" class="d-inline-block btn google-btn social-btn"><span class="h6"><i class="fab fa-google-plus-g"></i> Sign up with Google+</span></a>
@@ -47,11 +47,12 @@
         @enderror
         <input id="password-confirm" placeholder="Nhập lại nhật khẩu" type="password" class="form-control" name="password_confirmation" required autocomplete="new-password">
 
-        <button class="btn btn-primary btn-block" type="submit"><i class="fas fa-user-plus"></i> {{ __('Register') }}</button>
+        <button class="btn btn-primary btn-block" type="submit"><i class="fas fa-user-plus"></i> {{ __('Đăng ký') }}</button>
 
         <a  id="cancel_signup" href="{{ route('login') }}">
             <i class="fas fa-angle-left"></i> {{ __('Back') }}
         </a>
+        @csrf
     </form>
 </div>
 @endsection

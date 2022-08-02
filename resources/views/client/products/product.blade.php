@@ -39,7 +39,7 @@
                         <s class="product_info_price_value-real">{{number_format($product->price)}}đ</s>
                     </div>
                 </div>
-                <form action="/add-cart" method="POST">
+                <form class="form_addcart" action="/add-cart" method="POST">
                     <div class="button-order mb-3">
                         <button class="hoso col-5" type="submit">
                             Thêm vào giỏ hàng

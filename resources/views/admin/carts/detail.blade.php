@@ -8,6 +8,17 @@
                 <li>Số điện thoại: <strong>{{ $customer->phone }}</strong></li>
                 <li>Địa chỉ: <strong>{{ $customer->address }}</strong></li>
                 <li>Email: <strong>{{ $customer->email }}</strong></li>
+                <li>Hình thức thanh toán: <strong>@switch($customer->payment)
+                    @case('Transfer Payments Momo')
+                        Thanh toán momo
+                        @break
+                    @case('Transfer Payments Vnpay')
+                        Thanh toán Vnpay
+                    @break
+                    @default
+                        Thanh toán tiền mặt
+                        
+                @endswitch</strong></li>
                 <li>Trạng thái: <strong>{!! \App\Helpers\Helper::activeCustomer($customer->active) !!}</strong></li>
                 <li>Ghi chú: <strong>{{ $customer->content }}</strong></li>
             </ul>
@@ -102,7 +113,7 @@
                         </select>
                     </div>
                     <div class="form-group">
-                        <button type="submit">Xác nhận</button>
+                        <button class="btn btn-success" type="submit">Xác nhận</button>
                         @csrf
                     </div>
                 </form>

@@ -17,6 +17,7 @@
                         <span><button class="fas fa-search"  type="submit"></button></span>
                     </form>
                 </div>
+                {{-- tìm kiếm --}}
                 <script>
                     var path = "{{ route('autocomplete') }}";
                     $('#keyword').typeahead({

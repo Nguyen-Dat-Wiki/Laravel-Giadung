@@ -32,11 +32,11 @@ return [
     'google' => [
         'client_id' => '327668723390-47r7frckbbqa24vg7b4vd1a96ok5tr6r.apps.googleusercontent.com',
         'client_secret' => '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',
-        'redirect' => 'http://dientu.webhop.me/callback/google',
+        'redirect' => 'http://dientu.ddns.net/callback/google',
     ], 
     'facebook' => [
         'client_id' => '458654566066446',
         'client_secret' => '545bc0bc9d85b1f1ffa8b97b6f183c01',
-        'redirect' => 'https://dientu.webhop.me//callback/facebook',
+        'redirect' => 'https://dientu.ddns.net/callback/facebook',
     ]
 ];

@@ -18,9 +18,8 @@ class CartService
 {
     public function create($request)
     {
-        $qty = (int)$request->input('num_product');
-        $product_id = (int)$request->input('product_id');
-
+        $qty = $request->number;
+        $product_id = $request->product_id;
         $sl = Product::select('quantity')->where('id',$product_id)->get();
 
         if($qty> $sl[0]['quantity']){
@@ -210,9 +209,8 @@ class CartService
     public function vnpay($request)
     {
         $codeID = rand(00,9999);
-        $this->addcart($request,$codeID);
         $vnp_Url = "https://sandbox.vnpayment.vn/paymentv2/vpcpay.html";
-        $vnp_Returnurl = "http://localhost:8000/vnpay_php/return";
+        $vnp_Returnurl = "http://dientu.ddns.net/vnpay_php/return";
         $vnp_TmnCode = "K66APULO";//Mã website tại VNPAY 
         $vnp_HashSecret = "NBATWOLMBKUXJPBMDOEWOLRNWKHYUUQR"; //Chuỗi bí mật
 
@@ -270,6 +268,7 @@ class CartService
             , 'message' => 'success'
             , 'data' => $vnp_Url);
         if (isset($_POST['redirect'])) {
+            $this->addcart($request,$codeID);
             header('Location: ' . $vnp_Url);
             die();
         } else {
@@ -300,15 +299,14 @@ class CartService
     {
         $endpoint = "https://test-payment.momo.vn/v2/gateway/api/create";
         $codeID = rand(00,9999);
-        $this->addcart($request,$codeID);
         $partnerCode = 'MOMOBKUN20180529';
         $accessKey = 'klm05TvNBzhg7h7j';
         $secretKey = 'at67qH6mk8w5Y1nAyMoYKMWACiEi2bsa';
         $orderInfo = "Thanh toán qua ATM MoMo";
         $amount = $request->total;
         $orderId = time() ."";
-        $redirectUrl = "http://localhost:8000/momo_php/return";
-        $ipnUrl = "http://localhost:8000/gio-hang";
+        $redirectUrl = "http://dientu.ddns.net/momo_php/return";
+        $ipnUrl = "http://dientu.ddns.net/gio-hang";
         $extraData = "";
 
         $requestId = time() . "";
@@ -330,6 +328,7 @@ class CartService
             'requestType' => $requestType,
             'signature' => $signature);
         $result = $this->execPostRequest($endpoint, json_encode($data));
+        $this->addcart($request,$codeID);
         $jsonResult = json_decode($result, true);  // decode json
         return $jsonResult;
         
