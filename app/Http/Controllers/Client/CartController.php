@@ -20,13 +20,17 @@ class CartController extends Controller
 
     public function index(Request $request)
     {
-        
-        $result = $this->cartService->create($request); 
-        if ($result === false) {
-            return redirect()->back();
+
+        $result = $this->cartService->create($request);
+        if ($result !== false) {
+            return response()->json([
+                'error' => false,
+                'result'   => $result
+            ]);
         }
 
-        return redirect('/gio-hang'); 
+        return response()->json(['error' => true]);
+
     }
 
     public function show()
@@ -83,12 +87,17 @@ class CartController extends Controller
 
         return redirect()->back();
     }
-    public function vnpay_return()
+    public function vnpay_return(Request $request)
     {
-        $carts = Session::get('carts');
-        Session::flash('success', 'Đặt Hàng Thành Công');
-        Session::forget('carts');
-        return redirect()->back();
+        if ($request->vnp_ResponseCode != 00) {
+            Session::flash('success', 'Đặt Hàng Thất Bại');
+            return redirect()->back();
+        }else{
+            $carts = Session::get('carts');
+            Session::flash('success', 'Đặt Hàng Thành Công');
+            Session::forget('carts');
+            return redirect()->back();
+        }
     }
     public function momo(Request $request)
     {

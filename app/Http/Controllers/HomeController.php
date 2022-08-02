@@ -28,7 +28,6 @@ class HomeController extends Controller
 
     public function adminHome(Request $req)
     {
-        $title = 'Trang chủ';
         
         $title = 'Trang chủ';
         return view('admin.dashboard.home',[

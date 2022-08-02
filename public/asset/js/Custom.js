@@ -126,3 +126,37 @@ $(document).ready(function() {
         $("div.alert").remove();
     }, 5000); // 5 secs
 });
+
+function add_cart(num,id,token) {
+    $.ajax({
+        type: "POST",
+        url: "/add-cart",
+        
+        data: { 
+            _token: token,
+            number: num,
+            product_id:id
+        },
+        success: function ($res){
+            alert('Bạn đã thêm vào giỏ hàng thành công');
+        },
+        dataType: 'JSON'
+    });
+}
+
+$(function() {
+    $('.form_addcart').submit(function(e){
+        e.preventDefault();
+        var form = $(this);
+        var num = form[0][1].value;
+        var id = form[0][2].value;
+        var token = form[0][3].value;
+        var url = window.location.toString();
+        add_cart(num,id,token);
+        if (url.indexOf("san-pham") !== -1) {
+            window.location = " /gio-hang";
+        }else{
+            location.reload();
+        }
+    });
+})
